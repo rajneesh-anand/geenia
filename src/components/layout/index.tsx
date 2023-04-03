@@ -6,8 +6,8 @@ import { useSessionStorage } from "react-use";
 import { IoChevronForwardCircleOutline } from "react-icons/io5";
 import HighlightedBar from "@components/common/highlighted-bar";
 import Link from "@components/ui/link";
-import "react-whatsapp-widget/dist/index.css";
-import WhatsAppWidget from "react-whatsapp-widget";
+// import "react-whatsapp-widget/dist/index.css";
+// import WhatsAppWidget from "react-whatsapp-widget";
 
 type Props = {
   children?: React.ReactNode;
@@ -55,11 +55,11 @@ const Layout: React.FC<Props> = ({ children }) => {
         {children}
       </main>
       <Footer />
-      <WhatsAppWidget
+      {/* <WhatsAppWidget
         phoneNumber="919654774846"
         companyName="Geenia Online Shopping"
         message="How can we help you ?"
-      />
+      /> */}
       <MobileNavigation />
     </div>
   );
