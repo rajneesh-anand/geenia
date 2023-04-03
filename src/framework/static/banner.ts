@@ -19,17 +19,17 @@ export const homeTwoBanner = {
 export const bannersGridHero = [
   {
     id: 1,
-    title: "Try Fresh Healthy Breakfast on Morning",
-    slug: "/search",
+    title: "Geenia organic beauty product",
+    slug: "/products/bodycare",
     type: "medium",
     image: {
       mobile: {
-        url: "/images/banner/banner-mobile-10.png",
+        url: "/images/hero/login.png",
         width: 450,
         height: 465,
       },
       desktop: {
-        url: "/images/banner/banner-10.png",
+        url: "/images/hero/login.png",
         width: 1190,
         height: 500,
       },
@@ -37,17 +37,17 @@ export const bannersGridHero = [
   },
   {
     id: 2,
-    title: "Today best deal",
-    slug: "/search",
+    title: "Geenia Organic Products For Skin Care",
+    slug: "/products/skincare",
     type: "small",
     image: {
       mobile: {
-        url: "/images/banner/banner-mobile-11.png",
+        url: "/images/hero/registration.png",
         width: 450,
         height: 465,
       },
       desktop: {
-        url: "/images/banner/banner-11.png",
+        url: "/images/hero/registration.png",
         width: 740,
         height: 500,
       },
@@ -95,16 +95,16 @@ export const bannerGridTwo = [
 export const elegantBannerGrid = [
   {
     id: 1,
-    title: "Have a Safe Delivery",
+    title: "Skin Care",
     slug: "/search",
     image: {
       mobile: {
-        url: "/images/banner/banner-mobile-8.png",
+        url: "/images/hero/grid-1.webp",
         width: 450,
         height: 440,
       },
       desktop: {
-        url: "/images/banner/banner-8.png",
+        url: "/images/hero/grid-1.webp",
         width: 905,
         height: 420,
       },
@@ -112,16 +112,16 @@ export const elegantBannerGrid = [
   },
   {
     id: 2,
-    title: "Let's stop Covid-19",
+    title: "Body Care",
     slug: "/search",
     image: {
       mobile: {
-        url: "/images/banner/banner-mobile-9.png",
+        url: "/images/hero/grid-2.webp",
         width: 450,
         height: 440,
       },
       desktop: {
-        url: "/images/banner/banner-9.png",
+        url: "/images/hero/grid-2.webp",
         width: 905,
         height: 420,
       },

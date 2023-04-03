@@ -114,7 +114,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
       <div className="flex bg-skin-fill mx-auto rounded-lg overflow-hidden">
         <div className="md:w-[55%] xl:w-[60%] registration hidden relative md:block">
           <Image
-            src="/images/login.png"
+            src="/images/hero/login.png"
             alt="signin Image"
             layout="fill"
             // width={800}

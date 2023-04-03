@@ -87,7 +87,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
       <div className="flex bg-skin-fill mx-auto rounded-lg overflow-hidden w-full">
         <div className="md:w-[55%] xl:w-[60%] hidden md:block relative ">
           <Image
-            src="/images/registration.png"
+            src="/images/hero/registration.png"
             alt="sign up"
             layout="fill"
             // width={800}
