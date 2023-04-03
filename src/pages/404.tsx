@@ -8,7 +8,7 @@ export default function ErrorPage() {
   return (
     <>
       <Seo
-        title="404"
+        title="Geenia Online Shopping"
         description="Fastest E-commerce template built with React, NextJS, TypeScript, React-Query and Tailwind CSS."
         path="404"
       />

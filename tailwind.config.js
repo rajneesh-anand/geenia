@@ -63,27 +63,19 @@ module.exports = {
           "button-hover": withOpacity("--color-button-hover"),
         },
       },
-      borderColor: {
-        skin: {
-          primary: withOpacity("--color-primary"),
-          red: withOpacity("--color-red"),
-          yellow: withOpacity("--color-yellow"),
-          base: withOpacity("--color-border-base"),
-          one: withOpacity("--color-border-one"),
-          two: withOpacity("--color-border-two"),
-          three: withOpacity("--color-border-three"),
-          four: withOpacity("--color-border-four"),
-          form: withOpacity("--color-border-form"),
-          "yellow-three": withOpacity("--color-yellow-three"),
-        },
+      // backgroundImage: {
+      //   signinImage: "url('../public/images/hero/banner-1.png')",
+      // },
+
+      screens: {
+        "3xl": "1780px",
+        "4xl": "1921px",
       },
-      ringColor: {
-        skin: {
-          red: withOpacity("--color-red"),
-          base: withOpacity("--color-border-base"),
-          form: withOpacity("--color-border-form"),
-          primary: withOpacity("--color-primary"),
-        },
+
+      fontFamily: {
+        body: ["Open Sans", "system-ui", "sans-serif"],
+        nunito: ["'Nunito', sans-serif"],
+        poppins: ["'Poppins', sans-serif"],
       },
 
       fontSize: {
@@ -91,48 +83,7 @@ module.exports = {
         "13px": "13px",
         "15px": "15px",
       },
-      screens: {
-        "3xl": "1780px",
-        "4xl": "1921px",
-      },
-      spacing: {
-        "430px": "430px",
-        "450px": "450px",
-        "500px": "500px",
-        "64vh": "64vh",
-      },
-      minHeight: {
-        "50px": "50px",
-      },
-      scale: {
-        80: "0.8",
-        85: "0.85",
-        300: "3",
-        400: "4",
-      },
-      width: {
-        "1/9": "11.1111111%",
-        "100+30": "calc(100% + 30px)",
-      },
-      keyframes: {
-        shine: {
-          "100%": { left: "125%" },
-        },
-        wiggle: {
-          "0%, 100%": { transform: "rotate(-3deg)" },
-          "50%": { transform: "rotate(3deg)" },
-        },
-      },
-      animation: {
-        shine: "shine 0.8s ease-in",
-        ping: "ping 3s linear infinite",
-        wiggle: "wiggle 1s ease-in-out infinite",
-      },
-      fontFamily: {
-        body: ["Open Sans", "system-ui", "sans-serif"],
-        nunito: ["'Nunito', sans-serif"],
-        poppins: ["'Poppins', sans-serif"],
-      },
+
       boxShadow: {
         card: "0px 0px 6px rgba(79, 95, 120, 0.1)",
         cardHover: "0px 0px 8px rgba(79, 95, 120, 0.18)",

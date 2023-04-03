@@ -1,15 +1,15 @@
-import SectionHeader from '@components/common/section-header';
-import ProductCard from '@components/product/product-cards/product-card';
-import { Product } from '@framework/types';
-import Carousel from '@components/ui/carousel/carousel';
-import { SwiperSlide } from '@components/ui/carousel/slider';
-import Alert from '@components/ui/alert';
-import SeeAll from '@components/ui/see-all';
-import useWindowSize from '@utils/use-window-size';
-import ProductCardLoader from '@components/ui/loaders/product-card-loader';
-import cn from 'classnames';
-import { useRouter } from 'next/router';
-import { getDirection } from '@utils/get-direction';
+import SectionHeader from "@components/common/section-header";
+import ProductCard from "@components/product/product-cards/product-card";
+import { Product } from "@framework/types";
+import Carousel from "@components/ui/carousel/carousel";
+import { SwiperSlide } from "@components/ui/carousel/slider";
+import Alert from "@components/ui/alert";
+import SeeAll from "@components/ui/see-all";
+import useWindowSize from "@utils/use-window-size";
+import ProductCardLoader from "@components/ui/loaders/product-card-loader";
+import cn from "classnames";
+import { useRouter } from "next/router";
+import { getDirection } from "@utils/get-direction";
 
 interface ProductsCarouselProps {
   sectionHeading: string;
@@ -24,28 +24,28 @@ interface ProductsCarouselProps {
 }
 
 const breakpoints = {
-  '1921': {
+  "1921": {
     slidesPerView: 7,
   },
-  '1780': {
+  "1780": {
     slidesPerView: 8,
   },
-  '1536': {
+  "1536": {
     slidesPerView: 7,
   },
-  '1280': {
+  "1280": {
     slidesPerView: 6,
   },
-  '1024': {
+  "1024": {
     slidesPerView: 4,
   },
-  '640': {
+  "640": {
     slidesPerView: 3,
   },
-  '360': {
+  "360": {
     slidesPerView: 2,
   },
-  '0': {
+  "0": {
     slidesPerView: 1,
   },
 };
@@ -53,7 +53,7 @@ const breakpoints = {
 const ProductsCarousel: React.FC<ProductsCarouselProps> = ({
   sectionHeading,
   categorySlug,
-  className = 'mb-8 lg:mb-10 xl:mb-12',
+  className = "mb-8 lg:mb-10 xl:mb-12",
   products,
   loading,
   error,
@@ -67,7 +67,7 @@ const ProductsCarousel: React.FC<ProductsCarouselProps> = ({
   return (
     <div
       className={cn(
-        'max-w-[1920px] overflow-hidden 4xl:overflow-visible px-4 md:px-6 lg:px-8 2xl:ps-10 2xl:pe-0 4xl:pe-10 mx-auto relative',
+        "max-w-[1920px] overflow-hidden 4xl:overflow-visible px-4 md:px-6 lg:px-8 2xl:pl-10 2xl:pr-0 4xl:pr-10 mx-auto relative",
         className
       )}
     >
@@ -75,17 +75,17 @@ const ProductsCarousel: React.FC<ProductsCarouselProps> = ({
         <SectionHeader sectionHeading={sectionHeading} className="mb-0" />
       </div>
       {error ? (
-        <div className="2xl:pe-10">
+        <div className="2xl:pr-10">
           <Alert message={error} />
         </div>
       ) : (
-        <div className="heightFull xl:-me-40 2xl:-me-28 4xl:me-0 relative after-item-opacity">
+        <div className="heightFull xl:-mr-40 2xl:-mr-28 4xl:mr-0 relative after-item-opacity">
           <Carousel
             breakpoints={carouselBreakpoint || breakpoints}
             className="-mx-1.5 md:-mx-2 xl:-mx-2.5 -mt-4"
-            prevButtonClassName="-start-2 md:-start-1.5 lg:-start-2 xl:-start-2.5 2xl:start-5 -top-12 3xl:top-auto 3xl:-translate-y-2 4xl:-translate-y-10"
-            nextButtonClassName={`-end-2 xl:end-40 -top-12 3xl:top-auto transform 2xl:translate-x-0 3xl:-translate-y-2 4xl:-translate-y-10 ${
-              dir === 'rtl' ? 'xl:-translate-x-2.5' : 'xl:translate-x-2.5'
+            prevButtonClassName="-left-2 md:-left-1.5 lg:-left-2 xl:-left-2.5 2xl:left-5 -top-12 3xl:top-auto 3xl:-translate-y-2 4xl:-translate-y-10"
+            nextButtonClassName={`-right-2 xl:right-40 -top-12 3xl:top-auto transform 2xl:translate-x-0 3xl:-translate-y-2 4xl:-translate-y-10 ${
+              dir === "rtl" ? "xl:-translate-x-2.5" : "xl:translate-x-2.5"
             }`}
           >
             {loading && !products?.length ? (

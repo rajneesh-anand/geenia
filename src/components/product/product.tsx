@@ -31,6 +31,7 @@ const ProductSingleDetails: React.FC = () => {
   const {
     query: { slug },
   } = router;
+
   const { width } = useWindowSize();
   const { data, isLoading } = useProductQuery(slug as string);
   const { addItemToCart, isInCart, getItemFromCart, isInStock } = useCart();
@@ -47,7 +48,7 @@ const ProductSingleDetails: React.FC = () => {
     data && {
       amount: data.sale_price ? data.sale_price : data.price,
       baseAmount: data.price,
-      currencyCode: "USD",
+      currencyCode: "INR",
     }
   );
   const handleChange = () => {
@@ -83,6 +84,7 @@ const ProductSingleDetails: React.FC = () => {
     }, 1500);
 
     const item = generateCartItem(data!, selectedVariation);
+
     addItemToCart(item, quantity);
     toast("Added to the bag", {
       progressClassName: "fancy-progress-bar",
@@ -94,6 +96,7 @@ const ProductSingleDetails: React.FC = () => {
       draggable: true,
     });
   }
+
   function addToWishlist() {
     // to show btn feedback while product wishlist
     setAddToWishlistLoader(true);
@@ -117,7 +120,7 @@ const ProductSingleDetails: React.FC = () => {
   return (
     <div className="pt-6 md:pt-7 pb-2">
       <div className="lg:grid grid-cols-10 gap-2 2xl:gap-4">
-        <div className="col-span-5 xl:col-span-6 overflow-hidden mb-6 md:mb-8 lg:mb-0">
+        <div className="col-span-5 xl:col-span-5 overflow-hidden mb-6 md:mb-8 lg:mb-0">
           {!!data?.gallery?.length ? (
             <ThumbnailCarousel
               gallery={data?.gallery}
@@ -136,7 +139,7 @@ const ProductSingleDetails: React.FC = () => {
           )}
         </div>
 
-        <div className="flex-shrink-0 flex flex-col col-span-5 xl:col-span-4 xl:ps-2">
+        <div className="flex-shrink-0 flex flex-col col-span-5 xl:col-span-5 xl:pl-2">
           <div className="pb-3 lg:pb-5">
             <div className="md:mb-2.5 block -mt-1.5">
               <h2 className="text-skin-base text-lg md:text-xl xl:text-2xl font-medium transition-colors duration-300">
@@ -162,10 +165,10 @@ const ProductSingleDetails: React.FC = () => {
                 </div>
                 {discount && (
                   <>
-                    <del className="text-sm md:text-15px ps-3 text-skin-base text-opacity-50">
+                    <del className="text-sm md:text-15px pl-3 text-skin-base text-opacity-50">
                       {basePrice}
                     </del>
-                    <span className="inline-block rounded font-bold text-xs md:text-sm bg-skin-tree bg-opacity-20 text-skin-tree uppercase px-2 py-1 ms-2.5">
+                    <span className="inline-block rounded font-bold text-xs md:text-sm bg-skin-tree bg-opacity-20 text-skin-tree uppercase px-2 py-1 ml-2.5">
                       {discount} {t("text-off")}
                     </span>
                   </>
@@ -222,7 +225,7 @@ const ProductSingleDetails: React.FC = () => {
           </div>
 
           <div className="pt-1.5 lg:pt-3 xl:pt-4 space-y-2.5 md:space-y-3.5">
-            <Counter
+            {/* <Counter
               variant="single"
               value={selectedQuantity}
               onIncrement={() => setSelectedQuantity((prev) => prev + 1)}
@@ -235,14 +238,14 @@ const ProductSingleDetails: React.FC = () => {
                     Number(item.stock)
                   : selectedQuantity >= Number(item.stock)
               }
-            />
+            /> */}
             <Button
               onClick={addToCart}
               className="w-full px-1.5"
               disabled={!isSelected}
               loading={addToCartLoader}
             >
-              <CartIcon color="#ffffff" className="me-3" />
+              <CartIcon color="#ffffff" className="mr-3" />
               {t("text-add-to-cart")}
             </Button>
             <div className="grid grid-cols-2 gap-2.5">

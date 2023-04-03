@@ -3,14 +3,14 @@ import { useTranslation } from "next-i18next";
 
 const ErrorInformation: React.FC = () => {
   const { t } = useTranslation("common");
-  const backgroundThumbnail = "/images/404-bg.png";
+  // const backgroundThumbnail = "/images/404-bg.png";
   const errorThumbnail = "/images/404.png";
   return (
     <div
       className="text-center px-12 py-16 sm:py-20 lg:py-24 xl:py-32 flex items-center justify-center bg-cover bg-no-repeat bg-center"
-      style={{
-        backgroundImage: `url(${backgroundThumbnail})`,
-      }}
+      // style={{
+      //   backgroundImage: `url(${backgroundThumbnail})`,
+      // }}
     >
       <div className="max-w-md xl:max-w-lg">
         <Image

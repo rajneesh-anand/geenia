@@ -1,33 +1,34 @@
 import Layout from "@components/layout";
 import CheckoutCard from "@components/checkout/checkout-card";
 import Container from "@components/ui/container";
-import CheckoutDetails from "@components/checkout/checkout-details";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Divider from "@components/ui/divider";
-import Seo from "@components/seo/seo";
+import { getSession } from "next-auth/react";
+import { GetServerSideProps } from "next";
 
 export default function CheckoutPage() {
   return (
-    <>
-      <Seo
-        title="Checkout"
-        description="Fastest E-commerce template built with React, NextJS, TypeScript, React-Query and Tailwind CSS."
-        path="checkout"
-      />
-      <Container className="py-10 2xl:py-12 border-t border-skin-base checkout">
-        <CheckoutCard />
-      </Container>
-      <Divider />
-    </>
+    <Container>
+      <CheckoutCard />
+    </Container>
   );
 }
 
 CheckoutPage.Layout = Layout;
 
-export const getStaticProps = async ({ locale }: any) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
-      ...(await serverSideTranslations(locale, [
+      ...(await serverSideTranslations(context.locale!, [
         "common",
         "forms",
         "menu",

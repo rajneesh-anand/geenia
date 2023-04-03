@@ -41,10 +41,7 @@ const Header: React.FC = () => {
   function handleLogin() {
     openModal("LOGIN_VIEW");
   }
-  useEffect(() => {
-    console.log(isAuthorized);
-    console.log(user);
-  }, []);
+
   function handleCategoryMenu() {
     setCategoryMenu(!categoryMenu);
   }
@@ -53,43 +50,35 @@ const Header: React.FC = () => {
     <header
       id="siteHeader"
       ref={siteHeaderRef}
-      className={cn(
-        "header-five sticky-header sticky top-0 z-20 lg:relative w-full h-16 lg:h-auto",
-        displayMobileSearch && "active-mobile-search"
-      )}
+      className="sticky-header lg:relative w-full h-auto"
     >
-      <div className="innerSticky w-screen lg:w-full transition-all duration-200 ease-in-out body-font bg-skin-fill z-20">
-        <Search
-          searchId="mobile-search"
-          className="top-bar-search hidden lg:max-w-[600px] absolute z-30 px-4 md:px-6 top-1"
+      <Container className="navbar flex items-center justify-center lg:justify-between border-b border-slate-200">
+        <Logo />
+
+        <HeaderMenu
+          data={site_header.menu}
+          className="flex transition-all duration-200 ease-in-out"
         />
 
-        <Container className="top-bar h-16 lg:h-auto flex items-center justify-between py-1 bg-[#fcfffe]">
-          <Logo className="logo -mt-1.5 md:-mt-1 mr-auto ps-3 md:pl-0 md:ml-auto lg:mx-0" />
-
-          <HeaderMenu
-            data={site_header.menu}
-            className="flex transition-all duration-200 ease-in-out"
+        <div className="hidden lg:flex">
+          <CartButton className="flex mr-4" hideLabel={true} />
+          <AuthMenu
+            btnProps={{
+              onClick: handleLogin,
+            }}
           />
-
-          <div className="hidden lg:flex ">
-            <CartButton className="flex mr-4" hideLabel={true} />
-            <div className="flex-shrink-0 flex items-center ms-3">
-              {/* <UserIcon className="text-white text-opacity-90" /> */}
-              <AuthMenu
-                isAuthorized={isAuthorized}
-                href={ROUTES.ACCOUNT}
-                btnProps={{
-                  children: t("text-sign-in"),
-                  onClick: handleLogin,
-                }}
-              >
-                {t("text-account")}
-              </AuthMenu>
-            </div>
-          </div>
-        </Container>
-      </div>
+          {/* <AuthMenu
+            isAuthorized={isAuthorized}
+            href={ROUTES.ACCOUNT}
+            btnProps={{
+              children: t("text-sign-in"),
+              onClick: handleLogin,
+            }}
+          >
+            {t("text-account")}
+          </AuthMenu> */}
+        </div>
+      </Container>
     </header>
   );
 };

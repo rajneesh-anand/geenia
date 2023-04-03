@@ -1,29 +1,29 @@
-import usePrice from '@framework/product/use-price';
-import isEmpty from 'lodash/isEmpty';
-import { useTranslation } from 'next-i18next';
+import usePrice from "@framework/product/use-price";
+import isEmpty from "lodash/isEmpty";
+import { useTranslation } from "next-i18next";
 
 export default function VariationPrice({
   selectedVariation,
   minPrice,
   maxPrice,
 }: any) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const { price, basePrice, discount } = usePrice(
     selectedVariation && {
       amount: selectedVariation.sale_price
         ? selectedVariation.sale_price
         : selectedVariation.price,
       baseAmount: selectedVariation.price,
-      currencyCode: 'USD',
+      currencyCode: "INR",
     }
   );
   const { price: min_price } = usePrice({
     amount: minPrice,
-    currencyCode: 'USD',
+    currencyCode: "INR",
   });
   const { price: max_price } = usePrice({
     amount: maxPrice,
-    currencyCode: 'USD',
+    currencyCode: "INR",
   });
   return (
     <div className="flex items-center mt-5">
@@ -38,7 +38,7 @@ export default function VariationPrice({
             {basePrice}
           </del>
           <span className="inline-block rounded font-bold text-xs md:text-sm bg-skin-tree bg-opacity-20 text-skin-tree uppercase px-2 py-1 ms-2.5">
-            {discount} {t('text-off')}
+            {discount} {t("text-off")}
           </span>
         </>
       )}

@@ -1,15 +1,15 @@
-import { Fragment, useState, useEffect } from 'react';
-import { Listbox, Transition } from '@headlessui/react';
-import { IoChevronDown, IoCheckmarkSharp } from 'react-icons/io5';
-import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
+import { Fragment, useState, useEffect } from "react";
+import { Listbox, Transition } from "@headlessui/react";
+import { IoChevronDown, IoCheckmarkSharp } from "react-icons/io5";
+import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 type Option = {
   name: string;
   value: string;
 };
 
 export default function ListBox({ options }: { options: Option[] }) {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const router = useRouter();
   const { pathname, query } = router;
   const currentSelectedItem = query?.sort_by
@@ -40,14 +40,14 @@ export default function ListBox({ options }: { options: Option[] }) {
   return (
     <Listbox value={selectedItem} onChange={handleItemClick}>
       {({ open }) => (
-        <div className="relative ms-2 lg:ms-0 min-w-[160px]">
+        <div className="relative ml-2 lg:ml-0 min-w-[160px]">
           <div className="flex items-center">
-            <div className="flex-shrink-0 text-15px me-2 text-skin-base text-opacity-70">
-              {t('text-sort-by')}:
+            <div className="flex-shrink-0 text-15px mr-2 text-skin-base text-opacity-70">
+              {t("text-sort-by")}:
             </div>
-            <Listbox.Button className="pe-5 text-skin-base text-sm font-semibold relative w-full text-start bg-skin-fill rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm cursor-pointer">
+            <Listbox.Button className="pr-5 text-skin-base text-sm font-semibold relative w-full text-start bg-skin-fill rounded-lg shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-orange-300 focus-visible:ring-offset-2 focus-visible:border-indigo-500 sm:text-sm cursor-pointer">
               <span className="block truncate">{t(selectedItem.name)}</span>
-              <span className="absolute top-1 end-0 flex items-end ps-1 pointer-events-none">
+              <span className="absolute top-1 right-0 flex items-end pl-1 pointer-events-none">
                 <IoChevronDown
                   className="w-3.5 h-3.5 text-skin-muted"
                   aria-hidden="true"
@@ -72,10 +72,10 @@ export default function ListBox({ options }: { options: Option[] }) {
                   className={({ active }) =>
                     `${
                       active
-                        ? 'text-skin-base bg-skin-dropdown-hover'
-                        : 'text-skin-base'
+                        ? "text-skin-base bg-skin-dropdown-hover"
+                        : "text-skin-base"
                     }
-                    cursor-pointer transition-all select-none relative py-2.5 ps-10 pe-4`
+                    cursor-pointer transition-all select-none relative py-2.5 pl-10 pr-4`
                   }
                   value={option}
                 >
@@ -83,15 +83,15 @@ export default function ListBox({ options }: { options: Option[] }) {
                     <>
                       <span
                         className={`${
-                          selected ? 'font-medium' : 'font-normal'
+                          selected ? "font-medium" : "font-normal"
                         } block truncate`}
                       >
                         {t(option.name)}
                       </span>
                       {selected ? (
                         <span
-                          className={`${active ? 'text-amber-600' : ''}
-                                check-icon absolute inset-y-0 start-0 flex items-center ps-3`}
+                          className={`${active ? "text-amber-600" : ""}
+                                check-icon absolute inset-y-0 left-0 flex items-center pl-3`}
                         >
                           <IoCheckmarkSharp
                             className="w-5 h-5"

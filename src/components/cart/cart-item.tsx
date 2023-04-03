@@ -15,7 +15,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
     useCart();
   const { price: totalPrice } = usePrice({
     amount: item?.itemTotal,
-    currencyCode: "USD",
+    currencyCode: "INR",
   });
   const outOfStock = !isInStock(item.id);
   return (

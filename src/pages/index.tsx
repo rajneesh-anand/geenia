@@ -1,18 +1,16 @@
 import Layout from "@components/layout";
 import Container from "@components/ui/container";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import DownloadAppsTwo from "@components/common/download-apps-two";
 import BundleGrid from "@components/bundle/bundle-grid-two";
 import CollectionGrid from "@components/common/collection-grid";
-import BestSellerGroceryProductFeed from "@components/product/feeds/best-seller-grocery-product-feed";
+import BestSellerProductFeed from "@components/product/feeds/best-seller-products-feed";
 import { bundleDataThree as bundle } from "@framework/static/bundle";
 import { GetStaticProps } from "next";
 import Seo from "@components/seo/seo";
 import { QueryClient, dehydrate } from "react-query";
-// import { dehydrate } from "react-query/hydration";
 import { API_ENDPOINTS } from "@framework/utils/api-endpoints";
 import { fetchCategories } from "@framework/category/get-all-categories";
-import { fetchBestSellerGroceryProducts } from "@framework/product/get-all-best-seller-grocery-products";
+import { fetchBestSellerProducts } from "@framework/product/get-all-best-seller-products";
 import { fetchPopularProducts } from "@framework/product/get-all-popular-products";
 import { LIMITS } from "@framework/utils/limits";
 import BannerGridTwo from "@components/common/banner-grid-two";
@@ -27,7 +25,7 @@ export default function Home() {
   return (
     <>
       <Seo
-        title="Geenia Body Care | Beauty Products"
+        title="Organic Beauty Products"
         description="Geenia International is here to serve you better products for you we are in this Industry from many years and continuosly  upgrading products as per the environment"
         path="/"
       />
@@ -38,8 +36,8 @@ export default function Home() {
           className="my-3 md:my-4 lg:mt-1 lg:mb-5 xl:mb-6 "
         />
         <FeatureCarousel />
-        <CategoryGridBlock />
-        <BestSellerGroceryProductFeed className="mb-12 lg:mb-14 xl:mb-16 2xl:mb-20" />
+        {/* <CategoryGridBlock /> */}
+        <BestSellerProductFeed />
         <BundleGrid
           className="mb-12 lg:mb-14 xl:mb-16 2xl:mb-20"
           data={bundle}
@@ -52,11 +50,10 @@ export default function Home() {
         />
       </Container>
 
-      <CollectionGrid
+      {/* <CollectionGrid
         headingPosition="center"
         className="pb-1 lg:pb-0 mb-12 lg:mb-14 xl:mb-16 2xl:mb-20"
-      />
-      <DownloadAppsTwo />
+      /> */}
     </>
   );
 }
@@ -65,17 +62,13 @@ Home.Layout = Layout;
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const queryClient = new QueryClient();
-
   await queryClient.prefetchQuery(
     [API_ENDPOINTS.CATEGORIES, { limit: LIMITS.CATEGORIES_LIMITS }],
     fetchCategories
   );
   await queryClient.prefetchQuery(
-    [
-      API_ENDPOINTS.BEST_SELLER_GROCERY_PRODUCTS,
-      { limit: LIMITS.BEST_SELLER_GROCERY_PRODUCTS_LIMITS },
-    ],
-    fetchBestSellerGroceryProducts
+    [API_ENDPOINTS.PRODUCTS, { limit: 50 }],
+    fetchBestSellerProducts
   );
   await queryClient.prefetchQuery(
     [

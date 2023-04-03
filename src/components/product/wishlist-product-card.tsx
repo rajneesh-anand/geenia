@@ -19,7 +19,7 @@ const WishlistProductCard: FC<ProductProps> = ({ product, className }) => {
   const { price, basePrice, discount } = usePrice({
     amount: product.sale_price ? product.sale_price : product.price,
     baseAmount: product.price,
-    currencyCode: "USD",
+    currencyCode: "INR",
   });
 
   return (

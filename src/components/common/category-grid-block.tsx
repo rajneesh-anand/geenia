@@ -17,15 +17,15 @@ interface CategoriesProps {
 }
 const breakpoints = {
   "1640": {
-    slidesPerView: 9,
+    slidesPerView: 7,
     spaceBetween: 24,
   },
   "1280": {
-    slidesPerView: 7,
+    slidesPerView: 5,
     spaceBetween: 20,
   },
   "1024": {
-    slidesPerView: 6,
+    slidesPerView: 4,
     spaceBetween: 20,
   },
   "768": {
@@ -53,11 +53,11 @@ const CategoryGridBlock: React.FC<CategoriesProps> = ({
 
   return (
     <div className={className}>
-      <SectionHeader
+      {/* <SectionHeader
         sectionHeading="text-what-food-you-love"
         sectionSubHeading="text-favorite-different-categories"
         headingPosition="center"
-      />
+      /> */}
       <div className="block 2xl:flex justify-center flex-wrap 3xl:-mx-3.5">
         {error ? (
           <Alert message={error?.message} className="mb-14 3xl:mx-3.5" />

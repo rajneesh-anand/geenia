@@ -6,21 +6,24 @@ export interface Item {
   [key: string]: any;
 }
 
-export interface UpdateItemInput extends Partial<Omit<Item, "id">> {}
+export interface UpdateItemInput extends Partial<Omit<Item, 'id'>> {}
 
 export function addItemWithQuantity(
   items: Item[],
   item: Item,
   quantity: number
 ) {
+ 
   if (quantity <= 0)
-    throw new Error("cartQuantity can't be zero or less than zero");
-  const existingItemIndex = items.findIndex(
+    throw new Error("cartQuantity can't be zero or less than zero");  
+    const existingItemIndex = items.findIndex(
     (existingItem) => existingItem.id === item.id
   );
 
   if (existingItemIndex > -1) {
     const newItems = [...items];
+    const newQuantity =  newItems[existingItemIndex].quantity! + 1;
+    console.log(newQuantity);
     newItems[existingItemIndex].quantity! += quantity;
     return newItems;
   }
@@ -29,7 +32,7 @@ export function addItemWithQuantity(
 
 export function removeItemOrQuantity(
   items: Item[],
-  id: Item["id"],
+  id: Item['id'],
   quantity: number
 ) {
   return items.reduce((acc: Item[], item) => {
@@ -48,13 +51,13 @@ export function addItem(items: Item[], item: Item) {
   return [...items, item];
 }
 
-export function getItem(items: Item[], id: Item["id"]) {
+export function getItem(items: Item[], id: Item['id']) {
   return items.find((item) => item.id === id);
 }
 
 export function updateItem(
   items: Item[],
-  id: Item["id"],
+  id: Item['id'],
   item: UpdateItemInput
 ) {
   return items.map((existingItem) =>
@@ -62,13 +65,13 @@ export function updateItem(
   );
 }
 
-export function removeItem(items: Item[], id: Item["id"]) {
+export function removeItem(items: Item[], id: Item['id']) {
   return items.filter((existingItem) => existingItem.id !== id);
 }
 
-export function inStock(items: Item[], id: Item["id"]) {
+export function inStock(items: Item[], id: Item['id']) {
   const item = getItem(items, id);
-  if (item) return item["quantity"]! < item["stock"]!;
+  if (item) return item['quantity']! < item['stock']!;
   return false;
 }
 

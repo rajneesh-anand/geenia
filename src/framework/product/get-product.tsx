@@ -4,11 +4,12 @@ import { API_ENDPOINTS } from "@framework/utils/api-endpoints";
 import { useQuery } from "react-query";
 
 export const fetchProduct = async (_slug: string) => {
-  const { data } = await http.get(API_ENDPOINTS.PRODUCT);
-  return data;
+  const { data } = await http.get(API_ENDPOINTS.PRODUCTS);
+  let selectedProduct = data.find((item: any) => item.slug === _slug);
+  return selectedProduct;
 };
 export const useProductQuery = (slug: string) => {
-  return useQuery<Product, Error>([API_ENDPOINTS.PRODUCT, slug], () =>
+  return useQuery<Product, Error>([API_ENDPOINTS.PRODUCTS, slug], () =>
     fetchProduct(slug)
   );
 };

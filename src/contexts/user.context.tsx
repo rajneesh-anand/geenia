@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
+import { useSession, signOut as logOut } from "next-auth/react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -11,7 +12,9 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail,
 } from "firebase/auth";
+
 import { auth } from "@utils/firebase";
+
 import { useLocalStorage } from "@utils/use-local-storage";
 import { decryptData, encryptData } from "@utils/crypt";
 
@@ -25,18 +28,22 @@ export type User = {
 export type State = {
   user: User;
   isAuthorized: boolean;
-  loginSuccess?: boolean;
+
   error?: string | null;
+  loginSuccess?: () => void;
   logIn?: (email: string, password: string) => void;
   signUp?: (email: string, password: string) => void;
+  mobileAuth?: (mobile: string) => void;
+  setError?: (error: string | null) => void;
   logOut?: () => void;
   googleSignIn?: () => void;
+  emailLogOut?: () => void;
+  mobileLogOut?: () => void;
   setUpRecaptha?: (number: string) => void;
 };
 
 export const initialState = {
   isAuthorized: false,
-  loginSuccess: false,
   error: null,
   user: {},
 };
@@ -50,7 +57,7 @@ type Action =
   | { type: "USER_LOGOUT" }
   | { type: "USER_LOGIN_GMAIL" }
   | { type: "USER_LOGIN_EMAIL" }
-  | { type: "EMAIL_LOGIN_SUCCESS"; email: string }
+  | { type: "EMAIL_LOGIN_SUCCESS" }
   | { type: "EMAIL_LOGIN_FAILED"; error: string }
   | { type: "EMAIL_REGISTER_SUCCESS"; email: string }
   | { type: "EMAIL_REGISTER_FAILED"; error: string }
@@ -67,14 +74,15 @@ const userReducer = (state: State, action: Action) => {
         ...state,
         user: { mobile: action.number },
         isAuthorized: true,
+        error: null,
       };
     }
 
     case "EMAIL_LOGIN_SUCCESS": {
       return {
         ...state,
-        user: { email: action.email },
         isAuthorized: true,
+        error: null,
       };
     }
     case "EMAIL_LOGIN_FAILED": {
@@ -82,7 +90,6 @@ const userReducer = (state: State, action: Action) => {
         ...state,
         user: {},
         isAuthorized: false,
-        loginSuccess: false,
         error: action.error,
       };
     }
@@ -91,7 +98,6 @@ const userReducer = (state: State, action: Action) => {
       return {
         ...state,
         user: { email: action.email },
-        loginSuccess: true,
       };
     }
 
@@ -100,7 +106,6 @@ const userReducer = (state: State, action: Action) => {
         ...state,
         user: {},
         isAuthorized: false,
-        loginSuccess: false,
         error: action.error,
       };
     }
@@ -109,7 +114,6 @@ const userReducer = (state: State, action: Action) => {
       return {
         user: {},
         isAuthorized: false,
-        loginSuccess: false,
       };
     }
 
@@ -153,22 +157,24 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     decryptData(savedUser!, salt)
   );
 
+  const loginSuccess = () => dispatch({ type: "EMAIL_LOGIN_SUCCESS" });
+
   const setError = (msg: string | null) =>
     dispatch({ type: "SET_ERROR", error: msg });
 
   const mobileAuth = (mobile: string) =>
     dispatch({ type: "USER_LOGIN_MOBILE", number: mobile });
 
-  function logIn(email: string, password: string) {
-    return signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
-        dispatch({ type: "EMAIL_LOGIN_SUCCESS", email: email });
-      })
-      .catch((err) => {
-        console.log(err.message);
-        dispatch({ type: "EMAIL_LOGIN_FAILED", error: err.message });
-      });
-  }
+  // function logIn(email: string, password: string) {
+  //   return signInWithEmailAndPassword(auth, email, password)
+  //     .then(() => {
+  //       dispatch({ type: "EMAIL_LOGIN_SUCCESS", email: email });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //       dispatch({ type: "EMAIL_LOGIN_FAILED", error: err.message });
+  //     });
+  // }
   function signUp(email: string, password: string) {
     return createUserWithEmailAndPassword(auth, email, password)
       .then(() => {
@@ -193,7 +199,12 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         dispatch({ type: "RESET_PASSWORD_FAILED", error: err.message });
       });
   }
-  function logOut() {
+  function emailLogOut() {
+    dispatch({ type: "USER_LOGOUT" });
+    logOut();
+  }
+
+  function mobileLogOut() {
     dispatch({ type: "USER_LOGOUT" });
     return signOut(auth);
   }
@@ -232,9 +243,10 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
       value={{
         ...state,
         mobileAuth,
-        logIn,
         signUp,
-        logOut,
+        emailLogOut,
+        mobileLogOut,
+        loginSuccess,
         googleSignIn,
         setUpRecaptha,
         resetPassword,

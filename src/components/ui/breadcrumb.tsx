@@ -1,10 +1,10 @@
-import React from 'react';
-import ActiveLink from '@components/ui/active-link';
-import useBreadcrumb, { convertBreadcrumbTitle } from '@utils/use-breadcrumb';
-import { useTranslation } from 'next-i18next';
-import { IoChevronForward } from 'react-icons/io5';
-import { IoHomeOutline } from 'react-icons/io5';
-import { ROUTES } from '@utils/routes';
+import React from "react";
+import ActiveLink from "@components/ui/active-link";
+import useBreadcrumb, { convertBreadcrumbTitle } from "@utils/use-breadcrumb";
+import { useTranslation } from "next-i18next";
+import { IoChevronForward } from "react-icons/io5";
+import { IoHomeOutline } from "react-icons/io5";
+import { ROUTES } from "@utils/routes";
 
 interface Props {
   children: any;
@@ -54,7 +54,7 @@ export const BreadcrumbItems = (props: any) => {
   }, []);
 
   return (
-    <div className="borobazarBreadcrumb flex items-center">
+    <div className="breadcrumb flex items-center">
       <ol className="flex items-center w-full overflow-hidden">{children}</ol>
     </div>
   );
@@ -66,7 +66,7 @@ const Breadcrumb: React.FC<{ separator?: string }> = ({
   ),
 }) => {
   const breadcrumbs = useBreadcrumb();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   ROUTES;
   return (
     <BreadcrumbItems separator={separator}>
@@ -75,8 +75,8 @@ const Breadcrumb: React.FC<{ separator?: string }> = ({
         activeClassName="font-semibold text-heading"
       >
         <a className="inline-flex items-center">
-          <IoHomeOutline className="me-1.5 text-skin-base text-15px" />
-          {t('breadcrumb-home')}
+          {/* <IoHomeOutline className="me-1.5 text-skin-base text-15px" /> */}
+          {t("breadcrumb-home")}
         </a>
       </ActiveLink>
 

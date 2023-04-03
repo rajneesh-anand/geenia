@@ -19,7 +19,7 @@ export default function TermsPage() {
         path="terms"
       />
       <PageHeroSection heroTitle="text-page-terms-condition" />
-      <div className="py-12 lg:py-16 2xl:py-20">
+      <div className="py-12 lg:py-16 2xl:py-20 px-8">
         <Container>
           <div className="w-full xl:max-w-[1200px] mx-auto">
             {termsAndServices?.map((item) => (
@@ -42,7 +42,6 @@ export default function TermsPage() {
           </div>
         </Container>
       </div>
-      <DownloadApps />
     </>
   );
 }

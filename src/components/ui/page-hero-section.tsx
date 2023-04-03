@@ -12,9 +12,9 @@ interface HeaderProps {
 }
 
 const PageHeroSection: React.FC<HeaderProps> = ({
-  backgroundThumbnail = "/images/page-hero-bg.png",
+  backgroundThumbnail = "/images/hero/page-hero-bg.webp",
   heroTitle = "text-page-title",
-  mobileBackgroundThumbnail = "/images/page-hero-bg-mobile.png",
+  mobileBackgroundThumbnail = "/images/hero/page-hero-bg-mobile.png",
   variant = "default",
 }) => {
   const { t } = useTranslation("common");
@@ -36,14 +36,14 @@ const PageHeroSection: React.FC<HeaderProps> = ({
       <div className="w-full flex flex-col items-center justify-center relative">
         <h2
           className={cn(
-            "text-xl md:text-2xl lg:text-3xl 2xl:text-[40px] font-bold text-center",
+            "text-xl md:text-2xl lg:text-3xl 2xl:text-[40px]  text-center",
             {
               "text-skin-base": variant === "default",
               "text-skin-inverted": variant === "white",
             }
           )}
         >
-          <span className="font-manrope block font-bold mb-3 md:mb-4 lg:mb-5 2xl:mb-7 ">
+          <span className="font-poppins block  mb-3 md:mb-4 lg:mb-5 2xl:mb-7 ">
             {t(heroTitle)}
           </span>
         </h2>

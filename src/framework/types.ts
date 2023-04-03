@@ -1,4 +1,4 @@
-import { QueryKey } from 'react-query';
+import { QueryKey } from "react-query";
 
 export type CollectionsQueryOptionsType = {
   text?: string;

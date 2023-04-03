@@ -10,7 +10,7 @@ interface HeaderProps {
 const PageContactHeroSection: React.FC<HeaderProps> = ({
   heroTitle = "text-contact-page-header",
   heroDescription = "text-contact-page-explore",
-  backgroundThumbnail = "/images/contact-page-banner.png",
+  backgroundThumbnail = "/images/hero/contact-page-banner.png",
 }) => {
   const { t } = useTranslation("common");
   return (
@@ -22,10 +22,13 @@ const PageContactHeroSection: React.FC<HeaderProps> = ({
     >
       <div className="w-full max-w-[1484px] mx-auto px-4 md:px-6 lg:px-8">
         <div className="sm:max-w-xs md:max-w-sm lg:max-w-xl lg:pb-5">
-          <h2 className="font-manrope font-extrabold text-xl leading-7 md:leading-snug lg:leading-snug sm:text-2xl md:text-3xl lg:text-4xl 3xl:text-5xl 3xl:leading-snug text-skin-base tracking-tight mb-2.5 md:pe-6 lg:pe-36 3xl:pe-0">
+          <h2 className="font-poppins leading-7 md:leading-snug lg:leading-snug sm:text-2xl md:text-3xl 3xl:text-4xl 3xl:leading-snug text-skin-base tracking-tight mb-2.5 md:pr-6 ">
             {t(heroTitle)}
           </h2>
-          <p className="text-15px lg:text-base xl:text-[17px] leading-7 lg:leading-8 xl:leading-9 text-skin-base text-opacity-60 lg:pe-28">
+          <h3 className="font-poppins leading-7 md:leading-snug lg:leading-snug sm:text-xl md:text-2xl 3xl:text-3xl 3xl:leading-snug text-skin-base tracking-tight mb-2.5 md:pr-6 ">
+            {t("text-contact-page-header-two")}
+          </h3>
+          <p className="text-15px lg:text-base xl:text-[17px] leading-7 lg:leading-8 xl:leading-9 text-skin-base text-opacity-60 lg:pr-14">
             {t(heroDescription)}
           </p>
         </div>

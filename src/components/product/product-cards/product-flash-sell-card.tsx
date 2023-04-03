@@ -1,12 +1,12 @@
-import cn from 'classnames';
-import Image from '@components/ui/image';
-import usePrice from '@framework/product/use-price';
-import { Product } from '@framework/types';
-import { useModalAction } from '@components/common/modal/modal.context';
-import Countdown, { zeroPad } from 'react-countdown';
-import { productPlaceholder } from '@assets/placeholders';
-import ProgressCard from '@components/ui/progress-card';
-import { useTranslation } from 'react-i18next';
+import cn from "classnames";
+import Image from "@components/ui/image";
+import usePrice from "@framework/product/use-price";
+import { Product } from "@framework/types";
+import { useModalAction } from "@components/common/modal/modal.context";
+import Countdown, { zeroPad } from "react-countdown";
+import { productPlaceholder } from "@assets/placeholders";
+import ProgressCard from "@components/ui/progress-card";
+import { useTranslation } from "react-i18next";
 
 interface ProductProps {
   product: Product;
@@ -47,28 +47,28 @@ const ProductFlashSellCard: React.FC<ProductProps> = ({
 }) => {
   const { name, image, quantity, sold, product_type } = product ?? {};
   const { openModal } = useModalAction();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const { price, basePrice } = usePrice({
     amount: product?.sale_price ? product?.sale_price : product?.price,
     baseAmount: product?.price,
-    currencyCode: 'USD',
+    currencyCode: "INR",
   });
   const { price: minPrice } = usePrice({
     amount: product?.min_price ?? 0,
-    currencyCode: 'USD',
+    currencyCode: "INR",
   });
   const { price: maxPrice } = usePrice({
     amount: product?.max_price ?? 0,
-    currencyCode: 'USD',
+    currencyCode: "INR",
   });
 
   function handlePopupView() {
-    openModal('PRODUCT_VIEW', product);
+    openModal("PRODUCT_VIEW", product);
   }
   return (
     <article
       className={cn(
-        'flex flex-col justify-between group cursor-pointer relative px-5 lg:px-7 pt-4 lg:pt-5 pb-6 lg:pb-8',
+        "flex flex-col justify-between group cursor-pointer relative px-5 lg:px-7 pt-4 lg:pt-5 pb-6 lg:pb-8",
         className
       )}
       onClick={handlePopupView}
@@ -79,7 +79,7 @@ const ProductFlashSellCard: React.FC<ProductProps> = ({
           <div className="flex justify-center overflow-hidden mx-auto relative">
             <Image
               src={image?.original ?? productPlaceholder}
-              alt={name || 'Product Image'}
+              alt={name || "Product Image"}
               width={350}
               height={350}
               quality={100}
@@ -88,7 +88,7 @@ const ProductFlashSellCard: React.FC<ProductProps> = ({
           </div>
           <div className="w-full h-full absolute top-0 z-10 -mx-0.5 sm:-mx-1">
             <span className="text-[11px] md:text-xs font-bold text-skin-inverted uppercase inline-block bg-skin-red-secondary rounded-full px-2.5 py-[5px] pb-1 mx-0.5 sm:mx-1">
-              {t('text-most-popular')}
+              {t("text-most-popular")}
             </span>
           </div>
         </div>
@@ -96,7 +96,7 @@ const ProductFlashSellCard: React.FC<ProductProps> = ({
         <div className="flex flex-col pb-5 lg:pb-6 mb-0.5 lg:pt-3 h-full text-center">
           <div className="space-s-2 mb-1 lg:mb-2.5">
             <span className="inline-block font-semibold text-xl xl:text-2xl text-skin-base">
-              {product_type === 'variable'
+              {product_type === "variable"
                 ? `${minPrice} - ${maxPrice}`
                 : price}
             </span>

@@ -7,13 +7,15 @@ import { useTranslation } from "next-i18next";
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   inputClassName?: string;
-  label: string;
+  labelClassName?: string;
+  label?: string;
+  placeholder?: string;
   name: string;
+  error?: string;
+  type?: string;
   shadow?: boolean;
-  error: string | undefined;
   variant?: "normal" | "solid" | "outline";
 }
-
 const classes = {
   root: "py-2 px-4 w-full appearance-none transition duration-150 ease-in-out border text-input text-13px lg:text-sm font-body rounded placeholder-[#B3B3B3] min-h-12 transition duration-200 ease-in-out text-skin-base",
   normal:
@@ -24,27 +26,37 @@ const classes = {
   shadow: "focus:shadow",
 };
 
-// const classes = {
-//   root: 'py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border text-input text-13px lg:text-sm font-body rounded-md placeholder-[#B3B3B3] transition duration-200 ease-in-out bg-skin-fill border-skin-two focus:border-2  focus:outline-none focus:border-skin-primary h-11 md:h-12',
-// };
 const PasswordInput = React.forwardRef<HTMLInputElement, Props>(
   (
     {
       className = "block",
-      inputClassName,
       label,
       name,
       error,
+      placeholder,
       variant = "normal",
       shadow = false,
+      inputClassName,
+      labelClassName,
       ...rest
     },
     ref
   ) => {
+    const rootClassName = cn(
+      classes.root,
+      {
+        [classes.normal]: variant === "normal",
+        [classes.solid]: variant === "solid",
+        [classes.outline]: variant === "outline",
+      },
+      {
+        [classes.shadow]: shadow,
+      },
+      inputClassName
+    );
     const [show, setShow] = useState(false);
-
     const { t } = useTranslation();
-    const rootClassName = cn(classes.root, inputClassName);
+
     return (
       <div className={className}>
         {label && (

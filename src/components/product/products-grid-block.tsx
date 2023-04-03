@@ -1,13 +1,13 @@
-import SectionHeader from '@components/common/section-header';
-import ProductCard from '@components/product/product-cards/product-card';
-import ProductCardLoader from '@components/ui/loaders/product-card-loader';
-import { Product } from '@framework/types';
-import Alert from '@components/ui/alert';
+import SectionHeader from "@components/common/section-header";
+import ProductCard from "@components/product/product-cards/product-card";
+import ProductCardLoader from "@components/ui/loaders/product-card-loader";
+import { Product } from "@framework/types";
+import Alert from "@components/ui/alert";
 
 interface ProductsProps {
   sectionHeading: string;
   sectionSubHeading?: string;
-  headingPosition?: 'left' | 'center';
+  headingPosition?: "left" | "center";
   className?: string;
   products?: Product[];
   loading: boolean;
@@ -19,8 +19,8 @@ interface ProductsProps {
 const ProductsGridBlock: React.FC<ProductsProps> = ({
   sectionHeading,
   sectionSubHeading,
-  headingPosition = 'center',
-  className = 'mb-12 lg:mb-14 xl:mb-16',
+  headingPosition = "center",
+  className = "mb-12 lg:mb-14 xl:mb-16",
   products,
   loading,
   error,
@@ -34,7 +34,7 @@ const ProductsGridBlock: React.FC<ProductsProps> = ({
         sectionSubHeading={sectionSubHeading}
         headingPosition={headingPosition}
       />
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-7 gap-3 md:gap-4 2xl:gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-7 gap-3 md:gap-4 2xl:gap-5">
         {error ? (
           <Alert message={error} className="col-span-full" />
         ) : loading && !products?.length ? (

@@ -32,7 +32,9 @@ export default function LanguageSwitcher() {
               <span className="w-5 h-5 overflow-hidden rounded-full ltr:mr-2 rtl:ml-2 shrink-0">
                 {selectedItem.icon}
               </span>
-              <span className="leading-5 pb-0.5">{t(selectedItem.name)}</span>
+              <span className="leading-5 pb-0.5 ml-1">
+                {t(selectedItem.name)}
+              </span>
             </span>
             <span className="absolute inset-y-0 flex items-center pointer-events-none ltr:right-0 rtl:left-0">
               <FaChevronDown

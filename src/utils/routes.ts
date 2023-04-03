@@ -1,15 +1,15 @@
 export const ROUTES = {
   HOME: "/",
-  PRODUCT: `/products`,
+  PRODUCT: `/product`,
   CHECKOUT: "/checkout",
   CONTACT: "/contact-us",
   TERMS: "/terms",
   PRIVACY: "/privacy",
+  RETURN: "/return-policy",
   FAQ: "/faq",
   FORGET_PASSWORD: "/forget-password",
   CHANGE_PASSWORD: "/my-account/change-password",
   ACCOUNT: "/account/order",
-
   ACCOUNT_SETTING: "/account/information",
   ADDRESS: "/my-account/address",
   PAYMENT: "/my-account/payment",

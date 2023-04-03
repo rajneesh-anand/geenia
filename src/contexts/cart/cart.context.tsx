@@ -2,11 +2,6 @@ import React, { useCallback } from "react";
 import { cartReducer, State, initialState } from "./cart.reducer";
 import { Item, getItem, inStock } from "./cart.utils";
 import { useLocalStorage } from "@utils/use-local-storage";
-
-type Props = {
-  children?: React.ReactNode;
-};
-
 interface CartProviderState extends State {
   addItemToCart: (item: Item, quantity: number) => void;
   removeItemFromCart: (id: Item["id"]) => void;
@@ -30,9 +25,9 @@ export const useCart = () => {
   return context;
 };
 
-export const CartProvider: React.FC<Props> = (props) => {
+export const CartProvider = (props: any) => {
   const [savedCart, saveCart] = useLocalStorage(
-    "cart",
+    `cart`,
     JSON.stringify(initialState)
   );
   const [state, dispatch] = React.useReducer(

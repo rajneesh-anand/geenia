@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "overlayscrollbars/css/OverlayScrollbars.css";
 
 import type { AppProps } from "next/app";
+import { SessionProvider } from "next-auth/react";
 import { useRouter } from "next/router";
 import { ManagedUIContext } from "@contexts/ui.context";
 import ManagedModal from "@components/common/modal/managed-modal";
@@ -24,6 +25,7 @@ import { ToastContainer } from "react-toastify";
 import { appWithTranslation } from "next-i18next";
 import { DefaultSeo } from "@components/seo/default-seo";
 import { getDirection } from "@utils/get-direction";
+import PrivateRoute from "@utils/private-route";
 
 type ExtendedAppProps<P = {}> = {
   dehydratedState?: DehydratedState;
@@ -59,23 +61,35 @@ const CustomApp = ({
   }, [router.events, dir]);
 
   const Layout = (Component as any).Layout || Noop;
+  const authenticationRequired =
+    (Component as any).authenticationRequired ?? false;
 
   return (
     <QueryClientProvider client={queryClientRef.current}>
       <Hydrate state={dehydratedState}>
-        <AuthProvider>
-          <ManagedUIContext>
-            <>
-              <DefaultSeo />
-              <Layout pageProps={pageProps}>
-                <Component {...pageProps} key={router.route} />
-              </Layout>
-              <ToastContainer />
-              <ManagedModal />
-              <ManagedDrawer />
-            </>
-          </ManagedUIContext>
-        </AuthProvider>
+        <SessionProvider session={pageProps.session}>
+          <AuthProvider>
+            <ManagedUIContext>
+              <>
+                <DefaultSeo />
+                {authenticationRequired ? (
+                  <PrivateRoute>
+                    <Layout pageProps={pageProps}>
+                      <Component {...pageProps} key={router.route} />
+                    </Layout>
+                  </PrivateRoute>
+                ) : (
+                  <Layout pageProps={pageProps}>
+                    <Component {...pageProps} key={router.route} />
+                  </Layout>
+                )}
+                <ToastContainer />
+                <ManagedModal />
+                <ManagedDrawer />
+              </>
+            </ManagedUIContext>
+          </AuthProvider>
+        </SessionProvider>
       </Hydrate>
     </QueryClientProvider>
   );

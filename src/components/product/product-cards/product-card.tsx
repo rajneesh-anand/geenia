@@ -35,17 +35,18 @@ function RenderPopupOrAddToCart({ data }: { data: Product }) {
       </span>
     );
   }
-  if (product_type === "variable") {
-    return (
-      <button
-        className="inline-flex bg-skin-primary rounded-full w-8 lg:w-10 h-8 lg:h-10 text-skin-inverted text-4xl items-center justify-center focus:outline-none focus-visible:outline-none"
-        aria-label="Count Button"
-        onClick={handlePopupView}
-      >
-        <PlusIcon width={iconSize} height={iconSize} opacity="1" />
-      </button>
-    );
-  }
+  // if (product_type === "variable") {
+  //   return (
+  //     <button
+  //       className="bg-skin-primary rounded-sm h-8  uppercase font-poppins text-[10px] px-4  text-skin-inverted flex items-center justify-center focus:outline-none hover:bg-opacity-90"
+  //       aria-label="Count Button"
+  //       onClick={handlePopupView}
+  //     >
+  //       {/* <PlusIcon width={iconSize} height={iconSize} opacity="1" /> */}
+  //       Add To Cart
+  //     </button>
+  //   );
+  // }
   return <AddToCart data={data} />;
 }
 const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
@@ -56,15 +57,15 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
   const { price, basePrice, discount } = usePrice({
     amount: product?.sale_price ? product?.sale_price : product?.price,
     baseAmount: product?.price,
-    currencyCode: "USD",
+    currencyCode: "INR",
   });
   const { price: minPrice } = usePrice({
     amount: product?.min_price ?? 0,
-    currencyCode: "USD",
+    currencyCode: "INR",
   });
   const { price: maxPrice } = usePrice({
     amount: product?.max_price ?? 0,
-    currencyCode: "USD",
+    currencyCode: "INR",
   });
 
   // function handlePopupView() {
@@ -78,7 +79,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
   return (
     <article
       className={cn(
-        "flex flex-col group overflow-hidden rounded-md cursor-pointer transition-all duration-300 shadow-card hover:shadow-cardHover relative h-full",
+        "flex flex-col group overflow-hidden rounded-md cursor-pointer transition-all duration-300 shadow-[0_3px_10px_rgb(0,0,0,0.2)] hover:shadow-cardHover relative h-full",
         className
       )}
       onClick={navigateToProductPage}
@@ -90,38 +91,49 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
             src={image?.thumbnail ?? productPlaceholder}
             alt={name || "Product Image"}
             width={230}
-            height={200}
+            height={320}
             quality={100}
             className="object-cover bg-skin-thumbnail"
           />
         </div>
         <div className="w-full h-full absolute top-0 pt-2.5 md:pt-3.5 px-3 md:px-4 lg:px-[18px] z-10 -mx-0.5 sm:-mx-1">
           {discount && (
-            <span className="text-[11px] md:text-xs font-bold text-skin-inverted uppercase inline-block bg-skin-primary rounded-full px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
+            <span className="text-[11px] md:text-xs font-semibold text-skin-inverted uppercase inline-block bg-skin-yellow-three rounded-full px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
               {t("text-on-sale")}
             </span>
           )}
-          <div className="inline-block product-count-button-position">
-            <RenderPopupOrAddToCart data={product} />
-          </div>
+        </div>
+        <div className="w-full h-full absolute  top-0 text-right pt-2.5 md:pt-3.5 px-3 md:px-4 lg:px-[18px] z-10 -mx-0.5 sm:-mx-1">
+          {discount && (
+            <span className="inline-block rounded font-bold text-xs md:text-sm bg-skin-tree bg-opacity-20 text-skin-tree uppercase px-2 py-1 ml-2.5">
+              {discount} {t("text-off")}
+            </span>
+          )}
         </div>
       </div>
 
       <div className="flex flex-col px-3 md:px-4 lg:px-[18px] pb-5 lg:pb-6 lg:pt-1.5 h-full">
-        <div className="space-s-2 mb-1 lg:mb-1.5">
-          <span className="inline-block font-semibold text-sm sm:text-15px lg:text-base text-skin-base">
-            {product_type === "variable" ? `${minPrice} - ${maxPrice}` : price}
-          </span>
-          {basePrice && (
-            <del className="text-sm text-skin-base text-opacity-70">
-              {basePrice}
-            </del>
-          )}
-        </div>
-        <h2 className="text-skin-base text-13px sm:text-sm lg:text-15px leading-5 sm:leading-6 mb-1.5">
+        <h2 className="text-skin-base min-h-[44px] text-13px sm:text-sm lg:text-15px font-semibold font-poppins leading-5 sm:leading-6 mb-1.5">
           {name}
         </h2>
-        <div className="text-13px sm:text-sm mt-auto">{unit}</div>
+
+        <div className="flex justify-between items-center mt-2 ">
+          <div>
+            <span className="inline-block font-semibold text-sm sm:text-15px lg:text-[18px]  text-skin-base">
+              {product_type === "variable"
+                ? `${minPrice} - ${maxPrice}`
+                : price}
+            </span>
+            {basePrice && (
+              <del className="text-[15px] ml-1 text-skin-base text-opacity-70">
+                {basePrice}
+              </del>
+            )}
+          </div>
+          <div className="product-count-button-position">
+            <RenderPopupOrAddToCart data={product} />
+          </div>
+        </div>
       </div>
     </article>
   );

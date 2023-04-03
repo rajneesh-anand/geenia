@@ -37,7 +37,7 @@ export default function PrivacyPage() {
                       smooth={true}
                       duration={200}
                       to={makeTitleToDOMId(t(item.title))}
-                      activeClass="text-skin-primary font-medium borderColor relative ps-3"
+                      activeClass="text-skin-primary font-medium borderColor relative pl-3"
                       className="block transition-all cursor-pointer py-3 text-sm lg:text-15px text-skin-base font-medium"
                     >
                       {t(item.title)}
@@ -72,7 +72,6 @@ export default function PrivacyPage() {
           </div>
         </Container>
       </div>
-      <DownloadApps />
     </>
   );
 }

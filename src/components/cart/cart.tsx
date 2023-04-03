@@ -12,18 +12,36 @@ import { useTranslation } from "next-i18next";
 import Heading from "@components/ui/heading";
 import Text from "@components/ui/text";
 import DeleteIcon from "@components/icons/delete-icon";
+import { useUserAuth } from "@contexts/user.context";
+import { useModalAction } from "@components/common/modal/modal.context";
+import Router from "next/router";
+import { useSession } from "next-auth/react";
 
 export default function Cart() {
   const { t } = useTranslation("common");
+
+  const { data: session, status } = useSession();
+  const { isAuthorized, user } = useUserAuth();
+  const { openModal } = useModalAction();
   const { closeDrawer } = useUI();
   const { items, total, isEmpty, resetCart } = useCart();
   const { price: cartTotal } = usePrice({
     amount: total,
-    currencyCode: "USD",
+    currencyCode: "INR",
   });
+
+  const handleCheckout = () => {
+    closeDrawer();
+    if (session) {
+      Router.push("/checkout");
+    } else {
+      openModal("LOGIN_VIEW");
+    }
+  };
+
   return (
     <div className="flex flex-col w-full h-full">
-      <div className="w-full flex justify-between items-center relative ps-5 md:ps-7 border-b border-skin-base">
+      <div className="w-full flex justify-between items-center relative pl-5 md:pl-7 border-b border-skin-base">
         <Heading variant="titleMedium">{t("text-shopping-cart")}</Heading>
         <div className="flex items-center">
           {!isEmpty && (
@@ -70,8 +88,8 @@ export default function Cart() {
               {cartTotal}
             </div>
           </div>
-          <div className="flex flex-col" onClick={closeDrawer}>
-            <Link
+          <div className="flex flex-col">
+            {/* <Link
               href={isEmpty === false ? ROUTES.CHECKOUT : "/"}
               className={cn(
                 "w-full px-5 py-3 md:py-4 flex items-center justify-center bg-heading rounded font-semibold text-sm sm:text-15px text-skin-inverted bg-skin-primary focus:outline-none transition duration-300 hover:bg-opacity-90",
@@ -82,7 +100,19 @@ export default function Cart() {
               )}
             >
               <span className="py-0.5">{t("text-proceed-to-checkout")}</span>
-            </Link>
+            </Link> */}
+            <button
+              onClick={handleCheckout}
+              className={cn(
+                "w-full px-5 py-3 md:py-4 flex items-center justify-center bg-heading rounded font-semibold text-sm sm:text-15px text-skin-inverted bg-skin-primary focus:outline-none transition duration-300 hover:bg-opacity-90",
+                {
+                  "cursor-not-allowed !text-skin-base !text-opacity-25 bg-skin-button-disable hover:bg-skin-button-disable":
+                    isEmpty,
+                }
+              )}
+            >
+              <span className="py-0.5">{t("text-proceed-to-checkout")}</span>
+            </button>
           </div>
         </div>
       )}

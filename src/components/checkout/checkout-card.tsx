@@ -18,22 +18,27 @@ import Select from "@components/ui/form/select/select";
 import { statesOptions } from "@data/constant";
 import { useForm, Controller } from "react-hook-form";
 import Router, { useRouter } from "next/router";
+import { useModalAction } from "@components/common/modal/modal.context";
+import { useSession } from "next-auth/react";
+import TextArea from "@components/ui/form/text-area";
 
 interface FormValues {
   address: string;
-  city: string;
-  state: string;
+  email: string;
+  mobile: string;
   pin: string;
-  fname: string;
-  lname: string;
+  name: string;
+  conatct: string;
 }
 
 const CheckoutCard: React.FC = () => {
   const { t } = useTranslation("common");
-  const { user } = useUserAuth();
+  const { user, isAuthorized } = useUserAuth();
   const { items, total, isEmpty } = useCart();
   const [selectedState, setSelectedState] = useState(statesOptions[0]);
   const [redirect, setRedirect] = useState(false);
+
+  const { data: session } = useSession();
 
   const [paymentData, setPaymentData] = useState({
     token: "",
@@ -58,6 +63,7 @@ const CheckoutCard: React.FC = () => {
   useEffect(() => {
     initializePayment();
   }, []);
+
   const initializePayment = () => {
     let orderDate = new Date();
 
@@ -81,7 +87,7 @@ const CheckoutCard: React.FC = () => {
         currency: "INR",
       },
       userInfo: {
-        custId: user.mobile ? user.mobile : user.email,
+        custId: session?.user?.email,
       },
     };
 
@@ -170,18 +176,14 @@ const CheckoutCard: React.FC = () => {
           await axios.post(
             `${process.env.NEXT_PUBLIC_NODE_API}/order/neworder`,
             JSON.stringify({
-              user: user,
+              name: formData.name,
               item: items,
               amount: total,
               status: paymentStatus,
-              address: {
-                address: formData.address,
-                city: formData.city,
-                state: selectedState.value,
-                pin: formData.pin,
-                firstName: formData.fname,
-                lastName: formData.lname,
-              },
+              mobile: formData.mobile,
+              email: formData.email,
+              address: formData.address,
+              pin: formData.pin,
             }),
             {
               headers: {
@@ -195,7 +197,7 @@ const CheckoutCard: React.FC = () => {
           // Router.push("/account/order");
         },
         notifyMerchant: function notifyMerchant(eventName: any, data: any) {
-          console.log("Closed");
+          // console.log("Closed");
         },
       },
       merchant: {
@@ -243,114 +245,49 @@ const CheckoutCard: React.FC = () => {
     },
   ];
 
-  // const handlePayment = async () => {
-  //   try {
-  //     const orderData = {
-  //       name: "Rajnish",
-  //       email: "Rajneesh.k.anand@gmail.com",
-  //       mobile: "+919654202690",
-  //       amount: "100",
-  //       address: "Shstri nagar Delhi",
-  //       orderItem: "Book",
-  //     };
-
-  //     const response = await fetch("/api/paytm", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(orderData),
-  //     });
-  //     const result = await response.json();
-  //     console.log(result);
-  //     setPaytmData({
-  //       mid: "zWEMTK89662017572077",
-  //       orderId: result.orderId,
-  //       txnToken: result.txnToken,
-  //     });
-  //     if (result.message === "success") {
-  //       (document.getElementById("redFrom") as HTMLFormElement).submit();
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
   return (
-    <div className="border border-skin-base bg-skin-fill rounded-md">
+    <div className="border border-skin-base bg-skin-fill rounded-md mt-2">
       <form noValidate>
-        <div className="grid grid-cols-1 md:grid-cols-6 md:gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-6 md:gap-3 px-4 ">
           <div className="md:col-span-3 md:mx-8 my-3 md:my-8">
-            <div className="flex flex-col md:flex-row px-4 pt-8 ">
-              <div className="w-full md:w-1/2  mb-3 ">
-                <Input
-                  type="text"
-                  variant="outline"
-                  label="First Name"
-                  placeholder="Your Name"
-                  {...register("fname", {
-                    required: "You must provide your first name !",
-                  })}
-                  error={errors.fname?.message}
-                />
-              </div>
-
-              <div className="w-full md:w-1/2  mb-3 lg:ml-[4px]">
-                <Input
-                  type="text"
-                  variant="outline"
-                  label="Last Name"
-                  placeholder="Your Surname"
-                  {...register("lname")}
-                  error={errors.lname?.message}
-                />
-              </div>
-            </div>
-            <div className="w-full mb-3 px-4">
+            <h3 className="font-semibold uppercase text-red-900 py-4">
+              Shipping Information
+            </h3>
+            <div className="w-full mb-3 ">
               <Input
                 type="text"
                 variant="outline"
-                label="Delivery Address* "
-                placeholder="Enter your full address "
-                {...register("address", {
-                  required: "You must provide your delivery address !",
+                label="Enter your full name"
+                placeholder="Enter your full name "
+                {...register("name", {
+                  required: "You must provide your name !",
                 })}
+                error={errors.name?.message}
+              />
+            </div>
+
+            <div className="w-full mb-3">
+              <Input
+                type="email"
+                variant="outline"
+                label="Enter your billing email"
+                placeholder="Enter your billing email"
+                {...register("email")}
+                error={errors.email?.message}
+              />
+            </div>
+
+            <div className="w-full mb-3">
+              <TextArea
+                variant="outline"
+                label="Your Shiping  Address"
+                placeholder="Enter your shipping adress please"
+                {...register("address")}
                 error={errors.address?.message}
               />
             </div>
 
-            <div className="flex flex-col md:flex-row  px-4 ">
-              <div className="w-full md:w-1/2  mb-3 ">
-                <Input
-                  type="text"
-                  variant="outline"
-                  label="City"
-                  placeholder="Your City/Town Name"
-                  {...register("city", {
-                    required: "You must provide city / town !",
-                  })}
-                  error={errors.city?.message}
-                />
-              </div>
-
-              <div className="w-full md:w-1/2  mb-3 lg:ml-[4px]">
-                <label
-                  htmlFor="state"
-                  className="block mb-3 text-sm font-semibold leading-none text-body-dark"
-                >
-                  State
-                </label>
-                <Select
-                  id="state"
-                  defaultValue={selectedState}
-                  options={statesOptions}
-                  isSearchable={false}
-                  onChange={stateChange}
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col md:flex-row pb-8 px-4 ">
+            <div className="flex flex-col md:flex-row pb-8 ">
               <div className="w-full md:w-1/2  mb-3">
                 <Input
                   variant="outline"
@@ -362,9 +299,19 @@ const CheckoutCard: React.FC = () => {
                   error={errors.pin?.message}
                 />
               </div>
+              <div className="w-full md:w-1/2  mb-3 lg:ml-[4px]">
+                <Input
+                  type="text"
+                  variant="outline"
+                  label="Contact Number"
+                  placeholder="Enter your mobile number"
+                  {...register("mobile")}
+                  error={errors.mobile?.message}
+                />
+              </div>
             </div>
           </div>
-          <div className="md:col-span-3 md:px-8 my-3 md:my-8 border-l border-teal-600">
+          <div className="md:col-span-3 md:px-8 my-3 md:my-8 lg:border-l lg:border-teal-600">
             <div className="flex py-4 rounded-md text-sm font-semibold text-heading">
               <span className="text-15px text-skin-base font-medium">
                 {t("text-product")}
@@ -400,14 +347,14 @@ const CheckoutCard: React.FC = () => {
                 </a>
               </Link>
               {t("text-and")}{" "}
-              <Link href={ROUTES.PRIVACY}>
+              <Link href={ROUTES.RETURN}>
                 <a className="text-skin-primary underline font-medium">
                   {t("text-privacy")}
                 </a>
               </Link>
-              . {t("text-credit-debit")}
+              {/* . {t("text-credit-debit")} */}
             </Text>
-            <Text className="mt-4">{t("text-bag-fee")}</Text>
+            {/* <Text className="mt-4">{t("text-bag-fee")}</Text> */}
           </div>
         </div>
       </form>

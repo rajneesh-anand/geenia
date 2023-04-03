@@ -9,7 +9,7 @@ const EmptyCart: React.FC = () => {
     <div className="flex justify-center flex-col items-center">
       <div className="mt-8">
         <Image
-          src="/images/empty-cart.png"
+          src="/images/hero/empty-cart.png"
           alt={t("text-empty-cart")}
           width={270}
           height={240}

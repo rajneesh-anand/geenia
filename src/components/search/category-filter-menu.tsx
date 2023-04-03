@@ -14,7 +14,7 @@ function checkIsActive(arr: any, item: string) {
   return false;
 }
 function CategoryFilterMenuItem({
-  className = "hover:bg-skin-two border-t border-skin-base first:border-t-0 px-3.5 2xl:px-4 py-3 xl:py-3.5 2xl:py-2.5 3xl:py-3",
+  className = "bg-skin-two border-t border-skin-base first:border-t-0 px-3.5 2xl:px-4 py-3 xl:py-3.5 2xl:py-2.5 3xl:py-3",
   item,
   depth = 0,
 }: any) {
@@ -47,7 +47,7 @@ function CategoryFilterMenuItem({
 
   function onClick() {
     if (Array.isArray(items) && !!items.length) {
-      toggleCollapse();
+      // toggleCollapse();
     } else {
       const { category, ...restQuery } = query;
       let currentFormState = selectedCategories.includes(slug)
@@ -72,13 +72,13 @@ function CategoryFilterMenuItem({
   }
 
   let expandIcon;
-  if (Array.isArray(items) && items.length) {
-    expandIcon = !isOpen ? (
-      <IoIosArrowDown className="text-base text-skin-base text-opacity-40" />
-    ) : (
-      <IoIosArrowUp className="text-base text-skin-base text-opacity-40" />
-    );
-  }
+  // if (Array.isArray(items) && items.length) {
+  //   expandIcon = !isOpen ? (
+  //     <IoIosArrowDown className="text-base text-skin-base text-opacity-40" />
+  //   ) : (
+  //     <IoIosArrowUp className="text-base text-skin-base text-opacity-40" />
+  //   );
+  // }
 
   return (
     <>
@@ -98,7 +98,7 @@ function CategoryFilterMenuItem({
           // onClick={handleChange}
         >
           {icon && (
-            <div className="inline-flex flex-shrink-0 2xl:w-12 2xl:h-12 3xl:w-auto 3xl:h-auto me-2.5 md:me-4 2xl:me-3 3xl:me-4">
+            <div className="inline-flex flex-shrink-0 2xl:w-12 2xl:h-12 3xl:w-auto 3xl:h-auto mr-2.5 md:mr-4 2xl:mr-3 3xl:mr-4">
               <Image
                 src={icon ?? "/placeholder/category-small.svg"}
                 alt={name || t("text-category-thumbnail")}
@@ -110,7 +110,7 @@ function CategoryFilterMenuItem({
           <span className="text-skin-base capitalize py-0.5">{name}</span>
           {depth > 0 && (
             <span
-              className={`w-[22px] h-[22px] text-13px flex items-center justify-center border-2 border-skin-four rounded-full ms-auto transition duration-500 ease-in-out group-hover:border-skin-yellow text-skin-inverted ${
+              className={`w-[22px] h-[22px] text-13px flex items-center justify-center border-2 border-skin-four rounded-full ml-auto transition duration-500 ease-in-out group-hover:border-skin-yellow text-skin-inverted ${
                 selectedCategories.includes(slug) &&
                 "border-skin-yellow bg-skin-yellow"
               }`}
@@ -118,10 +118,10 @@ function CategoryFilterMenuItem({
               {selectedCategories.includes(slug) && <FaCheck />}
             </span>
           )}
-          {expandIcon && <span className="ms-auto">{expandIcon}</span>}
+          {expandIcon && <span className="ml-auto">{expandIcon}</span>}
         </button>
       </li>
-      {Array.isArray(items) && isOpen ? (
+      {Array.isArray(items) ? (
         <li>
           <ul key="content" className="text-xs px-4">
             {items?.map((currentItem: any) => {

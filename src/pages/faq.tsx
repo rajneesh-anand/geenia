@@ -29,7 +29,6 @@ export default function TermsPage() {
           ))}
         </div>
       </Container>
-      <DownloadApps />
     </>
   );
 }

@@ -5,7 +5,6 @@ import {
   Navigation,
   Thumbs,
 } from "@components/ui/carousel/slider";
-
 import Image from "@components/ui/image";
 import { useRef, useState } from "react";
 import cn from "classnames";
@@ -54,13 +53,16 @@ const ThumbnailCarousel: React.FC<Props> = ({
         <Swiper
           id="productGallery"
           // thumbs={{ swiper: thumbsSwiper }}
+          thumbs={{
+            swiper:
+              thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
+          }}
           modules={[Navigation, Thumbs]}
           navigation={{
             prevEl: prevRef.current!, // Assert non-null
             nextEl: nextRef.current!, // Assert non-null
           }}
-          spaceBetween={0}
-          slidesPerView={1}
+          {...swiperParams}
         >
           {gallery?.map((item: any) => (
             <SwiperSlide
