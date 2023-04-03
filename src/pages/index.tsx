@@ -1,7 +1,6 @@
 import Layout from "@components/layout";
 import Container from "@components/ui/container";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import BundleGrid from "@components/bundle/bundle-grid-two";
 import CollectionGrid from "@components/common/collection-grid";
 import BestSellerProductFeed from "@components/product/feeds/best-seller-products-feed";
 import { bundleDataThree as bundle } from "@framework/static/bundle";
@@ -38,10 +37,7 @@ export default function Home() {
         <FeatureCarousel />
         {/* <CategoryGridBlock /> */}
         <BestSellerProductFeed />
-        <BundleGrid
-          className="mb-12 lg:mb-14 xl:mb-16 2xl:mb-20"
-          data={bundle}
-        />
+
         <PopularProductWithBestDeals />
         <BannerGridTwo
           data={banners}
