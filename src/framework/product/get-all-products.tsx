@@ -11,21 +11,21 @@ const fetchProducts = async ({ queryKey }: any) => {
   const [_key, _params] = queryKey;
   const category = _params?.category?.toString().split(",");
 
-  const { data } = await http.get(API_ENDPOINTS.PRODUCTS);
-  const result = data.reduce((acc: any, item: any) => {
-    let categoryExist = item.category.find(
-      (cat: any) => cat.slug == _params.slug
-    );
+  const { data } = await http.get(`/products/${_params.slug}`);
+  // const result = data.reduce((acc: any, item: any) => {
+  //   let categoryExist = item.category.find(
+  //     (cat: any) => cat.slug == _params.slug
+  //   );
 
-    if (categoryExist) {
-      acc.push(item);
-    }
-    return acc;
-  }, []);
+  //   if (categoryExist) {
+  //     acc.push(item);
+  //   }
+  //   return acc;
+  // }, []);
 
   if (category) {
-    const subCategoryResult = result.reduce((acc: any, item: any) => {
-      let subCategoryExist = item.sub_category.find((cat: any) =>
+    const subCategoryResult = data.reduce((acc: any, item: any) => {
+      let subCategoryExist = item.category.find((cat: any) =>
         category?.includes(cat.slug)
       );
 
@@ -43,7 +43,7 @@ const fetchProducts = async ({ queryKey }: any) => {
     };
   } else {
     return {
-      data: result as Product[],
+      data: data as Product[],
       paginatorInfo: {
         nextPageUrl: "",
       },

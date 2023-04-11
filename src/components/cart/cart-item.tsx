@@ -42,7 +42,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
       </div>
 
       <div className="flex w-full overflow-hidden items-start justify-between">
-        <div className="ps-3 md:ps-4">
+        <div className="pl-3 md:pl-4">
           <Link
             href={`${ROUTES.PRODUCT}/${item?.slug}`}
             className="block text-skin-base text-13px sm:text-sm lg:text-15px transition-all leading-5 hover:text-skin-primary"

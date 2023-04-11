@@ -1,6 +1,3 @@
-import { USFlag } from "@components/icons/language/USFlag";
-import { DEFlag } from "@components/icons/language/DEFlag";
-
 export const siteSettings = {
   name: "Geenia",
   description:
@@ -79,20 +76,6 @@ export const siteSettings = {
             label: "menu-doctor-consultation",
           },
         ],
-      },
-    ],
-    languageMenu: [
-      {
-        id: "en",
-        name: "English",
-        value: "en",
-        icon: <USFlag />,
-      },
-      {
-        id: "de",
-        name: "Deutsch",
-        value: "de",
-        icon: <DEFlag />,
       },
     ],
   },

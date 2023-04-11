@@ -11,15 +11,15 @@ import { GetServerSideProps } from "next";
 import Divider from "@components/ui/divider";
 import Seo from "@components/seo/seo";
 import { fetchProduct } from "@framework/product/get-product";
+import axios from "axios";
 
-export default function ProductPage({ data }: any) {
-  console.log(data);
+export default function ProductPage({ product }: any) {
   return (
     <>
       <Seo
-        title={data.name}
-        description={data.description}
-        path={`/products/${data.slug}`}
+        title={product.name}
+        description={product.description}
+        path={`/products/${product.slug}`}
       />
       <Divider />
       <div className="pt-6 lg:pt-7">
@@ -42,12 +42,14 @@ export const getServerSideProps: GetServerSideProps = async ({
 }) => {
   const { slug }: any = params;
 
-  const data = await fetchProduct(slug);
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_NODE_API}/product/${slug}`
+  );
   console.log(data);
 
   return {
     props: {
-      data,
+      product: data.product,
       ...(await serverSideTranslations(locale!, [
         "common",
         "forms",

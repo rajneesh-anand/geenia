@@ -12,14 +12,17 @@ interface Props {
 const AuthMenu: React.FC<Props> = ({ btnProps }) => {
   const { data: session, status } = useSession();
   return session ? (
-    <Menu as="div" className="relative inline-flex ml-auto">
+    <Menu
+      as="div"
+      className="relative inline-flex ml-auto border px-[8px] py-[4px] rounded-sm border-purple-700"
+    >
       <Menu.Button className="inline-flex justify-center items-center group">
         <img
-          className="w-8 h-8 rounded-full"
+          className="rounded-full"
           src={session?.user?.image ?? "/images/avatar.svg"}
-          width="32"
-          height="32"
-          alt="profile image"
+          width="24"
+          height="24"
+          alt={session?.user?.name}
         />
         <div className="flex items-center truncate">
           <span className="truncate ml-2 text-red-900 uppercase text-[12px] font-medium group-hover:text-gray-800">
@@ -51,13 +54,28 @@ const AuthMenu: React.FC<Props> = ({ btnProps }) => {
               </p>
             </li>
             <li className="px-4 pb-2">
-              <Link href="/account/profile">Profile</Link>
+              <Link
+                href="/account/profile"
+                className="font-medium font-poppins text-[14px]"
+              >
+                My Profile
+              </Link>
             </li>
             <li className="px-4 pb-2">
-              <Link href="/account/order">My Orders</Link>
+              <Link
+                href="/account/order"
+                className="font-medium font-poppins text-[14px]"
+              >
+                My Orders
+              </Link>
             </li>
             <li className="px-4 pb-2">
-              <button onClick={() => signOut()}>Sign Out</button>
+              <button
+                className="font-medium font-poppins text-[14px]"
+                onClick={() => signOut()}
+              >
+                Sign Out
+              </button>
             </li>
           </ul>
         </div>
@@ -75,37 +93,3 @@ const AuthMenu: React.FC<Props> = ({ btnProps }) => {
 };
 
 export default AuthMenu;
-
-// import Link from "@components/ui/link";
-// import React from "react";
-
-// interface Props {
-//   href: string;
-//   btnProps: React.ButtonHTMLAttributes<any>;
-//   isAuthorized: boolean;
-//   children: React.ReactNode;
-// }
-
-// const AuthMenu: React.FC<Props> = ({
-//   isAuthorized,
-//   href,
-//   btnProps,
-//   children,
-// }) => {
-//   return isAuthorized ? (
-//     <Link
-//       href={href}
-//       className="text-sm font-nunito uppercase lg:text-[12.5px] text-slate-900 text-opacity-90 font-semibold focus:outline-none ml-2 px-3 py-1.5 border rounded-sm border-emerald-700"
-//     >
-//       {children}
-//     </Link>
-//   ) : (
-//     <button
-//       className="text-sm font-nunito uppercase lg:text-[12.5px] text-slate-900 text-opacity-90 font-semibold focus:outline-none ml-2 px-3 py-1.5 border rounded-sm border-emerald-700"
-//       aria-label="Authentication"
-//       {...btnProps}
-//     />
-//   );
-// };
-
-// export default AuthMenu;

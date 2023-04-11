@@ -13,22 +13,19 @@ import AccountLayout from "@components/my-account/account-layout";
 import OrderTable from "@components/order/order-table";
 import { useOrdersQuery } from "@framework/order/get-all-orders";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import axios from "axios";
 
-export default function OrderPage() {
-  const { data, isLoading } = useOrdersQuery({});
+export default function OrderPage({ orders }: any) {
+  // const { data, isLoading } = useOrdersQuery({});
   return (
     <>
       <Seo
-        title="Orders"
+        title="My Orders | Geenia"
         description="Fastest E-commerce template built with React, NextJS, TypeScript, React-Query and Tailwind CSS."
         path="account/order"
       />
       <AccountLayout>
-        {!isLoading ? (
-          <OrderTable orders={data?.data} />
-        ) : (
-          <div>Loading...</div>
-        )}
+        <OrderTable orders={orders} />
       </AccountLayout>
     </>
   );
@@ -47,9 +44,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
-
+  const { data } = await axios.post(
+    `${process.env.NEXT_PUBLIC_NODE_API}/order/order-list`,
+    { email: session?.user?.email },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log(data);
   return {
     props: {
+      orders: data.orders,
       ...(await serverSideTranslations(context.locale!, [
         "common",
         "forms",

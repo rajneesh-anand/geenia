@@ -4,7 +4,7 @@ import { useTranslation } from "next-i18next";
 const ErrorInformation: React.FC = () => {
   const { t } = useTranslation("common");
   // const backgroundThumbnail = "/images/404-bg.png";
-  const errorThumbnail = "/images/404.png";
+  const errorThumbnail = "/images/404.svg";
   return (
     <div
       className="text-center px-12 py-16 sm:py-20 lg:py-24 xl:py-32 flex items-center justify-center bg-cover bg-no-repeat bg-center"

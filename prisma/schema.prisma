@@ -10,18 +10,25 @@ datasource db {
 
 
 
+
 model Order {
   id            Int     @default(autoincrement()) @id
   orderDate     DateTime  @default(now())  
-  orderNumber   String
+  orderNumber   String @unique
   email         String
   name          String
   address       String?
+  pincode       String?
+  description   String?
   mobile        String?
   amount        String?
+  discount      String?
+  shipping      String?
+  totalAmount   String?
   orderItem     String
+  orderStatus   String?
   paymentId     String?
-  paymentStatus String
+  paymentStatus String?
 }
 
 

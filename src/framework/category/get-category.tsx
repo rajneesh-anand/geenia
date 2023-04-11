@@ -8,7 +8,7 @@ export const fetchCategory = async ({ queryKey }: any) => {
 
   const {
     data: { data },
-  } = await http.get(API_ENDPOINTS.CATEGORIES);
+  } = await http.get("/categories");
 
   const result = data.reduce((acc: any, item: any) => {
     if (item.slug === _params.slug) {

@@ -79,7 +79,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
   return (
     <article
       className={cn(
-        "flex flex-col group overflow-hidden rounded-md cursor-pointer transition-all duration-300 shadow-[0_3px_10px_rgb(0,0,0,0.2)] hover:shadow-cardHover relative h-full",
+        "flex flex-col group overflow-hidden rounded-md cursor-pointer transition-all duration-300  hover:shadow-cardHover relative h-full",
         className
       )}
       onClick={navigateToProductPage}
@@ -98,14 +98,14 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
         </div>
         <div className="w-full h-full absolute top-0 pt-2.5 md:pt-3.5 px-3 md:px-4 lg:px-[18px] z-10 -mx-0.5 sm:-mx-1">
           {discount && (
-            <span className="text-[11px] md:text-xs font-semibold text-skin-inverted uppercase inline-block bg-skin-yellow-three rounded-full px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
+            <span className="text-[10px] font-semibold text-skin-inverted uppercase inline-block bg-skin-yellow-three rounded-full px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
               {t("text-on-sale")}
             </span>
           )}
         </div>
         <div className="w-full h-full absolute  top-0 text-right pt-2.5 md:pt-3.5 px-3 md:px-4 lg:px-[18px] z-10 -mx-0.5 sm:-mx-1">
           {discount && (
-            <span className="inline-block rounded font-bold text-xs md:text-sm bg-skin-tree bg-opacity-20 text-skin-tree uppercase px-2 py-1 ml-2.5">
+            <span className="inline-block text-[12px] font-poppins font-medium text-rose-700 px-2 py-1 ml-2.5">
               {discount} {t("text-off")}
             </span>
           )}
@@ -113,19 +113,19 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
       </div>
 
       <div className="flex flex-col px-3 md:px-4 lg:px-[18px] pb-5 lg:pb-6 lg:pt-1.5 h-full">
-        <h2 className="text-skin-base min-h-[44px] text-13px sm:text-sm lg:text-15px font-semibold font-poppins leading-5 sm:leading-6 mb-1.5">
+        <h2 className="text-skin-base min-h-[44px] text-11px  lg:text-15px font-semibold font-poppins leading-5 sm:leading-6 mb-1.5">
           {name}
         </h2>
 
         <div className="flex justify-between items-center mt-2 ">
           <div>
-            <span className="inline-block font-semibold text-sm sm:text-15px lg:text-[18px]  text-skin-base">
+            <span className="inline-block font-semibold text-[13px] lg:text-[18px] text-skin-base">
               {product_type === "variable"
                 ? `${minPrice} - ${maxPrice}`
                 : price}
             </span>
             {basePrice && (
-              <del className="text-[15px] ml-1 text-skin-base text-opacity-70">
+              <del className="text-[10px] ml-1 text-skin-base text-opacity-70">
                 {basePrice}
               </del>
             )}

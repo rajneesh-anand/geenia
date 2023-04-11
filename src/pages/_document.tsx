@@ -30,11 +30,11 @@ export default class CustomDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;700&family=Poppins:wght@400;500;600&display=swap"
             rel="stylesheet"
           />
-          <script
+          {/* <script
             type="text/javascript"
             crossOrigin="anonymous"
             src="https://securegw-stage.paytm.in/merchantpgpui/checkoutjs/merchants/zWEMTK89662017572077.js"
-          />
+          /> */}
           <script
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}

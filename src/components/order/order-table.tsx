@@ -1,15 +1,16 @@
-import { Table } from '@components/ui/table';
-import Input from '@components/ui/form/input';
-import { useState } from 'react';
-import Pagination from '@components/ui/pagination';
-import ActionsButton from '@components/ui/action-button';
-import { TotalPrice } from '@components/order/price';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import timezone from 'dayjs/plugin/timezone';
-import { GrNext, GrPrevious } from 'react-icons/gr';
-import { BsSearch } from 'react-icons/bs';
+import { Table } from "@components/ui/table";
+import Input from "@components/ui/form/input";
+import { useState } from "react";
+import Pagination from "@components/ui/pagination";
+import ActionsButton from "@components/ui/action-button";
+import { TotalPrice } from "@components/order/price";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import relativeTime from "dayjs/plugin/relativeTime";
+import timezone from "dayjs/plugin/timezone";
+import { GrNext, GrPrevious } from "react-icons/gr";
+import { BsSearch } from "react-icons/bs";
+import Image from "@components/ui/image";
 
 export const CreatedAt: React.FC<{ createdAt?: any }> = ({ createdAt }) => {
   dayjs.extend(relativeTime);
@@ -24,7 +25,7 @@ export const CreatedAt: React.FC<{ createdAt?: any }> = ({ createdAt }) => {
 
 export const Status: React.FC<{ item?: any }> = ({ item }) => {
   return (
-    <span className={item?.status?.name?.replace(/\s/g, '_').toLowerCase()}>
+    <span className={item?.status?.name?.replace(/\s/g, "_").toLowerCase()}>
       <span
         className="bullet"
         style={{ backgroundColor: item?.status?.color }}
@@ -34,123 +35,183 @@ export const Status: React.FC<{ item?: any }> = ({ item }) => {
   );
 };
 
-const columns = [
-  {
-    title: 'Order Number',
-    dataIndex: 'tracking_number',
-    key: 'tracking_number',
-    className: 'id-cell',
-  },
-  {
-    title: 'Order Date',
-    dataIndex: 'created_at',
-    key: 'created_at',
-    render: function createdAt(items: any) {
-      return <CreatedAt createdAt={items} />;
-    },
-  },
-  {
-    title: 'Status',
-    key: 'status',
-    render: function status(item: any) {
-      return <Status item={item} />;
-    },
-  },
-  {
-    title: 'Delivery Time',
-    dataIndex: 'delivery_time',
-    key: 'delivery_time',
-  },
-  {
-    title: 'Total Price',
-    key: 'total',
-    render: function totalPrice(items: any) {
-      return <TotalPrice items={items} />;
-    },
-  },
-  {
-    dataIndex: '',
-    key: 'operations',
-    render: function actionsButton(item: any) {
-      return <ActionsButton item={item} />;
-    },
-    className: 'operations-cell',
-  },
-];
-
 const OrderTable: React.FC<{ orders?: any }> = ({ orders }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [value, setValue] = useState('');
-  const countPerPage = 5;
-  let [filterData, setDataValue] = useState(orders.slice(0, countPerPage));
-
-  const updatePage = (p: any) => {
-    setCurrentPage(p);
-    const to = countPerPage * p;
-    const from = to - countPerPage;
-    setDataValue(orders.slice(from, to));
-  };
-
-  const onChangeSearch = (e: any) => {
-    setCurrentPage(1);
-    let filter: any = orders
-      .filter((item: any) =>
-        item.tracking_number
-          .toLowerCase()
-          .includes(e.target.value.toLowerCase())
-      )
-      .slice(0, countPerPage);
-    setValue(e.target.value);
-    if (!e.target.value) {
-      updatePage(1);
-    }
-    setDataValue(filter);
-  };
-  const onSubmitHandle = (e: any) => {
-    e.preventDefault();
-  };
-
+  console.log(orders);
   return (
     <>
-      <div className="md:flex md:justify-between items-center mb-5 sm:mb-10">
-        <h2 className="font-semibold text-sm md:text-xl text-skin-base mb-4 md:mb-0">
-          My order list
+      <div className="text-center">
+        <h2 className="font-semibold text-sm md:text-xl font-poppins uppercase text-rose-500">
+          My Orders
         </h2>
-        <form onSubmit={onSubmitHandle} className="relative">
-          <span className="absolute end-3 top-[80%] transform -translate-y-1/2 order-icon-color">
-            <BsSearch size={19} />
-          </span>
-          <Input
-            name="search"
-            type="search"
-            value={value}
-            onChange={onChangeSearch}
-            placeholder="Search Order list"
-            inputClassName=" h-[46px] w-full placeholder-[rgba(0, 0, 0, .3)] bg-white border border-[#E3E8EC] rounded-md order-search focus:border-2 focus:outline-none focus:border-skin-primary"
-          />
-        </form>
       </div>
-      <div className="order-list-table-wraper">
-        <Table
-          className="order-list-table"
-          columns={columns}
-          data={filterData}
-          rowKey="id"
-        />
-      </div>
-      {!value.trim() && (
-        <div className="text-end mt-5">
-          <Pagination
-            current={currentPage}
-            onChange={updatePage}
-            pageSize={countPerPage}
-            total={orders?.length}
-            prevIcon={<GrPrevious size={12} style={{ color: '#090B17' }} />}
-            nextIcon={<GrNext size={12} style={{ color: '#090B17' }} />}
-            className="order-table-pagination"
-          />
-        </div>
-      )}
+
+      {orders?.map((itm: any, idx: number) => {
+        return (
+          <div key={idx} className="flex flex-col lg:flex-row mb-6">
+            <div className="h-auto w-full lg:w-2/3 bg-slate-100">
+              {JSON.parse(itm.orderItem).map((data: any, index: number) => {
+                return (
+                  <div
+                    key={index}
+                    className={`w-full flex justify-start items-center  px-8 py-4 md:py-7 relative `}
+                  >
+                    <Image
+                      src={data?.image ?? "/placeholder/cart-item.svg"}
+                      width={100}
+                      height={100}
+                      loading="eager"
+                      alt={data.name || "Product Image"}
+                      className="object-cover"
+                    />
+                    <div className="pl-3 md:pl-4">
+                      <p> {data?.name}</p>
+
+                      <div className="text-13px sm:text-sm text-skin-muted mt-1.5 block mb-2">
+                        {data?.unit} X {data?.quantity}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="h-auto w-full lg:w-1/3 bg-white shadow-lg rounded-sm border border-gray-200">
+              <div className="overflow-x-auto p-3">
+                <div className="text-center mb-2">
+                  <span className="bullet">.</span>{" "}
+                  <p className="uppercase text-[12px] font-bold text-green-700">
+                    Order Status
+                  </p>
+                  <span className="uppercase text-[11px] font-semibold text-green-900">
+                    <span
+                      className="bullet"
+                      style={{ backgroundColor: "green" }}
+                    />
+                    Order Accepted &amp; Ready for Shipment
+                  </span>
+                </div>
+                <table className="table-auto w-full font-poppins">
+                  <tbody className="text-sm divide-y divide-gray-100">
+                    <tr>
+                      <td className="p-2">
+                        <h3 className="font-medium text-[12px] lg:text-[14px]">
+                          Order Number
+                        </h3>
+                      </td>
+                      <td className="p-2">
+                        <h3 className="font-medium text-left text-[12px] lg:text-[14px]">
+                          {itm.orderNumber}
+                        </h3>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-2">
+                        <h3 className="font-medium text-[12px] lg:text-[14px]">
+                          Order Date
+                        </h3>
+                      </td>
+                      <td className="p-2">
+                        <h3 className="font-medium text-left text-[12px] lg:text-[14px]">
+                          {dayjs(itm.orderDate).format("MMM D, YYYY")}
+                        </h3>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-2">
+                        <h3 className="font-medium text-[12px] lg:text-[14px]">
+                          Amount
+                        </h3>
+                      </td>
+                      <td className="p-2">
+                        <h3 className="font-medium text-left text-[12px] lg:text-[14px]">
+                          &#x20B9; {itm.amount}
+                        </h3>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-2">
+                        <h3 className="font-medium text-[12px] lg:text-[14px]">
+                          Shipping Charge
+                        </h3>
+                      </td>
+                      <td className="p-2">
+                        {itm.shipping === "free" ? (
+                          <h3 className="font-medium text-left text-[12px] lg:text-[14px] text-green-700">
+                            Free Shipping{" "}
+                          </h3>
+                        ) : (
+                          <h3 className="font-medium text-left text-[12px] lg:text-[14px]">
+                            &#x20B9; {itm.shipping}
+                          </h3>
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-2">
+                        <h3 className="font-semibold text-[14px] lg:text-[18px]">
+                          Total Amount
+                        </h3>
+                      </td>
+                      <td className="p-2">
+                        <h3 className="font-medium text-left text-[14px] lg:text-[18px] ">
+                          &#x20B9; {itm.totalAmount}
+                        </h3>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* <ul className="px-8 py-4">
+              <li className="flex font-medium text-[12px] lg:text-[14px]">
+                <h3>Order Number -</h3>
+                <h3 className="ml-2">{itm.orderNumber}</h3>
+              </li>
+              <li className="flex font-medium text-[12px] lg:text-[14px]">
+                <h3>Order Date -</h3>
+                <h3 className="ml-2">
+                  {dayjs(itm.orderDate).format("MMM D, YYYY")} (
+                  <CreatedAt createdAt={itm.orderDate} /> )
+                </h3>
+              </li>
+              <li className="flex font-medium text-[12px] lg:text-[14px]">
+                {itm.orderStatus === "Created" && (
+                  <>
+                    <h3>Order Status - </h3>
+                    <p className="text-green-700 font-bold ml-2 ">
+                      {" "}
+                      Order accepted &amp; ready for shipment
+                    </p>
+                  </>
+                )}
+              </li>
+            </ul>
+
+            <ul className="px-8 py-4">
+              <li className="flex justify-end font-medium text-[12px] lg:text-[14px]">
+                <h3>Order Amount =</h3>
+                <h3 className="ml-2">&#x20B9;{itm.amount}</h3>
+              </li>
+              <li className="flex justify-end font-medium text-[12px] lg:text-[14px]">
+                <h3>Shipping Amount =</h3>
+
+                {itm.shipping === "free" ? (
+                  <h3 className="ml-2 font-semibold font-green-700">
+                    {" "}
+                    Free Shipping{" "}
+                  </h3>
+                ) : (
+                  <h3 className="ml-2">&#x20B9;{itm.shipping}</h3>
+                )}
+              </li>
+              <li className="flex justify-end font-medium text-[12px] lg:text-[14px]">
+                <h3>Total Amount =</h3>
+                <h3 className="ml-2">&#x20B9;{itm.totalAmount}</h3>
+              </li>
+            </ul> */}
+          </div>
+        );
+      })}
     </>
   );
 };

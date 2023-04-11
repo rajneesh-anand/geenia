@@ -7,6 +7,8 @@ import DownloadApps from "@components/common/download-apps";
 import { GetServerSideProps } from "next";
 import PageHeroSection from "@components/ui/page-hero-section";
 import { useTranslation } from "next-i18next";
+import { Element } from "react-scroll";
+import axios from "axios";
 
 import Seo from "@components/seo/seo";
 import Divider from "@components/ui/divider";
@@ -17,7 +19,8 @@ import { fetchProducts } from "@framework/product/get-all-products";
 import { LIMITS } from "@framework/utils/limits";
 import { useProductsQuery } from "@framework/product/get-all-products";
 
-export default function Products() {
+export default function Products({ data }: any) {
+  console.log(data);
   return (
     <>
       <Seo
@@ -27,7 +30,25 @@ export default function Products() {
       />
       <Divider />
       <Container>
-        <ProductGrid />
+        {data.length > 0 ? (
+          <Element name="grid" className="flex pt-7 lg:pt-11 pb-16 lg:pb-20">
+            <div className="flex-shrink-0 pe-8 xl:pe-16 hidden lg:block w-80 xl:w-96 sticky top-16 h-full">
+              <ShopFilters />
+            </div>
+            <div className="w-full lg:-ms-2 xl:-ms-8 lg:-mt-1">
+              <ProductGrid />
+            </div>
+          </Element>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-32">
+            <p className="text-2xl md:text-3xl font-light leading-normal">
+              Sorry ! No Product available !{" "}
+            </p>
+            <p className="mb-8">
+              You can find plenty of other products on our homepage.
+            </p>
+          </div>
+        )}
       </Container>
     </>
   );
@@ -40,15 +61,14 @@ export const getServerSideProps: GetServerSideProps = async ({
   locale,
 }) => {
   const { slug }: any = params;
-  const queryClient = new QueryClient();
-  await queryClient.prefetchInfiniteQuery(
-    [API_ENDPOINTS.PRODUCTS, { limit: LIMITS.PRODUCTS_LIMITS, category: slug }],
-    fetchProducts
+
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_NODE_API}/products/${slug}`
   );
 
   return {
     props: {
-      dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
+      data,
       ...(await serverSideTranslations(locale!, [
         "common",
         "forms",
