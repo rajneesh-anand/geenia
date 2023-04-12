@@ -19,7 +19,7 @@ const AuthMenu: React.FC<Props> = ({ btnProps }) => {
       <Menu.Button className="inline-flex justify-center items-center group">
         <img
           className="rounded-full"
-          src={session?.user?.image ?? "/images/avatar.svg"}
+          src={session?.user?.image ?? "/hero/images/avatar.svg"}
           width="24"
           height="24"
           alt={session?.user?.name}

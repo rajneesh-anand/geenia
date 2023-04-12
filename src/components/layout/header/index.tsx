@@ -33,7 +33,7 @@ const Header: React.FC = () => {
       ref={siteHeaderRef}
       className="sticky-header lg:relative w-full h-auto"
     >
-      <Container className="navbar flex items-center justify-center lg:justify-between border-b border-slate-200">
+      <Container className="navbar flex items-center justify-center lg:justify-between py-2 lg:py-0 border-b border-slate-200">
         <Logo />
         <HeaderMenu
           data={site_header.menu}

@@ -123,7 +123,7 @@ const CheckoutCard: React.FC = () => {
             name: formData.name,
             item: items,
             shipping: shippingCharge,
-            discount: 0,
+            discount: "0",
             mobile: formData.mobile,
             email: session?.user?.email,
             address: formData.address,
