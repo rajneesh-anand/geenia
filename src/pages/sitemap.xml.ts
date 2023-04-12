@@ -6,13 +6,14 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const baseUrl = "https://geenia.in";
 
   const staticPages = [
-    "https://geenia.in/contact",
-    "https://geenia.in/bodycare",
-    "https://geenia.in/skincare",
-    "https://geenia.in/phy",
-    "https://geenia.in/haircare",
-    "https://geenia.in/makeup",
+    "https://geenia.in/products/bodycare",
+    "https://geenia.in/products/skincare",
+    "https://geenia.in/products/phy",
+    "https://geenia.in/products/haircare",
+    "https://geenia.in/products/makeup",
     "https://geenia.in/about",
+    "https://geenia.in/contact",
+    "https://geenia.in/faq",
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
