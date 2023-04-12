@@ -8,7 +8,7 @@ export const DefaultSeo = () => {
       titleTemplate={`%s`}
       defaultTitle={siteSettings.name}
       description={siteSettings.description}
-      canonical="https://geenia.in/"
+      canonical="https://geenia.in"
       openGraph={{
         type: "website",
         locale: "en_IE",

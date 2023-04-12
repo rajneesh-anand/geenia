@@ -19,7 +19,7 @@ const Seo = ({ title, description, path }: SeoProps) => {
             url: "/images/openGraph/og-image-01.png",
             width: 800,
             height: 600,
-            alt: `${title}`,
+            alt: "Og Image Alt First",
           },
           {
             url: "/images/openGraph/og-image-02.png",

@@ -19,7 +19,7 @@ export default function ProductPage({ product }: any) {
       <Seo
         title={product.name}
         description={product.description}
-        path={`/products/${product.slug}`}
+        path={`product/${product.slug}`}
       />
       <Divider />
       <div className="pt-6 lg:pt-7">

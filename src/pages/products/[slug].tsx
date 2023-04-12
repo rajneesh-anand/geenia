@@ -3,30 +3,19 @@ import Layout from "@components/layout";
 import { ShopFilters } from "@components/search/filters";
 import { ProductGrid } from "@components/product/product-grid";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import DownloadApps from "@components/common/download-apps";
 import { GetServerSideProps } from "next";
-import PageHeroSection from "@components/ui/page-hero-section";
-import { useTranslation } from "next-i18next";
 import { Element } from "react-scroll";
 import axios from "axios";
-
 import Seo from "@components/seo/seo";
 import Divider from "@components/ui/divider";
-import { QueryClient, dehydrate } from "react-query";
-import { API_ENDPOINTS } from "@framework/utils/api-endpoints";
-import { fetchCategories } from "@framework/category/get-all-categories";
-import { fetchProducts } from "@framework/product/get-all-products";
-import { LIMITS } from "@framework/utils/limits";
-import { useProductsQuery } from "@framework/product/get-all-products";
 
 export default function Products({ data }: any) {
-  console.log(data);
   return (
     <>
       <Seo
         title="Geenia Organic Beauty Products"
         description="Fastest E-commerce template built with React, NextJS, TypeScript, React-Query and Tailwind CSS."
-        path="/products"
+        path="products"
       />
       <Divider />
       <Container>
@@ -41,7 +30,7 @@ export default function Products({ data }: any) {
           </Element>
         ) : (
           <div className="flex flex-col items-center justify-center py-32">
-            <p className="text-2xl md:text-3xl font-light leading-normal">
+            <p className="text-2xl font-poppins font-medium leading-normal">
               Sorry ! No Product available !{" "}
             </p>
             <p className="mb-8">

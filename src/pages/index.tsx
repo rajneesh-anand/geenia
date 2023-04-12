@@ -26,7 +26,7 @@ export default function Home() {
       <Seo
         title="Organic Beauty Products"
         description="Geenia International is here to serve you better products for you we are in this Industry from many years and continuosly  upgrading products as per the environment"
-        path="/"
+        path=""
       />
 
       <Container>
