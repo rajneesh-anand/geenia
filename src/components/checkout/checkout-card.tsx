@@ -1,7 +1,4 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import PaytmConfig from "@paytm/config";
-import PaytmChecksum from "@paytm/cheksum";
-import https from "https";
 import Link from "next/link";
 import usePrice from "@framework/product/use-price";
 import { useCart } from "@contexts/cart/cart.context";
@@ -11,14 +8,9 @@ import { CheckoutItem } from "@components/checkout/checkout-card-item";
 import { CheckoutCardFooterItem } from "./checkout-card-footer-item";
 import { useTranslation } from "next-i18next";
 import { ROUTES } from "@utils/routes";
-import axios, { formToJSON } from "axios";
-import { useUserAuth } from "@contexts/user.context";
 import Input from "@components/ui/input";
-import Select from "@components/ui/form/select/select";
-import { statesOptions } from "@data/constant";
 import { useForm, Controller } from "react-hook-form";
 import Router, { useRouter } from "next/router";
-import { useModalAction } from "@components/common/modal/modal.context";
 import { useSession } from "next-auth/react";
 import TextArea from "@components/ui/form/text-area";
 import { toast } from "react-toastify";
@@ -43,6 +35,7 @@ const CheckoutCard: React.FC = () => {
   const { t } = useTranslation("common");
   const [error, setError] = useState<string>("");
   const [pinError, setPinError] = useState<boolean>(false);
+  const [processingStatus, setProcessingStatus] = useState<boolean>(false);
   const [shippingCharge, setShippingCharge] = useState<string>("0");
   const { items, total, isEmpty, resetCart } = useCart();
   const { data: session } = useSession();
@@ -105,6 +98,7 @@ const CheckoutCard: React.FC = () => {
     if (pinError) {
       return;
     } else {
+      setProcessingStatus(true);
       const res = await initializeRazorpay();
 
       if (!res) {
@@ -142,6 +136,7 @@ const CheckoutCard: React.FC = () => {
         description: "Thank you for placing an order",
         image: `${process.env.NEXT_PUBLIC_SITE_URL}/images/logo.jpg`,
         handler: async function (response: responseObeject) {
+          setProcessingStatus(false);
           const bodydata = {
             paymentId: response.razorpay_payment_id,
             orderId: response.razorpay_order_id,
@@ -270,28 +265,6 @@ const CheckoutCard: React.FC = () => {
                         : undefined
                     }
                   />
-                  {/* <Controller
-                    name="pin"
-                    control={control}
-                    rules={{ required: true }}
-                    render={({ field: { ref, onChange, ...field } }) => (
-                      <Input
-                        {...field}
-                        variant="outline"
-                        label="PIN/ZIP Code"
-                        type="text"
-                        onChange={({ target: { value } }) =>
-                          handleShippingCharge(value)
-                        }
-                        placeholder="pincode"
-                        error={
-                          pinError
-                            ? "Sorry ! We can't ship item to this pincode "
-                            : undefined
-                        }
-                      />
-                    )}
-                  /> */}
                 </div>
                 <div className="w-full md:w-1/2  mb-3 lg:ml-[4px]">
                   <Input
@@ -331,6 +304,7 @@ const CheckoutCard: React.FC = () => {
                 className={`w-full mt-8 mb-5 bg-skin-primary text-skin-inverted rounded font-semibold px-4 py-3 transition-all ${
                   isEmpty && "opacity-40 cursor-not-allowed"
                 }`}
+                loading={processingStatus}
                 onClick={handleSubmit(makePayment)}
               >
                 {t("button-order-now")}

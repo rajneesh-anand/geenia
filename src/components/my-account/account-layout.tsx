@@ -21,11 +21,7 @@ const accountMenu = [
     name: "account-settings",
     icon: <SettingsIcon className="w-5 md:w-[22px] h-5 md:h-[22px]" />,
   },
-  {
-    slug: ROUTES.ORDERS,
-    name: "text-orders",
-    icon: <OrdersIcon className="w-5 md:w-[22px] h-5 md:h-[22px]" />,
-  },
+
   {
     slug: ROUTES.WISHLIST,
     name: "text-wishlist",
@@ -63,7 +59,7 @@ const accountMenu = [
 const AccountLayout: React.FunctionComponent<Props> = ({ children }) => {
   return (
     <Container>
-      <div className="pt-10 2xl:pt-12 pb-12 lg:pb-14 xl:pb-16 2xl:pb-20 xl:max-w-screen-xl 2xl:max-w-[1300px] mx-auto">
+      <div className="pb-12 lg:pb-14 xl:pb-16 2xl:pb-20 xl:max-w-screen-xl 2xl:max-w-[1300px] mx-auto">
         <div className="flex flex-col lg:flex-row w-full">
           {/* <div className="lg:hidden">
               <AccountNavMobile options={accountMenu} />

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Layout from "@components/layout";
 import Container from "@components/ui/container";
 import PageHeroSection from "@components/ui/page-hero-section";
-import DownloadApps from "@components/common/download-apps";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
 import Accordion from "@components/ui/accordion";

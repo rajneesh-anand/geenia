@@ -20,18 +20,26 @@ const PageHeroSection: React.FC<HeaderProps> = ({
   const { t } = useTranslation("common");
   const { width } = useWindowSize();
   return (
+    // <div
+    //   className={cn(
+    //     "flex justify-center md:min-h-[250px] lg:min-h-[288px] py-20 w-full bg-cover bg-no-repeat bg-center page-header-banner",
+    //     {
+    //       "style-variant-white": variant === "white",
+    //     }
+    //   )}
+    //   style={{
+    //     backgroundImage: `url(${
+    //       width! > 480 ? backgroundThumbnail : mobileBackgroundThumbnail
+    //     })`,
+    //   }}
+    // >
     <div
       className={cn(
-        "flex justify-center md:min-h-[250px] lg:min-h-[288px] py-20 w-full bg-cover bg-no-repeat bg-center page-header-banner",
+        "flex justify-center md:min-h-[250px] lg:min-h-[288px] py-20 w-full page-header-banner bg-gradient-to-r from-cyan-100 to-blue-100",
         {
           "style-variant-white": variant === "white",
         }
       )}
-      style={{
-        backgroundImage: `url(${
-          width! > 480 ? backgroundThumbnail : mobileBackgroundThumbnail
-        })`,
-      }}
     >
       <div className="w-full flex flex-col items-center justify-center relative">
         <h2

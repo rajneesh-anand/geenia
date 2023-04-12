@@ -1,4 +1,4 @@
 User-agent: *
-Disallow:
+Allow: /
 
-Sitemap: https://www.geenia.in/sitemap.xml
+Sitemap: https://geenia.in/sitemap.xml

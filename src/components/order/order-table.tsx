@@ -38,8 +38,8 @@ export const Status: React.FC<{ item?: any }> = ({ item }) => {
 const OrderTable: React.FC<{ orders?: any }> = ({ orders }) => {
   return (
     <>
-      <div className="text-center py-4">
-        <h2 className="font-semibold text-sm md:text-xl font-poppins uppercase text-rose-500">
+      <div className="flex justify-center items-center py-8 mb-4 w-full page-header-banner bg-gradient-to-r from-cyan-100 to-blue-100">
+        <h2 className="font-semibold text-sm md:text-xl  uppercase">
           My Orders
         </h2>
       </div>
