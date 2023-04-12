@@ -5,6 +5,9 @@ import { useRouter } from "next/router";
 import { getDirection } from "@utils/get-direction";
 const Cart = dynamic(() => import("@components/cart/cart"));
 const OrderDetails = dynamic(() => import("@components/order/order-drawer"));
+const MobileAuthMenu = dynamic(
+  () => import("@components/layout/mobile-navigation/mobile-auth-menu")
+);
 
 const ManagedDrawer = () => {
   const { displayDrawer, closeDrawer, drawerView } = useUI();
@@ -23,6 +26,7 @@ const ManagedDrawer = () => {
       contentWrapperStyle={contentWrapperCSS}
     >
       {drawerView === "CART_SIDEBAR" && <Cart />}
+      {drawerView === "AUTH_SIDEBAR" && <MobileAuthMenu />}
       {drawerView === "ORDER_DETAILS" && <OrderDetails />}
     </Drawer>
   );

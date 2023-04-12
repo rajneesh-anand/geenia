@@ -36,10 +36,9 @@ export const Status: React.FC<{ item?: any }> = ({ item }) => {
 };
 
 const OrderTable: React.FC<{ orders?: any }> = ({ orders }) => {
-  console.log(orders);
   return (
     <>
-      <div className="text-center">
+      <div className="text-center py-4">
         <h2 className="font-semibold text-sm md:text-xl font-poppins uppercase text-rose-500">
           My Orders
         </h2>

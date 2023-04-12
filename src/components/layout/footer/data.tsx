@@ -51,6 +51,14 @@ export const footer = {
       width: 50,
       height: 20,
     },
+    {
+      id: 4,
+      path: "/",
+      image: "/images/payment/upi.svg",
+      name: "payment-upi",
+      width: 50,
+      height: 20,
+    },
   ],
   socials: [
     {

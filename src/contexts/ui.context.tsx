@@ -104,7 +104,11 @@ type Action =
       type: "DISABLE_STICKY_HEADER";
     };
 
-type DRAWER_VIEWS = "CART_SIDEBAR" | "MOBILE_MENU" | "ORDER_DETAILS";
+type DRAWER_VIEWS =
+  | "CART_SIDEBAR"
+  | "MOBILE_MENU"
+  | "ORDER_DETAILS"
+  | "AUTH_SIDEBAR";
 type ToastText = string;
 
 export const UIContext = React.createContext<State | any>(initialState);
