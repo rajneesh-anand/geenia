@@ -2,7 +2,7 @@ import Layout from "@components/layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetServerSideProps } from "next";
 import Container from "@components/ui/container";
-import ResetPassword from "@components/form/reset-password";
+import ResetPassword from "@components/auth/reset-password-form";
 
 export default function ResetPasswordPage() {
   return (

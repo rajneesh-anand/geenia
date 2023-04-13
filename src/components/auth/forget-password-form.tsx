@@ -9,6 +9,7 @@ import CloseButton from "@components/ui/close-button";
 import { useUserAuth } from "@contexts/user.context";
 import Alert from "@components/ui/alert";
 import { IoCheckmarkCircle } from "react-icons/io5";
+import { BsCheckLg } from "react-icons/bs";
 
 type FormValues = {
   email: string;
@@ -16,7 +17,7 @@ type FormValues = {
 
 const ForgetPasswordForm = () => {
   const [status, setStatus] = useState("");
-  const [errorMsg, setErrorMsg] = useState<string | undefined>("");
+  const [errorMsg, setErrorMsg] = useState<string | undefined>();
   const { t } = useTranslation();
   const { closeModal, openModal } = useModalAction();
   const [flag, setFlag] = useState(false);
@@ -45,6 +46,7 @@ const ForgetPasswordForm = () => {
       );
 
       const result = await res.json();
+
       if (res.status >= 400 && res.status < 600) {
         throw new Error(result.message);
       } else {
@@ -75,18 +77,28 @@ const ForgetPasswordForm = () => {
         </div>
       ) : (
         <>
-          <div className="text-center">
-            <p className="text-sm md:text-base text-body mt-3 sm:mt-4 mb-8 sm:mb-10">
+          <div className="text-center my-4 lg:my-3 ">
+            <p className="text-sm md:text-base text-body ">
               {t("common:forgot-password-helper")}
             </p>
           </div>
+          {errorMsg && (
+            <Alert
+              message={errorMsg}
+              variant="error"
+              closeable={true}
+              className="my-4"
+              onClose={() => setErrorMsg("")}
+            />
+          )}
           <form
             onSubmit={handleSubmit((data) => onSubmit(data))}
             className="flex flex-col justify-center"
             noValidate
           >
             <Input
-              label={t("forms:label-email")}
+              // label={t("forms:label-email")}
+              placeholder="Enter your email address"
               type="email"
               variant="outline"
               className="mb-4"
@@ -108,15 +120,6 @@ const ForgetPasswordForm = () => {
               {t("common:text-reset-password")}
             </button>
           </form>
-          {errorMsg && (
-            <Alert
-              message={error}
-              variant="error"
-              closeable={true}
-              className="mt-5"
-              onClose={() => setErrorMsg("")}
-            />
-          )}
         </>
       )}
       <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-10 mb-6 sm:mb-7">
