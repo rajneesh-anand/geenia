@@ -36,7 +36,7 @@ export default function mobileAuthMenu() {
       <div className="flex flex-col justify-center items-center ">
         <img
           className="rounded-full "
-          src={session?.user?.image ?? "/hero/images/avatar.svg"}
+          src={session?.user?.image ?? "/images/placeholder/avatar.svg"}
           width="128"
           height="128"
           alt={session?.user?.name}
