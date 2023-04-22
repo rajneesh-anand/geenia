@@ -8,29 +8,60 @@ import ProductCardLoader from "@components/ui/loaders/product-card-loader";
 import cn from "classnames";
 import { useProductsQuery } from "@framework/product/get-all-products";
 import { LIMITS } from "@framework/utils/limits";
-import { Product } from "@framework/types";
+// import { Product } from "@framework/types";
 import SearchTopBar from "@components/search/search-top-bar";
 import { ShopFilters } from "@components/search/filters";
 import { Element } from "react-scroll";
 
+type Product = {
+  id: string;
+  name: string;
+  slug: string;
+  image: string;
+  gallery: string;
+  description: string;
+  price: string;
+  sale_price: string;
+  unit: string;
+  quantity_in_stock: string;
+  tags: string;
+  category: string;
+};
+
 interface ProductGridProps {
   className?: string;
+  products: Product[];
 }
 
-export const ProductGrid: FC<ProductGridProps> = ({ className = "" }) => {
+export const ProductGridTwo: FC<ProductGridProps> = ({
+  className,
+  products,
+}) => {
+  console.log(products);
+  const [data, setData] = useState<Product[]>(products);
   const { query } = useRouter();
-  const {
-    isFetching: isLoading,
-    isFetchingNextPage: loadingMore,
-    fetchNextPage,
-    hasNextPage,
-    data,
-    error,
-  } = useProductsQuery({ limit: LIMITS.PRODUCTS_LIMITS, ...query });
+
+  useEffect(() => {
+    const category = query?.category?.toString().split(",");
+
+    if (category) {
+      const subCategoryResult = products.reduce((acc: any, item: any) => {
+        let subCategoryExist = JSON.parse(item.category).find((cat: any) =>
+          category?.includes(cat.slug)
+        );
+
+        if (subCategoryExist) {
+          acc.push(item);
+        }
+        return acc;
+      }, []);
+      setData(subCategoryResult);
+    }
+  }, [query]);
 
   return (
     <>
-      {error ? (
+      {/* {error ? (
         <div className="col-span-full">
           <Alert message={error?.message} />
         </div>
@@ -49,14 +80,19 @@ export const ProductGrid: FC<ProductGridProps> = ({ className = "" }) => {
                 <ProductCard key={idx} product={product} />
               ))}
             </div>
-          ) : (
-            <div className="flex items-center justify-center h-auto">
-              <p className="pt-32 font-medium text-red-700">
-                No Product available !
-              </p>
-            </div>
-          )
-        )
+          ) : ( */}
+      {data.length > 0 ? (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-6 gap-3  ml-2">
+          {data?.map((product: Product, idx: any) => (
+            <ProductCard key={idx} product={product} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex items-center justify-center h-auto">
+          <p className="pt-32 font-medium text-red-700">
+            No Product available !
+          </p>
+        </div>
       )}
     </>
   );

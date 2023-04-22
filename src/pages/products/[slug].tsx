@@ -1,7 +1,7 @@
 import Container from "@components/ui/container";
 import Layout from "@components/layout";
 import { ShopFilters } from "@components/search/filters";
-import { ProductGrid } from "@components/product/product-grid";
+import { ProductGridTwo } from "@components/product/product-grid-two";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetServerSideProps } from "next";
 import { Element } from "react-scroll";
@@ -18,14 +18,14 @@ export default function Products({ data }: any) {
         path="products"
       />
       <Divider />
-      <Container>
-        {data.length > 0 ? (
-          <Element name="grid" className="flex pt-7 lg:pt-11 pb-16 lg:pb-20">
-            <div className="flex-shrink-0 pe-8 xl:pe-16 hidden lg:block w-80 xl:w-96 sticky top-16 h-full">
+      <Container className="bg-[#EBE0F0]">
+        {data ? (
+          <Element name="grid" className="flex pt-6 ">
+            <div className="flex-shrink-0 hidden lg:block w-72  sticky top-16 h-full">
               <ShopFilters />
             </div>
-            <div className="w-full lg:-ms-2 xl:-ms-8 lg:-mt-1">
-              <ProductGrid />
+            <div className="w-full ">
+              <ProductGridTwo products={data} />
             </div>
           </Element>
         ) : (
@@ -57,7 +57,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   return {
     props: {
-      data,
+      data: data.products,
       ...(await serverSideTranslations(locale!, [
         "common",
         "forms",

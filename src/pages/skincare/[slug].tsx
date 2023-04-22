@@ -12,55 +12,49 @@ import Divider from "@components/ui/divider";
 import Seo from "@components/seo/seo";
 import { fetchProduct } from "@framework/product/get-product";
 import axios from "axios";
-import { useRouter } from "next/router";
 
 export default function ProductPage({ product }: any) {
-  const { query, pathname } = useRouter();
-  console.log(query);
-  console.log(`first`);
-  console.log(pathname);
   return (
     <>
-      {/* <Seo
+      <Seo
         title={product.name}
         description={product.description}
-        path={`product/${product.slug}`}
-      /> */}
+        path={`bodycare/${product.slug}`}
+      />
       <Divider />
-      {/* <div className="pt-6 lg:pt-7">
+      <div className="pt-6 lg:pt-7">
         <Container>
           <Breadcrumb />
-          <ProductSingleDetails />
+          <ProductSingleDetails product={product} />
         </Container>
-      </div> */}
+      </div>
 
-      {/* <RelatedProductFeed uniqueKey="related-products" /> */}
+      <RelatedProductFeed uniqueKey="related-products" />
     </>
   );
 }
 
 ProductPage.Layout = Layout;
 
-// export const getServerSideProps: GetServerSideProps = async ({
-//   params,
-//   locale,
-// }) => {
-//   const { slug }: any = params;
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  locale,
+}) => {
+  const { slug }: any = params;
 
-//   const { data } = await axios.get(
-//     `${process.env.NEXT_PUBLIC_NODE_API}/product/${slug}`
-//   );
-//   console.log(data);
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_NODE_API}/product/skincare/${slug}`
+  );
 
-//   return {
-//     props: {
-//       product: data.product,
-//       ...(await serverSideTranslations(locale!, [
-//         "common",
-//         "forms",
-//         "menu",
-//         "footer",
-//       ])),
-//     },
-//   };
-// };
+  return {
+    props: {
+      product: data.product,
+      ...(await serverSideTranslations(locale!, [
+        "common",
+        "forms",
+        "menu",
+        "footer",
+      ])),
+    },
+  };
+};
