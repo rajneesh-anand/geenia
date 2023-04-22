@@ -7,7 +7,7 @@ import { getSession } from "next-auth/react";
 import Seo from "@components/seo/seo";
 import Container from "@components/ui/container";
 import Layout from "@components/layout";
-import RegistrationForm from "@components/form/register-form";
+// import RegistrationForm from "@components/form/register-form";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const queryClient = new QueryClient();
@@ -35,11 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default function RegisterPage() {
-  return (
-    <Container>
-      <RegistrationForm />
-    </Container>
-  );
+  return <Container>{/* <RegistrationForm /> */}</Container>;
 }
 
 RegisterPage.Layout = Layout;
