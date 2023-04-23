@@ -71,7 +71,8 @@
   margin: 5px 5px 6px;
 }
 #productGalleryThumbs .swiper-wrapper .swiper-slide.swiper-slide-thumb-active {
-  border-color: #80d8c7;
+  border-color: #f98f14;
+  border-width: 2px;
 }
 
 @media screen and (min-width: 1024px) {

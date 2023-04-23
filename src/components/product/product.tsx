@@ -276,8 +276,8 @@ const ProductSingleDetails: React.FC<ProductProps> = ({ product }) => {
               <li className="text-sm md:text-15px text-skin-base text-opacity-80 inline-flex items-center justify-center mr-2 relative top-1">
                 <LabelIcon className="mr-2" /> {t("text-tags")}:
               </li>
-              {JSON.parse(product?.tags).map((item: any) => (
-                <li className="inline-block p-[3px]" key={`tag-${item.id}`}>
+              {JSON.parse(product?.tags).map((item: any, idx: any) => (
+                <li className="inline-block p-[3px]" key={`tag-${idx}`}>
                   <TagLabel data={item} />
                 </li>
               ))}

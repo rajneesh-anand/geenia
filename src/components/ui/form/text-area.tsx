@@ -41,9 +41,9 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, Props>((props, ref) => {
       {label && (
         <label
           htmlFor={name}
-          className={`block ${
+          className={`block  font-medium ${
             labelClassName || "text-skin-base opacity-70"
-          } font-normal text-13px lg:text-sm leading-none mb-3 cursor-pointer`}
+          }  text-13px lg:text-sm leading-none mb-3 cursor-pointer`}
         >
           {t(label)}
         </label>
@@ -65,11 +65,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, Props>((props, ref) => {
         placeholder={t(placeholder)}
         {...rest}
       />
-      {error && (
-        <p className="my-2 text-13px text-skin-red text-opacity-70">
-          {t(error)}
-        </p>
-      )}
+      {error && <p className="my-2 text-13px text-skin-red">{t(error)}</p>}
     </div>
   );
 });

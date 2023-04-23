@@ -35,8 +35,10 @@ export default (req: NextApiRequest, res: NextApiResponse) =>
               throw new Error("No user found with this email !");
             }
 
+            console.log(user);
             //Check hashed password with database password
             const checkPassword = await compareSync(password, user.password);
+            console.log(checkPassword);
 
             // // Password Not Matched
             if (!checkPassword) {

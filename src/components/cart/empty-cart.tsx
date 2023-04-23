@@ -7,18 +7,16 @@ const EmptyCart: React.FC = () => {
   const { t } = useTranslation("common");
   return (
     <div className="flex justify-center flex-col items-center">
-      <div className="mt-8">
+      <div className="relative py-4">
         <Image
-          src="/images/hero/empty-cart.png"
+          src="/images/hero/empty-cart.svg"
           alt={t("text-empty-cart")}
-          width={270}
-          height={240}
+          height={280}
+          width={280}
         />
       </div>
-      <Heading variant="titleMedium" className="mb-1.5 pt-8">
-        {t("text-empty-cart")}
-      </Heading>
-      <Text>{t("text-empty-cart-description")}</Text>
+      <p className="font-medium"> You have no items in your shopping cart</p>
+      <p>Add product to checkout </p>
     </div>
   );
 };

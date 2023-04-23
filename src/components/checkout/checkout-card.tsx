@@ -243,7 +243,7 @@ const CheckoutCard: React.FC = () => {
                 <TextArea
                   variant="outline"
                   label="Your Shiping  Address"
-                  placeholder="Enter your detailed shipping adress "
+                  placeholder="Enter your detailed shipping address "
                   {...register("address", {
                     required: "shipping address is required !",
                   })}
@@ -280,15 +280,15 @@ const CheckoutCard: React.FC = () => {
                 </div>
               </div>
             </div>
-            <div className="md:col-span-3 md:px-8 my-3 md:my-8 lg:border-l lg:border-teal-600">
-              <div className="flex py-4 rounded-md text-sm font-semibold text-heading">
+            <div className="md:col-span-3 md:px-8 my-3 md:my-8 lg:border-l lg:border-[#F98F14]">
+              {/* <div className="flex py-4 rounded-md text-sm font-semibold text-heading">
                 <span className="text-15px text-skin-base font-medium">
                   {t("text-product")}
                 </span>
                 <span className="ml-auto flex-shrink-0 text-15px text-skin-base font-medium ">
                   {t("text-sub-total")}
                 </span>
-              </div>
+              </div> */}
               {!isEmpty ? (
                 items.map((item) => <CheckoutItem item={item} key={item.id} />)
               ) : (

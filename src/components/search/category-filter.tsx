@@ -36,7 +36,7 @@ export const CategoryFilter = () => {
       {/* <h3 className="font-semibold text-sm uppercase text-slate-900 mb-5 -mt-1 ">
         Select Category
       </h3> */}
-      <div className="max-h-full overflow-hidden rounded-t-md border border-skin-base">
+      <div className="max-h-full overflow-hidden rounded-md border border-skin-base">
         <Scrollbar className="w-full category-filter-scrollbar">
           {data?.category?.data?.length ? (
             <CategoryFilterMenu items={data?.category?.data} />

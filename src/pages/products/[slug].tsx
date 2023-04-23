@@ -8,6 +8,7 @@ import { Element } from "react-scroll";
 import axios from "axios";
 import Seo from "@components/seo/seo";
 import Divider from "@components/ui/divider";
+import Image from "next/image";
 
 export default function Products({ data }: any) {
   return (
@@ -20,7 +21,7 @@ export default function Products({ data }: any) {
       <Divider />
       <Container className="bg-[#EBE0F0]">
         {data ? (
-          <Element name="grid" className="flex pt-6 ">
+          <Element name="grid" className="flex py-6 ">
             <div className="flex-shrink-0 hidden lg:block w-72  sticky top-16 h-full">
               <ShopFilters />
             </div>
@@ -29,12 +30,16 @@ export default function Products({ data }: any) {
             </div>
           </Element>
         ) : (
-          <div className="flex flex-col items-center justify-center py-32">
-            <p className="text-2xl font-poppins font-medium leading-normal">
-              Sorry ! No Product available !{" "}
-            </p>
-            <p className="mb-8">
-              You can find plenty of other products on our homepage.
+          <div className="flex flex-col items-center justify-center no-product-found">
+            <Image
+              src="/images/noproduct2.svg"
+              alt="no-product"
+              width={450}
+              height={550}
+            />
+
+            <p className="pb-16">
+              You can find plenty of other products on our homepage
             </p>
           </div>
         )}

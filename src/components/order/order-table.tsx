@@ -77,15 +77,15 @@ const OrderTable: React.FC<{ orders?: any }> = ({ orders }) => {
               <div className="overflow-x-auto p-3">
                 <div className="text-center mb-2">
                   <span className="bullet">.</span>{" "}
-                  <p className="uppercase text-[12px] font-bold text-green-700">
+                  <p className="uppercase text-[14px] font-medium text-green-700">
                     Order Status
                   </p>
-                  <span className="uppercase text-[11px] font-semibold text-green-900">
+                  <span className="text-[13px] font-normal text-green-900">
                     <span
                       className="bullet"
                       style={{ backgroundColor: "green" }}
                     />
-                    Order Accepted &amp; Ready for Shipment
+                    Order accepted &amp; ready for shipment
                   </span>
                 </div>
                 <table className="table-auto w-full font-poppins">

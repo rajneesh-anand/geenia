@@ -14,9 +14,11 @@ import OrderTable from "@components/order/order-table";
 import { useOrdersQuery } from "@framework/order/get-all-orders";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import axios from "axios";
+import Image from "next/image";
+import Link from "@components/ui/link";
 
 export default function OrderPage({ orders }: any) {
-  // const { data, isLoading } = useOrdersQuery({});
+  console.log(orders);
   return (
     <>
       <Seo
@@ -24,9 +26,32 @@ export default function OrderPage({ orders }: any) {
         description="Fastest E-commerce template built with React, NextJS, TypeScript, React-Query and Tailwind CSS."
         path="account/order"
       />
-      <AccountLayout>
-        <OrderTable orders={orders} />
-      </AccountLayout>
+      {orders.length > 0 ? (
+        <AccountLayout>
+          <OrderTable orders={orders} />
+        </AccountLayout>
+      ) : (
+        <Container>
+          <div className="flex flex-col items-center justify-center no-product-found">
+            <Image
+              src="/images/hero/empty-cart.svg"
+              alt="no-product"
+              width={280}
+              height={280}
+            />
+
+            <p className="my-8 font-medium text-[18px] text-red-700">
+              You have no orders !
+            </p>
+            <Link
+              href="/"
+              className="underline hover:no-underline text-cyan-600"
+            >
+              Buy organic beauty products here !
+            </Link>
+          </div>
+        </Container>
+      )}
     </>
   );
 }
@@ -53,7 +78,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     }
   );
-  console.log(data);
+
   return {
     props: {
       orders: data.orders,

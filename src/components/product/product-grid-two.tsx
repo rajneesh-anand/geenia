@@ -8,6 +8,7 @@ import ProductCardLoader from "@components/ui/loaders/product-card-loader";
 import cn from "classnames";
 import { useProductsQuery } from "@framework/product/get-all-products";
 import { LIMITS } from "@framework/utils/limits";
+import Image from "next/image";
 // import { Product } from "@framework/types";
 import SearchTopBar from "@components/search/search-top-bar";
 import { ShopFilters } from "@components/search/filters";
@@ -88,10 +89,14 @@ export const ProductGridTwo: FC<ProductGridProps> = ({
           ))}
         </div>
       ) : (
-        <div className="flex items-center justify-center h-auto">
-          <p className="pt-32 font-medium text-red-700">
-            No Product available !
-          </p>
+        <div className="flex items-center justify-center no-product-found">
+          <Image
+            src="/images/noproduct.svg"
+            alt="no-product"
+            width={450}
+            height={550}
+          />
+          {/* <p className="font-medium text-red-700">No Product available !</p> */}
         </div>
       )}
     </>

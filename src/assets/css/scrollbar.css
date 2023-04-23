@@ -11,7 +11,7 @@
 
 .os-theme-thin > .os-scrollbar-horizontal > .os-scrollbar-track:before,
 .os-theme-thin > .os-scrollbar-vertical > .os-scrollbar-track:before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   background: rgba(0, 0, 0, 0.1);
@@ -54,7 +54,7 @@
   > .os-scrollbar
   > .os-scrollbar-track
   > .os-scrollbar-handle:before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   background: rgba(0, 0, 0, 0.3);
@@ -116,5 +116,10 @@
 }
 
 .category-filter-scrollbar {
+  height: 583px;
+  background-color: white;
+}
+
+.no-product-found {
   height: 583px;
 }

@@ -54,9 +54,6 @@ function RenderPopupOrAddToCart({ data }: { data: Product }) {
 }
 const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
   const router = useRouter();
-  console.log(router.query.slug);
-  console.log(`first`);
-  console.log(router.pathname);
   const { name, image, unit, slug } = product ?? {};
 
   const { t } = useTranslation("common");
@@ -67,7 +64,6 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
   });
 
   function navigateToProductPage() {
-    console.log(`${router.query.slug}/${slug}`);
     router.push(`/${router.query.slug}/${slug}`);
   }
 
@@ -86,7 +82,7 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
             src={image ?? productPlaceholder}
             alt={name || "Product Image"}
             width={230}
-            height={320}
+            height={300}
             quality={100}
             className="object-cover bg-skin-thumbnail"
           />
