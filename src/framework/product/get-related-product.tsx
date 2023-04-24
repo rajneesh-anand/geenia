@@ -5,8 +5,11 @@ import { useQuery } from "react-query";
 
 export const fetchRelatedProducts = async ({ queryKey }: any) => {
   const [_key, _params] = queryKey;
-  const { data } = await http.get("/related-products");
-  return data;
+  const category = _params.pathname.split("/");
+
+  const { data } = await http.get(`/related-product/${category[1]}`);
+
+  return data.data;
 };
 export const useRelatedProductsQuery = (options: QueryOptionsType) => {
   return useQuery<Product[], Error>(

@@ -38,11 +38,11 @@ export const ProductGridTwo: FC<ProductGridProps> = ({
   className,
   products,
 }) => {
-  console.log(products);
-  const [data, setData] = useState<Product[]>(products);
+  const [data, setData] = useState<Product[]>([]);
   const { query } = useRouter();
 
   useEffect(() => {
+    setData(products);
     const category = query?.category?.toString().split(",");
 
     if (category) {
@@ -58,32 +58,12 @@ export const ProductGridTwo: FC<ProductGridProps> = ({
       }, []);
       setData(subCategoryResult);
     }
-  }, [query]);
+  }, [query, products]);
 
   return (
     <>
-      {/* {error ? (
-        <div className="col-span-full">
-          <Alert message={error?.message} />
-        </div>
-      ) : isLoading && !data?.pages?.length ? (
-        Array.from({ length: 30 }).map((_, idx) => (
-          <ProductCardLoader
-            key={`product--key-${idx}`}
-            uniqueKey={`product--key-${idx}`}
-          />
-        ))
-      ) : (
-        data?.pages?.map((page: any) =>
-          page?.data?.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-6 gap-3 md:gap-4 2xl:gap-5">
-              {page?.data?.map((product: Product, idx: any) => (
-                <ProductCard key={idx} product={product} />
-              ))}
-            </div>
-          ) : ( */}
       {data.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-6 gap-3  ml-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-6 gap-3 lg:ml-2">
           {data?.map((product: Product, idx: any) => (
             <ProductCard key={idx} product={product} />
           ))}
@@ -96,7 +76,6 @@ export const ProductGridTwo: FC<ProductGridProps> = ({
             width={450}
             height={550}
           />
-          {/* <p className="font-medium text-red-700">No Product available !</p> */}
         </div>
       )}
     </>

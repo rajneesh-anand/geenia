@@ -9,8 +9,10 @@ import axios from "axios";
 import Seo from "@components/seo/seo";
 import Divider from "@components/ui/divider";
 import Image from "next/image";
+import Breadcrumb from "@components/ui/breadcrumb";
 
 export default function Products({ data }: any) {
+  console.log(data);
   return (
     <>
       <Seo
@@ -20,6 +22,9 @@ export default function Products({ data }: any) {
       />
       <Divider />
       <Container className="bg-[#EBE0F0]">
+        <div className="pt-4">
+          <Breadcrumb />
+        </div>
         {data ? (
           <Element name="grid" className="flex py-6 ">
             <div className="flex-shrink-0 hidden lg:block w-72  sticky top-16 h-full">

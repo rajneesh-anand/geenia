@@ -7,6 +7,7 @@ import useWindowSize from "@utils/use-window-size";
 import Carousel from "@components/ui/carousel/carousel";
 import { SwiperSlide } from "@components/ui/carousel/slider";
 import { ROUTES } from "@utils/routes";
+import Container from "@components/ui/container";
 
 const data = [
   {
@@ -87,28 +88,30 @@ const FeatureGrid: React.FC<Props> = ({
 }) => {
   const { width } = useWindowSize();
   return (
-    <div className={`heightFull ${className}`}>
-      {width! < 1536 ? (
-        <Carousel
-          autoplay={false}
-          breakpoints={breakpoints}
-          prevActivateId="featured-carousel-button-prev"
-          nextActivateId="featured-carousel-button-next"
-        >
-          {data?.map((item) => (
-            <SwiperSlide key={`featured-key-${item.id}`}>
-              <FeaturedCard item={item} />
-            </SwiperSlide>
-          ))}
-        </Carousel>
-      ) : (
-        <div className="2xl:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {data?.map((item) => (
-            <FeaturedCard item={item} key={`featured-key-${item.id}`} />
-          ))}
-        </div>
-      )}
-    </div>
+    <Container>
+      <div className={`heightFull ${className}`}>
+        {width! < 1536 ? (
+          <Carousel
+            autoplay={false}
+            breakpoints={breakpoints}
+            prevActivateId="featured-carousel-button-prev"
+            nextActivateId="featured-carousel-button-next"
+          >
+            {data?.map((item) => (
+              <SwiperSlide key={`featured-key-${item.id}`}>
+                <FeaturedCard item={item} />
+              </SwiperSlide>
+            ))}
+          </Carousel>
+        ) : (
+          <div className="2xl:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {data?.map((item) => (
+              <FeaturedCard item={item} key={`featured-key-${item.id}`} />
+            ))}
+          </div>
+        )}
+      </div>
+    </Container>
   );
 };
 
