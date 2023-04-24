@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node envtest.ts && next build",
     "start": "next start",
     "pg-push": "npx prisma db push",
     "postinstall": "npx prisma generate"
