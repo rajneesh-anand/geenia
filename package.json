@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start --openssl-legacy-provider",
+    "build": "node envtest.js && next build",
+    "start": "next start ",
     "pg-push": "npx prisma db push",
     "postinstall": "npx prisma generate"
   },
