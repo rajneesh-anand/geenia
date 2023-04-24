@@ -27,7 +27,6 @@
     "incremental": true
   },
   "include": [
-    "envtest.js",
     "next-env.d.ts",
     "src/types/*.ts",
     "**/*.ts",
