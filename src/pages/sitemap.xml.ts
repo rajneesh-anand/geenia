@@ -1,40 +1,15 @@
 import { GetServerSideProps } from "next";
+import axios from "axios";
 
 const Sitemap = () => {};
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_NODE_API}/getslug-links`
+  );
   const baseUrl = "https://geenia.in";
-  async function getProducts() {
-    if (
-      !(
-        process.env.GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL &&
-        process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY &&
-        process.env.GOOGLE_SPREADSHEET_PRODUCTS
-      )
-    ) {
-      throw new Error("forbidden");
-    }
-    const { GoogleSpreadsheet } = require("google-spreadsheet");
-    const doc = new GoogleSpreadsheet(process.env.GOOGLE_SPREADSHEET_PRODUCTS);
-    await doc.useServiceAccountAuth({
-      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_CLIENT_EMAIL,
-      private_key: process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY.replace(
-        /\\n/gm,
-        "\n"
-      ),
-    });
-    await doc.loadInfo();
-    const sheet = doc.sheetsByTitle["all_items"]; // or use doc.sheetsById[id]
-    const rows = await sheet.getRows(); // can pass in { limit, offset }
 
-    const products = rows?.map(({ slug, item_category }: any) => ({
-      slug,
-      item_category,
-    }));
-    return products;
-  }
-
-  const productLinks = await getProducts();
+  const productLinks = data.data;
 
   const staticPages = [
     "https://geenia.in/products/bodycare",
