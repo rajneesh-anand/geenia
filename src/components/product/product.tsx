@@ -38,6 +38,7 @@ type Product = {
   quantity_in_stock: string;
   tags: string;
   category: string;
+  product_detailed_description?: string;
 };
 
 interface ProductProps {
