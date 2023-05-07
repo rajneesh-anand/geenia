@@ -52,7 +52,7 @@ const ProductSingleDetails: React.FC<ProductProps> = ({ product }) => {
   const {
     query: { slug },
   } = router;
-  const ImageArray = JSON.parse(product.gallery);
+  const ImageArray = product.gallery;
   const { width } = useWindowSize();
   // const { data, isLoading } = useProductQuery(slug as string);
   const { addItemToCart, isInCart, getItemFromCart, isInStock } = useCart();

@@ -36,6 +36,7 @@ const ThumbnailCarousel: React.FC<Props> = ({
   thumbnailClassName = "xl:w-[480px] 2xl:w-[650px]",
   galleryClassName = "xl:w-28 2xl:w-[130px]",
 }) => {
+  console.log(gallery);
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
@@ -71,7 +72,7 @@ const ThumbnailCarousel: React.FC<Props> = ({
             >
               <Image
                 src={item ?? productGalleryPlaceholder}
-                alt={`Product gallery ${item.id}`}
+                alt={`Product gallery ${idx}`}
                 width={650}
                 height={590}
                 className="rounded-lg"
@@ -114,7 +115,7 @@ const ThumbnailCarousel: React.FC<Props> = ({
             >
               <Image
                 src={item ?? productGalleryPlaceholder}
-                alt={`Product thumb gallery ${item.id}`}
+                alt={`Product thumb gallery ${idx}`}
                 width={170}
                 height={170}
               />

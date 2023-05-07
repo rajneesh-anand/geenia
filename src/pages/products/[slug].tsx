@@ -12,7 +12,6 @@ import Image from "next/image";
 import Breadcrumb from "@components/ui/breadcrumb";
 
 export default function Products({ data }: any) {
-  console.log(data);
   return (
     <>
       <Seo
