@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start ",
     "pg-push": "npx prisma db push",
+    "gcp-build": "next build",
     "postinstall": "npx prisma generate"
   },
   "dependencies": {

@@ -113,7 +113,7 @@ const ThumbnailCarousel: React.FC<Props> = ({
               key={`product-thumb-gallery-${idx}`}
               className="flex items-center justify-center cursor-pointer rounded overflow-hidden border border-skin-base transition hover:opacity-75"
             >
-              <Image
+              <img
                 src={item ?? productGalleryPlaceholder}
                 alt={`Product thumb gallery ${idx}`}
                 width={170}
