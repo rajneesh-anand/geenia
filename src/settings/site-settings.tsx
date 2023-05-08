@@ -36,6 +36,11 @@ export const siteSettings = {
       },
       {
         id: 4,
+        path: "/products/fragrance",
+        label: "menu-fragrance",
+      },
+      {
+        id: 4,
         path: "/products/makeup",
         label: "menu-makeup",
       },

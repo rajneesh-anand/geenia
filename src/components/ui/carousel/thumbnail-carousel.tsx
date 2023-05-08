@@ -70,7 +70,7 @@ const ThumbnailCarousel: React.FC<Props> = ({
               key={`product-gallery-${idx}`}
               className="flex items-center justify-center"
             >
-              <Image
+              <img
                 src={item ?? productGalleryPlaceholder}
                 alt={`Product gallery ${idx}`}
                 width={650}
