@@ -37,7 +37,7 @@ export const CategoryFilter = () => {
         Select Category
       </h3> */}
       <div className="max-h-full overflow-hidden rounded-md border border-skin-base">
-        <Scrollbar className="w-full category-filter-scrollbar">
+        <div className="w-full category-filter-scrollbar overflow-y-scroll">
           {data?.category?.data?.length ? (
             <CategoryFilterMenu items={data?.category?.data} />
           ) : (
@@ -45,7 +45,7 @@ export const CategoryFilter = () => {
               {t("text-no-results-found")}
             </div>
           )}
-        </Scrollbar>
+        </div>
       </div>
     </div>
   );

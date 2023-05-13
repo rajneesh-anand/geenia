@@ -67,7 +67,7 @@ const ProductSingleDetails: React.FC<ProductProps> = ({ product }) => {
   const productUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/${
     router.pathname.split("/")[1]
   }/${router.query.slug}`;
-  console.log(productUrl);
+
   const { price, basePrice, discount } = usePrice(
     product && {
       amount: Number(product.sale_price)

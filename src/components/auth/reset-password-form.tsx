@@ -61,7 +61,6 @@ export default function ResetPassword() {
 
   async function onSubmit(data: FormValues) {
     if (data.password != data.repassword) {
-      console.log(`hhh`);
       setErrorMsg("Password didn't match !");
       return;
     } else {

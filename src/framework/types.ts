@@ -76,26 +76,42 @@ export type Tag = {
   name: string;
   slug: string;
 };
+// export type Product = {
+//   id: number | string;
+//   name: string;
+//   slug: string;
+//   price: number;
+//   quantity: number;
+//   sold: number;
+//   unit: string;
+//   sale_price?: number;
+//   min_price?: number;
+//   max_price?: number;
+//   image: Attachment;
+//   sku?: string;
+//   gallery?: Attachment[];
+//   category?: Category;
+//   tag?: Tag[];
+//   meta?: any[];
+//   brand?: Brand;
+//   description?: string;
+//   variations?: object;
+//   [key: string]: unknown;
+// };
+
 export type Product = {
   id: number | string;
   name: string;
   slug: string;
-  price: number;
-  quantity: number;
-  sold: number;
+  image: string;
+  gallery: string;
+  description: string;
+  price: string;
+  sale_price: string;
   unit: string;
-  sale_price?: number;
-  min_price?: number;
-  max_price?: number;
-  image: Attachment;
-  sku?: string;
-  gallery?: Attachment[];
-  category?: Category;
-  tag?: Tag[];
-  meta?: any[];
-  brand?: Brand;
-  description?: string;
-  variations?: object;
+  quantity_in_stock: string;
+  tags: string;
+  category: string;
   [key: string]: unknown;
 };
 export type OrderItem = {

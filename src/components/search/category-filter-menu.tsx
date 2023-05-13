@@ -46,29 +46,27 @@ function CategoryFilterMenuItem({
   };
 
   function onClick() {
-    if (Array.isArray(items) && !!items.length) {
-      // toggleCollapse();
-    } else {
-      const { category, ...restQuery } = query;
-      let currentFormState = selectedCategories.includes(slug)
-        ? selectedCategories.filter((i) => i !== slug)
-        : [...selectedCategories, slug];
-      router.push(
-        {
-          pathname,
-          query: {
-            ...restQuery,
-            ...(!!currentFormState.length
-              ? { category: currentFormState.join(",") }
-              : {}),
-          },
+    const { category, ...restQuery } = query;
+    console.log(category);
+    console.log(restQuery);
+    let currentFormState = selectedCategories.includes(slug)
+      ? selectedCategories.filter((i) => i !== slug)
+      : [...selectedCategories, slug];
+    router.push(
+      {
+        pathname,
+        query: {
+          ...restQuery,
+          ...(!!currentFormState.length
+            ? { category: currentFormState.join(",") }
+            : {}),
         },
-        undefined,
-        { scroll: false }
-      );
+      },
+      undefined,
+      { scroll: false }
+    );
 
-      displaySidebar && closeSidebar();
-    }
+    displaySidebar && closeSidebar();
   }
 
   let expandIcon;

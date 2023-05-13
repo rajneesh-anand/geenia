@@ -79,7 +79,7 @@ const CheckoutCard: React.FC = () => {
       `${process.env.NEXT_PUBLIC_NODE_API}/payment/razorpay/create`,
       { method: "POST" }
     ).then((t) => t.json());
-    console.log(data);
+
     var options = {
       key: process.env.RAZORPAY_KEY,
       name: "Geenia International Pvt. Ltd.",
@@ -105,7 +105,6 @@ const CheckoutCard: React.FC = () => {
           }
         ).then((t) => t.json());
 
-        console.log(data);
         // Validate payment at server - using webhooks is a better idea.
         // alert(response.razorpay_payment_id);
         // alert(response.razorpay_order_id);

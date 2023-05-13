@@ -11,6 +11,8 @@ import timezone from "dayjs/plugin/timezone";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import { BsSearch } from "react-icons/bs";
 import Image from "@components/ui/image";
+import Container from "@components/ui/container";
+import Breadcrumb from "@components/ui/breadcrumb";
 
 export const CreatedAt: React.FC<{ createdAt?: any }> = ({ createdAt }) => {
   dayjs.extend(relativeTime);
@@ -37,11 +39,10 @@ export const Status: React.FC<{ item?: any }> = ({ item }) => {
 
 const OrderTable: React.FC<{ orders?: any }> = ({ orders }) => {
   return (
-    <>
-      <div className="flex justify-center items-center py-8 mb-4 w-full page-header-banner bg-gradient-to-r from-cyan-100 to-blue-100">
-        <h2 className="font-semibold text-sm md:text-xl  uppercase">
-          My Orders
-        </h2>
+    <Container>
+      <Breadcrumb />
+      <div className="flex justify-center items-center py-8 mb-4 w-full page-header-banner ">
+        <h2 className="font-semibold text-sm md:text-xl  ">My Orders</h2>
       </div>
 
       {orders?.map((itm: any, idx: number) => {
@@ -160,58 +161,10 @@ const OrderTable: React.FC<{ orders?: any }> = ({ orders }) => {
                 </table>
               </div>
             </div>
-
-            {/* <ul className="px-8 py-4">
-              <li className="flex font-medium text-[12px] lg:text-[14px]">
-                <h3>Order Number -</h3>
-                <h3 className="ml-2">{itm.orderNumber}</h3>
-              </li>
-              <li className="flex font-medium text-[12px] lg:text-[14px]">
-                <h3>Order Date -</h3>
-                <h3 className="ml-2">
-                  {dayjs(itm.orderDate).format("MMM D, YYYY")} (
-                  <CreatedAt createdAt={itm.orderDate} /> )
-                </h3>
-              </li>
-              <li className="flex font-medium text-[12px] lg:text-[14px]">
-                {itm.orderStatus === "Created" && (
-                  <>
-                    <h3>Order Status - </h3>
-                    <p className="text-green-700 font-bold ml-2 ">
-                      {" "}
-                      Order accepted &amp; ready for shipment
-                    </p>
-                  </>
-                )}
-              </li>
-            </ul>
-
-            <ul className="px-8 py-4">
-              <li className="flex justify-end font-medium text-[12px] lg:text-[14px]">
-                <h3>Order Amount =</h3>
-                <h3 className="ml-2">&#x20B9;{itm.amount}</h3>
-              </li>
-              <li className="flex justify-end font-medium text-[12px] lg:text-[14px]">
-                <h3>Shipping Amount =</h3>
-
-                {itm.shipping === "free" ? (
-                  <h3 className="ml-2 font-semibold font-green-700">
-                    {" "}
-                    Free Shipping{" "}
-                  </h3>
-                ) : (
-                  <h3 className="ml-2">&#x20B9;{itm.shipping}</h3>
-                )}
-              </li>
-              <li className="flex justify-end font-medium text-[12px] lg:text-[14px]">
-                <h3>Total Amount =</h3>
-                <h3 className="ml-2">&#x20B9;{itm.totalAmount}</h3>
-              </li>
-            </ul> */}
           </div>
         );
       })}
-    </>
+    </Container>
   );
 };
 

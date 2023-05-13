@@ -3,6 +3,7 @@ import { API_ENDPOINTS } from "@framework/utils/api-endpoints";
 import http from "@framework/utils/http";
 import shuffle from "lodash/shuffle";
 import { useInfiniteQuery } from "react-query";
+
 type PaginatedProduct = {
   data: Product[];
   paginatorInfo: any;
@@ -10,22 +11,12 @@ type PaginatedProduct = {
 const fetchProducts = async ({ queryKey }: any) => {
   const [_key, _params] = queryKey;
   const category = _params?.category?.toString().split(",");
-
+  console.log(category);
   const { data } = await http.get(`/products/${_params.slug}`);
-  // const result = data.reduce((acc: any, item: any) => {
-  //   let categoryExist = item.category.find(
-  //     (cat: any) => cat.slug == _params.slug
-  //   );
-
-  //   if (categoryExist) {
-  //     acc.push(item);
-  //   }
-  //   return acc;
-  // }, []);
-
+  console.log(data);
   if (category) {
-    const subCategoryResult = data.reduce((acc: any, item: any) => {
-      let subCategoryExist = item.category.find((cat: any) =>
+    const subCategoryResult = data?.products.reduce((acc: any, item: any) => {
+      let subCategoryExist = JSON.parse(item.category).find((cat: any) =>
         category?.includes(cat.slug)
       );
 
@@ -43,7 +34,7 @@ const fetchProducts = async ({ queryKey }: any) => {
     };
   } else {
     return {
-      data: data as Product[],
+      data: data?.products as Product[],
       paginatorInfo: {
         nextPageUrl: "",
       },

@@ -12,21 +12,7 @@ import { productPlaceholder } from "@assets/placeholders";
 import { useRouter } from "next/router";
 import { ROUTES } from "@utils/routes";
 import Divider from "@components/ui/divider";
-
-type Product = {
-  id: string;
-  name: string;
-  slug: string;
-  image: string;
-  gallery: string;
-  description: string;
-  price: string;
-  sale_price: string;
-  unit: string;
-  quantity_in_stock: string;
-  tags: string;
-  category: string;
-};
+import { Product } from "@framework/types";
 
 interface ProductProps {
   product: Product;

@@ -116,7 +116,7 @@
 }
 
 .category-filter-scrollbar {
-  min-height: 583px;
+  max-height: 583px;
   background-color: white;
 }
 

@@ -9,9 +9,6 @@ import cn from "classnames";
 import { useProductsQuery } from "@framework/product/get-all-products";
 import { LIMITS } from "@framework/utils/limits";
 import { Product } from "@framework/types";
-import SearchTopBar from "@components/search/search-top-bar";
-import { ShopFilters } from "@components/search/filters";
-import { Element } from "react-scroll";
 
 interface ProductGridProps {
   className?: string;
@@ -26,7 +23,7 @@ export const ProductGrid: FC<ProductGridProps> = ({ className = "" }) => {
     hasNextPage,
     data,
     error,
-  } = useProductsQuery({ limit: LIMITS.PRODUCTS_LIMITS, ...query });
+  } = useProductsQuery({ limit: 25, ...query });
 
   return (
     <>
@@ -35,28 +32,25 @@ export const ProductGrid: FC<ProductGridProps> = ({ className = "" }) => {
           <Alert message={error?.message} />
         </div>
       ) : isLoading && !data?.pages?.length ? (
-        Array.from({ length: 30 }).map((_, idx) => (
-          <ProductCardLoader
-            key={`product--key-${idx}`}
-            uniqueKey={`product--key-${idx}`}
-          />
-        ))
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-6 gap-3 lg:ml-2">
+          {Array.from({ length: 25 }).map((_, idx) => (
+            <ProductCardLoader
+              key={`product--key-${idx}`}
+              uniqueKey={`product--key-${idx}`}
+            />
+          ))}
+        </div>
       ) : (
-        data?.pages?.map((page: any) =>
-          page?.data?.length > 0 ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-6 gap-3 md:gap-4 2xl:gap-5">
-              {page?.data?.map((product: Product, idx: any) => (
-                <ProductCard key={idx} product={product} />
-              ))}
-            </div>
-          ) : (
-            <div className="flex items-center justify-center h-auto">
-              <p className="pt-32 font-medium text-red-700">
-                No Product available !
-              </p>
-            </div>
-          )
-        )
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-6 gap-3 lg:ml-2">
+          {data?.pages?.map((page: any) => {
+            return page?.data?.map((product: Product) => (
+              <ProductCard
+                key={`product--key-${product.id}`}
+                product={product}
+              />
+            ));
+          })}
+        </div>
       )}
     </>
   );

@@ -50,18 +50,20 @@ const CheckoutCard: React.FC = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
+  const shipping = total > 500 ? 99 : 0;
+
   const { price: subtotal } = usePrice({
     amount: total,
     currencyCode: "INR",
   });
 
   const { price: shippingAmount } = usePrice({
-    amount: Number(shippingCharge),
+    amount: shipping,
     currencyCode: "INR",
   });
 
   const { price: totalAmount } = usePrice({
-    amount: Math.round(total + Number(shippingCharge)),
+    amount: Math.round(total + shipping),
     currencyCode: "INR",
   });
 
@@ -95,96 +97,89 @@ const CheckoutCard: React.FC = () => {
   };
 
   const makePayment = async (formData: FormValues) => {
-    if (pinError) {
+    setProcessingStatus(true);
+    const res = await initializeRazorpay();
+
+    if (!res) {
+      alert("Razorpay SDK Failed to load");
       return;
-    } else {
-      setProcessingStatus(true);
-      const res = await initializeRazorpay();
+    }
 
-      if (!res) {
-        alert("Razorpay SDK Failed to load");
-        return;
+    const data = await fetch(
+      `${process.env.NEXT_PUBLIC_NODE_API}/payment/razorpay/create`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          item: items,
+          discount: "0",
+          mobile: formData.mobile,
+          email: session?.user?.email,
+          address: formData.address,
+          pincode: formData.pin,
+          description: formData.description,
+        }),
       }
-
-      const data = await fetch(
-        `${process.env.NEXT_PUBLIC_NODE_API}/payment/razorpay/create`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            item: items,
-            shipping: shippingCharge,
-            discount: "0",
-            mobile: formData.mobile,
-            email: session?.user?.email,
-            address: formData.address,
-            pin: formData.pin,
-            description: formData.description,
-          }),
-        }
-      ).then((t) => t.json());
-      let orderNumber = data.orderNumber;
-      var options = {
-        key: process.env.RAZORPAY_KEY,
-        name: "Geenia International Pvt. Ltd.",
-        currency: data.currency,
-        amount: data.amount,
-        order_id: data.id,
-        description: "Thank you for placing an order",
-        image: `${process.env.NEXT_PUBLIC_SITE_URL}/images/logo.jpg`,
-        handler: async function (response: responseObeject) {
-          setProcessingStatus(false);
-          const bodydata = {
-            paymentId: response.razorpay_payment_id,
-            orderId: response.razorpay_order_id,
-            signature: response.razorpay_signature,
-            orderNumber: orderNumber,
-          };
-          const data = await fetch(
-            `${process.env.NEXT_PUBLIC_NODE_API}/payment/razorpay/verify`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(bodydata),
-            }
-          ).then((t) => t.json());
-
-          if (data.message === "success") {
-            resetCart();
-            router.push("/account/order");
-          } else {
-            setError("failed");
+    ).then((t) => t.json());
+    let orderNumber = data.orderNumber;
+    var options = {
+      key: process.env.RAZORPAY_KEY,
+      name: "Geenia International Pvt. Ltd.",
+      currency: data.currency,
+      amount: data.amount,
+      order_id: data.id,
+      description: "Thank you for placing an order",
+      image: `${process.env.NEXT_PUBLIC_SITE_URL}/images/logo.jpg`,
+      handler: async function (response: responseObeject) {
+        setProcessingStatus(false);
+        const bodydata = {
+          paymentId: response.razorpay_payment_id,
+          orderId: response.razorpay_order_id,
+          signature: response.razorpay_signature,
+          orderNumber: orderNumber,
+        };
+        const data = await fetch(
+          `${process.env.NEXT_PUBLIC_NODE_API}/payment/razorpay/verify`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(bodydata),
           }
-        },
-        prefill: {
-          name: " ",
-          email: "",
-          contact: "",
-        },
-      };
+        ).then((t) => t.json());
 
-      const paymentObject = (window as any).Razorpay(options);
-      paymentObject.open();
-    }
+        if (data.message === "success") {
+          resetCart();
+          router.push("/account/order");
+        } else {
+          setError("failed");
+        }
+      },
+      prefill: {
+        name: " ",
+        email: "",
+        contact: "",
+      },
+    };
+
+    const paymentObject = (window as any).Razorpay(options);
+    paymentObject.open();
   };
 
-  const handleShippingCharge = (e: ChangeEvent<HTMLInputElement>) => {
-    const pincode = e.target.value;
-    const ship = shippingData.find((item) => item.pincode === Number(pincode));
+  // const handleShippingCharge = (e: ChangeEvent<HTMLInputElement>) => {
+  //   // const pincode = e.target.value;
+  //   // const ship = shippingData.find((item) => item.pincode === Number(pincode));
 
-    if (ship) {
-      setShippingCharge(ship.shipping.toString());
-      setPinError(false);
-    } else {
-      setShippingCharge("0");
-      setPinError(true);
-    }
-  };
+  //   if (total > 500) {
+  //     setShippingCharge("0");
+  //   } else {
+  //     setShippingCharge("99");
+  //   }
+  // };
 
   const checkoutFooter = [
     {
@@ -195,7 +190,7 @@ const CheckoutCard: React.FC = () => {
     {
       id: 2,
       name: t("text-shipping"),
-      price: shippingAmount,
+      price: total > 500 ? shippingAmount : "free",
     },
     {
       id: 3,
@@ -254,16 +249,13 @@ const CheckoutCard: React.FC = () => {
               <div className="flex flex-col md:flex-row pb-8 ">
                 <div className="w-full md:w-1/2  mb-3">
                   <Input
-                    name="pincode"
+                    type="text"
                     variant="outline"
                     label="PIN/ZIP Code"
-                    onChange={handleShippingCharge}
-                    required
-                    error={
-                      pinError
-                        ? "Sorry ! We can't ship item to this pincode "
-                        : undefined
-                    }
+                    {...register("pin", {
+                      required: "pincode is required !",
+                    })}
+                    error={errors.pin?.message}
                   />
                 </div>
                 <div className="w-full md:w-1/2  mb-3 lg:ml-[4px]">

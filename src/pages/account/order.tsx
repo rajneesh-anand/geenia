@@ -16,6 +16,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import axios from "axios";
 import Image from "next/image";
 import Link from "@components/ui/link";
+import { getHash } from "next/dist/server/image-optimizer";
+import { SDK_VERSION } from "firebase/app";
 
 export default function OrderPage({ orders }: any) {
   console.log(orders);

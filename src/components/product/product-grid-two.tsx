@@ -38,15 +38,16 @@ export const ProductGridTwo: FC<ProductGridProps> = ({
   className,
   products,
 }) => {
-  const [data, setData] = useState<Product[]>([]);
+  const [data, setData] = useState<Product[]>(products);
   const { query } = useRouter();
 
   useEffect(() => {
-    setData(products);
     const category = query?.category?.toString().split(",");
+    console.log(category);
 
     if (category) {
       const subCategoryResult = products.reduce((acc: any, item: any) => {
+        console.log(item.category);
         let subCategoryExist = JSON.parse(item.category).find((cat: any) =>
           category?.includes(cat.slug)
         );
@@ -58,7 +59,7 @@ export const ProductGridTwo: FC<ProductGridProps> = ({
       }, []);
       setData(subCategoryResult);
     }
-  }, [query, products]);
+  }, [query]);
 
   return (
     <>
