@@ -24,11 +24,10 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
       title={item?.name}
     >
       <div className="relative flex rounded overflow-hidden flex-shrink-0 cursor-pointer w-[90px] md:w-[100px] h-[90px] md:h-[100px]">
-        <Image
+        <img
           src={item?.image ?? "/placeholder/cart-item.svg"}
           width={100}
           height={100}
-          loading="eager"
           alt={item.name || "Product Image"}
           className="object-cover bg-skin-thumbnail"
         />
