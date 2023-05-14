@@ -50,7 +50,7 @@ const CheckoutCard: React.FC = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const shipping = total > 500 ? 99 : 0;
+  const shipping = total > 500 ? 0 : 99;
 
   const { price: subtotal } = usePrice({
     amount: total,
@@ -190,7 +190,7 @@ const CheckoutCard: React.FC = () => {
     {
       id: 2,
       name: t("text-shipping"),
-      price: total > 500 ? shippingAmount : "free",
+      price: total > 500 ? "free" : shippingAmount,
     },
     {
       id: 3,

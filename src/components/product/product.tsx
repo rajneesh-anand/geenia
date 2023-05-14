@@ -156,13 +156,8 @@ const ProductSingleDetails: React.FC<ProductProps> = ({ product }) => {
           ) : (
             <div className="w-auto flex items-center justify-center">
               <Image
-<<<<<<< HEAD
-                src={data?.image?.original ?? "/images/placeholder/product.svg"}
-                alt={data?.name!}
-=======
                 src={ImageArray[0] ?? "/images/placeholder/product.svg"}
                 alt={product?.name!}
->>>>>>> 86376062892f2b10fdafbb6b59b16ae9851abbf2
                 width={900}
                 height={680}
               />
