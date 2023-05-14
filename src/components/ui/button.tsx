@@ -23,9 +23,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   } = props;
 
   const rootClassName = cn(
-    "group text-[8px] md:text-sm lg:text-12px leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300  font-semibold text-center justify-center tracking-[0.2px] rounded placeholder-white focus-visible:outline-none focus:outline-none",
+    "group text-[16px] md:text-[14px] lg:text-[18px] leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300  font-semibold text-center justify-center tracking-[0.2px] rounded placeholder-white focus-visible:outline-none focus:outline-none",
     {
-      "h-12 md:h-14 bg-blue-700 text-skin-inverted tracking-widest px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white hover:bg-opacity-90":
+      " bg-blue-700 text-skin-inverted tracking-widest px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4 hover:text-white hover:bg-opacity-90":
         variant === "primary",
       "h-12 md:h-14 bg-skin-inverted text-skin-base border border-skin-four tracking-widest px-5 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-4":
         variant === "border",
