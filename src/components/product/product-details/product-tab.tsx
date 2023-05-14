@@ -64,7 +64,7 @@ export default function ProductDetailsTab() {
                 UK 8-10, model shown is a UK 8 and 5’5. !!
               </p>
             </div>
-            <div className="flex-shrink-0 lg:w-[400px] xl:w-[480px] 2xl:w-[550px] 3xl:w-[680px] lg:pl-10 xl:pl-14 2xl:pl-20 pt-5 lg:pt-0">
+            {/* <div className="flex-shrink-0 lg:w-[400px] xl:w-[480px] 2xl:w-[550px] 3xl:w-[680px] lg:pl-10 xl:pl-14 2xl:pl-20 pt-5 lg:pt-0">
               <Heading
                 variant="mediumHeading"
                 className="xl:text-lg mb-4 pt-0.5"
@@ -126,11 +126,11 @@ export default function ProductDetailsTab() {
                   </tbody>
                 </table>
               </div>
-            </div>
+            </div> */}
           </Tab.Panel>
-          <Tab.Panel>
+          {/* <Tab.Panel>
             <ProductReviewRating />
-          </Tab.Panel>
+          </Tab.Panel> */}
         </Tab.Panels>
       </Tab.Group>
     </div>

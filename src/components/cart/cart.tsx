@@ -42,7 +42,8 @@ export default function Cart() {
   return (
     <div className="flex flex-col w-full h-full">
       <div className="w-full flex justify-between items-center relative pl-5 md:pl-7 border-b border-skin-base">
-        <Heading variant="titleMedium">{t("text-shopping-cart")}</Heading>
+        <p className="font-normal font-poppins text-[16px]">Shopping Cart</p>
+
         <div className="flex items-center">
           {!isEmpty && (
             <button

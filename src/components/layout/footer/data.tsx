@@ -90,8 +90,8 @@ export const footer = {
       path: "https://www.youtube.com/channel/UCjld1tyVHRNy_pe3ROLiLhw",
       image: "/images/social/youtube.svg",
       name: "youtube",
-      width: 20,
-      height: 20,
+      width: 24,
+      height: 24,
     },
   ],
 };

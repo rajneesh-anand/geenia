@@ -6,7 +6,11 @@ import { footer } from "./data";
 const { links, payments, socials } = footer;
 
 const Footer: React.FC = () => (
-  <footer className="mt-[50px] lg:mt-14 2xl:mt-16 pt-[64px] bg-blue-100">
+  // <footer
+  //   className="pt-[64px] bg-[url('/images/hero/footer-bg.png')]"
+  //    style={{ backgroundImage: `url(/images/hero/footer-bg.png)` }}
+  // >
+  <footer className="bg-[#fff7ec] pt-[64px]">
     <Information socials={socials} />
 
     <Payment payments={payments} />

@@ -1,6 +1,7 @@
-import ProductsCarousel from '@components/product/products-carousel';
-import { useRelatedProductsQuery } from '@framework/product/get-related-product';
-import { LIMITS } from '@framework/utils/limits';
+import ProductsCarousel from "@components/product/products-carousel";
+import { useRelatedProductsQuery } from "@framework/product/get-related-product";
+import { LIMITS } from "@framework/utils/limits";
+import { useRouter } from "next/router";
 
 interface RelatedProductsProps {
   carouselBreakpoint?: {} | any;
@@ -11,15 +12,18 @@ interface RelatedProductsProps {
 const RelatedProductFeed: React.FC<RelatedProductsProps> = ({
   carouselBreakpoint,
   className,
-  uniqueKey = 'related-product-popup',
+  uniqueKey = "related-product-popup",
 }) => {
+  const router = useRouter();
+  const category = router.pathname.split("/");
   const { data, isLoading, error } = useRelatedProductsQuery({
     limit: LIMITS.RELATED_PRODUCTS_LIMITS,
+    ...router,
   });
   return (
     <ProductsCarousel
       sectionHeading="text-related-products"
-      categorySlug="/search"
+      categorySlug={`/products/${category[1]}`}
       className={className}
       products={data}
       loading={isLoading}

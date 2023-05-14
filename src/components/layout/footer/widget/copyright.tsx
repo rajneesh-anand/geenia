@@ -17,7 +17,7 @@ const year = new Date().getFullYear();
 const Copyright: React.FC<CopyrightProps> = ({ payment }) => {
   const { t } = useTranslation("footer");
   return (
-    <div className="text-center mb-4 py-2">
+    <div className="text-center mb-4 py-2 border-t border-t-gray-300">
       <p className="text-skin-base text-sm leading-7 lg:leading-[27px] lg:text-15px">
         &copy;&nbsp;{t("text-copyright")} {year}&nbsp;
         <a

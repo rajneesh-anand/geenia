@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start ",
     "pg-push": "npx prisma db push",
+    "gcp-build": "next build",
     "postinstall": "npx prisma generate"
   },
   "dependencies": {
@@ -23,6 +24,7 @@
     "date-fns": "^2.28.0",
     "dayjs": "^1.10.7",
     "firebase": "^9.9.0",
+    "google-spreadsheet": "^3.3.0",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
@@ -62,6 +64,7 @@
     "@types/crypto-js": "^4.1.1",
     "@types/gtag.js": "^0.0.12",
     "@types/js-cookie": "^3.0.1",
+    "@types/jsonwebtoken": "^9.0.1",
     "@types/leaflet": "^1.7.9",
     "@types/lodash": "^4.14.178",
     "@types/node": "18.0.0",
@@ -75,5 +78,9 @@
     "prisma": "^4.8.0",
     "tailwindcss": "^3.1.8",
     "typescript": "4.7.4"
+  },
+  "engines": {
+    "npm": ">=8.0.0 <9.0.0",
+    "node": ">=16.0.0 <17.0.0"
   }
 }

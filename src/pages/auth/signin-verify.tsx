@@ -9,7 +9,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (session) {
     return {
       redirect: {
-        destination: ROUTES.DASHBOARD,
+        destination: "/",
         permanent: false,
       },
     };

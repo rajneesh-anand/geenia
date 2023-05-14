@@ -43,7 +43,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
   }
 
   async function onSubmit({ name, email, mobile, password }: SignUpInputType) {
-    console.log(mobile);
     setProcessing(true);
     const formData = new FormData();
     formData.append("name", name);

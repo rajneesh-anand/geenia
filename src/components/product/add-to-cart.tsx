@@ -32,16 +32,15 @@ export const AddToCart = ({ data, variation, disabled }: Props) => {
     removeItemFromCart(item.id);
   };
   const outOfStock = isInCart(item?.id) && !isInStock(item.id);
-  const iconSize = width! > 480 ? "19" : "17";
+  const iconSize = width! > 480 ? "17" : "15";
   return !isInCart(item?.id) ? (
     <button
-      className="bg-skin-primary rounded-sm h-8  uppercase font-poppins text-[10px]  px-2 lg:px-4  text-skin-inverted flex items-center justify-center focus:outline-none"
+      className="bg-skin-primary rounded-sm h-8 w-full uppercase font-poppins font-medium text-[12px]  px-2 lg:px-4  text-skin-inverted flex items-center justify-center focus:outline-none"
       aria-label="Count Button"
       onClick={handleAddClick}
       disabled={disabled || outOfStock}
     >
-      {/* <PlusIcon width={iconSize} height={iconSize} opacity="1" /> */}
-      Add to Cart
+      <PlusIcon width={iconSize} height={iconSize} opacity="1" /> Add to Cart
     </button>
   ) : (
     <Counter

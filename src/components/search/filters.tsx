@@ -8,11 +8,11 @@ import { DietaryFilter } from "@components/search/dietary-filter";
 import Heading from "@components/ui/heading";
 
 export const ShopFilters: React.FC = () => {
-  const router = useRouter();
-  const { query } = router;
-  const category = query?.category?.toString().split(",");
+  // const router = useRouter();
+  // const { query } = router;
+  // const category = query?.category?.toString().split(",");
 
-  const { t } = useTranslation("common");
+  // const { t } = useTranslation("common");
   return (
     <div className="space-y-10">
       {/* {!isEmpty(query) && (

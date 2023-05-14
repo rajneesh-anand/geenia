@@ -3,14 +3,9 @@ import Container from "@components/ui/container";
 import { GetServerSideProps } from "next";
 import { getCsrfToken, getSession } from "next-auth/react";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import SignInForm from "@components/form/signin-form";
 
 export default function LoginPage({ csrfToken }: any) {
-  return (
-    <Container>
-      <SignInForm csrfToken={csrfToken} />
-    </Container>
-  );
+  return <Container>{/* <SignInForm csrfToken={csrfToken} /> */}</Container>;
 }
 
 LoginPage.Layout = Layout;

@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export function convertBreadcrumbTitle(string: string) {
   return string
-    .replace(/-/g, ' ')
-    .replace(/oe/g, 'ö')
-    .replace(/ae/g, 'ä')
-    .replace(/ue/g, 'ü')
+    .replace(/-/g, " ")
+    .replace(/oe/g, "ö")
+    .replace(/ae/g, "ä")
+    .replace(/ue/g, "ü")
     .toLowerCase();
 }
 
@@ -16,15 +16,16 @@ export default function useBreadcrumb() {
   useEffect(() => {
     if (router) {
       const linkPath =
-        router.asPath.indexOf('?') > 0
-          ? router.pathname.split('/')
-          : router.asPath.split('/');
+        router.asPath.indexOf("?") > 0
+          ? router.pathname.split("/")
+          : router.asPath.split("/");
+
       linkPath.shift();
 
       const pathArray = linkPath.map((path, i) => {
         return {
           breadcrumb: path,
-          href: '/' + linkPath.slice(0, i + 1).join('/'),
+          href: "/" + linkPath.slice(0, i + 1).join("/"),
         };
       });
 

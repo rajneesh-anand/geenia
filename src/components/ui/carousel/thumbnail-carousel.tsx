@@ -14,7 +14,7 @@ import { useRouter } from "next/router";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 interface Props {
-  gallery: any[];
+  gallery: string;
   thumbnailClassName?: string;
   galleryClassName?: string;
 }
@@ -36,6 +36,7 @@ const ThumbnailCarousel: React.FC<Props> = ({
   thumbnailClassName = "xl:w-[480px] 2xl:w-[650px]",
   galleryClassName = "xl:w-28 2xl:w-[130px]",
 }) => {
+  console.log(gallery);
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const prevRef = useRef<HTMLDivElement>(null);
   const nextRef = useRef<HTMLDivElement>(null);
@@ -64,14 +65,14 @@ const ThumbnailCarousel: React.FC<Props> = ({
           }}
           {...swiperParams}
         >
-          {gallery?.map((item: any) => (
+          {JSON.parse(gallery).map((item: any, idx: any) => (
             <SwiperSlide
-              key={`product-gallery-${item.id}`}
+              key={`product-gallery-${idx}`}
               className="flex items-center justify-center"
             >
-              <Image
-                src={item?.original ?? productGalleryPlaceholder}
-                alt={`Product gallery ${item.id}`}
+              <img
+                src={item ?? productGalleryPlaceholder}
+                alt={`Product gallery ${idx}`}
                 width={650}
                 height={590}
                 className="rounded-lg"
@@ -107,14 +108,14 @@ const ThumbnailCarousel: React.FC<Props> = ({
           observeParents={true}
           breakpoints={galleryCarouselBreakpoints}
         >
-          {gallery?.map((item: any) => (
+          {JSON.parse(gallery).map((item: any, idx: any) => (
             <SwiperSlide
-              key={`product-thumb-gallery-${item.id}`}
+              key={`product-thumb-gallery-${idx}`}
               className="flex items-center justify-center cursor-pointer rounded overflow-hidden border border-skin-base transition hover:opacity-75"
             >
-              <Image
-                src={item?.thumbnail ?? productGalleryPlaceholder}
-                alt={`Product thumb gallery ${item.id}`}
+              <img
+                src={item ?? productGalleryPlaceholder}
+                alt={`Product thumb gallery ${idx}`}
                 width={170}
                 height={170}
               />

@@ -133,3 +133,7 @@
     max-width: calc(100% - 8px);
   }
 }
+
+.social-link-vertical-align > span {
+  vertical-align: middle;
+}

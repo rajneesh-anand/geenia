@@ -1,9 +1,15 @@
 import { GetServerSideProps } from "next";
+import axios from "axios";
 
 const Sitemap = () => {};
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+  const { data } = await axios.get(
+    `${process.env.NEXT_PUBLIC_NODE_API}/getslug-links`
+  );
   const baseUrl = "https://geenia.in";
+
+  const productLinks = data.data;
 
   const staticPages = [
     "https://geenia.in/products/bodycare",
@@ -31,6 +37,19 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
           `;
         })
         .join("")}
+
+        ${productLinks
+          .map((item: any) => {
+            return `
+              <url>
+                <loc>${baseUrl}/${item.item_category}/${item.slug}</loc>
+                <lastmod>${new Date().toISOString()}</lastmod>
+                <changefreq>weekly</changefreq>
+                <priority>1.0</priority>
+              </url>
+            `;
+          })
+          .join("")}
 
 
             

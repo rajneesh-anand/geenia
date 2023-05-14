@@ -18,7 +18,7 @@ export default function TermsPage() {
       />
       <PageHeroSection heroTitle="text-page-faq" />
       <Container>
-        <div className="flex flex-col max-w-2xl 2xl:max-w-4xl mx-auto py-12 md:py-20">
+        <div className="flex flex-col max-w-2xl 2xl:max-w-4xl mx-auto py-12 ">
           {faq?.map((item, index) => (
             <Accordion
               key={`${item.title}-${index}`}

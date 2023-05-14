@@ -36,17 +36,22 @@ export const siteSettings = {
       },
       {
         id: 4,
+        path: "/products/fragrance",
+        label: "menu-fragrance",
+      },
+      {
+        id: 5,
         path: "/products/makeup",
         label: "menu-makeup",
       },
       {
-        id: 5,
+        id: 6,
         path: "/products/phy",
         label: "menu-phy",
       },
 
       {
-        id: 6,
+        id: 7,
         path: "/",
         label: "menu-treatment",
         subMenu: [

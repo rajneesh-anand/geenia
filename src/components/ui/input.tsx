@@ -1,5 +1,5 @@
-import cn from 'classnames';
-import React, { InputHTMLAttributes } from 'react';
+import cn from "classnames";
+import React, { InputHTMLAttributes } from "react";
 
 export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
@@ -10,28 +10,28 @@ export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
   type?: string;
   shadow?: boolean;
-  variant?: 'normal' | 'solid' | 'outline';
+  variant?: "normal" | "solid" | "outline";
 }
 const classes = {
-  root: 'py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border text-input text-13px lg:text-sm font-body rounded-md placeholder-body min-h-12 transition duration-200 ease-in-out',
+  root: "py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border text-input text-13px lg:text-sm font-body rounded-md placeholder-body min-h-12 transition duration-200 ease-in-out",
   normal:
-    'bg-gray-100 border-gray-300 focus:shadow focus:bg-white focus:border-skin-primary',
+    "bg-gray-100 border-gray-300 focus:shadow focus:bg-white focus:border-skin-primary",
   solid:
-    'bg-white border-skin-base focus:outline-none h-11 md:h-12 focus:border-skin-primary',
-  outline: 'border-gray-300 focus:text-skin-base',
-  shadow: 'focus:shadow',
+    "bg-white border-skin-base focus:outline-none h-11 md:h-12 focus:border-skin-primary",
+  outline: "border-gray-300 focus:text-skin-base",
+  shadow: "focus:shadow",
 };
 const Input = React.forwardRef<HTMLInputElement, Props>(
   (
     {
-      className = 'block',
+      className = "block",
       label,
       name,
       error,
       placeholder,
-      variant = 'normal',
+      variant = "normal",
       shadow = false,
-      type = 'text',
+      type = "text",
       inputClassName,
       ...rest
     },
@@ -40,9 +40,9 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
     const rootClassName = cn(
       classes.root,
       {
-        [classes.normal]: variant === 'normal',
-        [classes.solid]: variant === 'solid',
-        [classes.outline]: variant === 'outline',
+        [classes.normal]: variant === "normal",
+        [classes.solid]: variant === "solid",
+        [classes.outline]: variant === "outline",
       },
       {
         [classes.shadow]: shadow,
@@ -54,7 +54,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
         {label && (
           <label
             htmlFor={name}
-            className="block text-gray-600 font-semibold text-sm leading-none mb-3 cursor-pointer"
+            className="block text-gray-600 font-medium text-sm leading-none mb-3 cursor-pointer"
           >
             {label}
           </label>
@@ -69,7 +69,7 @@ const Input = React.forwardRef<HTMLInputElement, Props>(
           className={rootClassName}
           autoComplete="off"
           spellCheck="false"
-          aria-invalid={error ? 'true' : 'false'}
+          aria-invalid={error ? "true" : "false"}
           {...rest}
         />
         {error && <p className="my-2 text-13px text-skin-red">{error}</p>}

@@ -18,6 +18,7 @@ import { bannersGridHero as bannersHero } from "@framework/static/banner";
 import { elegantBannerGrid as banners } from "@framework/static/banner";
 import FeatureCarousel from "@components/common/featured-grid";
 import PopularProductWithBestDeals from "@components/product/popular-product-with-best-deals";
+import { HomeProductFilter } from "@components/home/products-filter";
 import CategoryGridBlock from "@components/common/category-grid-block";
 
 export default function Home() {
@@ -29,22 +30,21 @@ export default function Home() {
         path=""
       />
 
-      <Container>
-        <BannerHeroGrid
-          data={bannersHero}
-          className="my-3 md:my-4 lg:mt-1 lg:mb-5 xl:mb-6 "
-        />
-        <FeatureCarousel />
-        {/* <CategoryGridBlock /> */}
-        <BestSellerProductFeed />
+      <BannerHeroGrid
+        data={bannersHero}
+        className="my-3 md:my-4 lg:mt-1 lg:mb-5 xl:mb-6 "
+      />
+      <FeatureCarousel />
+      {/* <CategoryGridBlock /> */}
+      <HomeProductFilter />
+      {/* <BestSellerProductFeed /> */}
 
-        <PopularProductWithBestDeals />
-        <BannerGridTwo
-          data={banners}
-          className="mb-12 lg:mb-14 xl:mb-16 2xl:mb-20"
-          girdClassName="xl:gap-5 3xl:gap-7"
-        />
-      </Container>
+      {/* <PopularProductWithBestDeals />
+      <BannerGridTwo
+        data={banners}
+        className="mb-12 lg:mb-14 xl:mb-16 2xl:mb-20"
+        girdClassName="xl:gap-5 3xl:gap-7"
+      /> */}
 
       {/* <CollectionGrid
         headingPosition="center"

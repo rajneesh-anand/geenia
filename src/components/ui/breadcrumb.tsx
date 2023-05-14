@@ -5,6 +5,7 @@ import { useTranslation } from "next-i18next";
 import { IoChevronForward } from "react-icons/io5";
 import { IoHomeOutline } from "react-icons/io5";
 import { ROUTES } from "@utils/routes";
+import cn from "classnames";
 
 interface Props {
   children: any;
@@ -54,7 +55,7 @@ export const BreadcrumbItems = (props: any) => {
   }, []);
 
   return (
-    <div className="breadcrumb flex items-center">
+    <div className={cn("breadcrumb flex items-center")}>
       <ol className="flex items-center w-full overflow-hidden">{children}</ol>
     </div>
   );

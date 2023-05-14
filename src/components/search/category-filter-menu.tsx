@@ -14,7 +14,7 @@ function checkIsActive(arr: any, item: string) {
   return false;
 }
 function CategoryFilterMenuItem({
-  className = "bg-skin-two border-t border-skin-base first:border-t-0 px-3.5 2xl:px-4 py-3 xl:py-3.5 2xl:py-2.5 3xl:py-3",
+  className = "bg-skin-yellow-three border-t border-skin-base first:border-t-0 px-3.5 2xl:px-4 py-3 xl:py-3.5 2xl:py-2.5 3xl:py-3",
   item,
   depth = 0,
 }: any) {
@@ -46,29 +46,27 @@ function CategoryFilterMenuItem({
   };
 
   function onClick() {
-    if (Array.isArray(items) && !!items.length) {
-      // toggleCollapse();
-    } else {
-      const { category, ...restQuery } = query;
-      let currentFormState = selectedCategories.includes(slug)
-        ? selectedCategories.filter((i) => i !== slug)
-        : [...selectedCategories, slug];
-      router.push(
-        {
-          pathname,
-          query: {
-            ...restQuery,
-            ...(!!currentFormState.length
-              ? { category: currentFormState.join(",") }
-              : {}),
-          },
+    const { category, ...restQuery } = query;
+    console.log(category);
+    console.log(restQuery);
+    let currentFormState = selectedCategories.includes(slug)
+      ? selectedCategories.filter((i) => i !== slug)
+      : [...selectedCategories, slug];
+    router.push(
+      {
+        pathname,
+        query: {
+          ...restQuery,
+          ...(!!currentFormState.length
+            ? { category: currentFormState.join(",") }
+            : {}),
         },
-        undefined,
-        { scroll: false }
-      );
+      },
+      undefined,
+      { scroll: false }
+    );
 
-      displaySidebar && closeSidebar();
-    }
+    displaySidebar && closeSidebar();
   }
 
   let expandIcon;
@@ -107,7 +105,9 @@ function CategoryFilterMenuItem({
               />
             </div>
           )}
-          <span className="text-skin-base capitalize py-0.5">{name}</span>
+          <span className="text-slate-900 font-poppins uppercase py-0.5">
+            {name}
+          </span>
           {depth > 0 && (
             <span
               className={`w-[22px] h-[22px] text-13px flex items-center justify-center border-2 border-skin-four rounded-full ml-auto transition duration-500 ease-in-out group-hover:border-skin-yellow text-skin-inverted ${
@@ -123,7 +123,7 @@ function CategoryFilterMenuItem({
       </li>
       {Array.isArray(items) ? (
         <li>
-          <ul key="content" className="text-xs px-4">
+          <ul key="content" className="text-xs px-4 bg-white">
             {items?.map((currentItem: any) => {
               const childDepth = depth + 1;
               return (
