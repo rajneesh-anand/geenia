@@ -41,6 +41,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   locale,
 }) => {
   const { slug }: any = params;
+  // console.log(slug);
 
   const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_NODE_API}/product/bodycare/${slug}`

@@ -267,7 +267,7 @@ const ProductSingleDetails: React.FC<ProductProps> = ({ product }) => {
                       ? "visible opacity-100 top-full"
                       : "opacity-0 invisible top-[130%]"
                   }`}
-                  shareUrl={productUrl}
+                  shareUrl={productUrl!!}
                 />
               </div>
             </div>

@@ -20,7 +20,7 @@ import { getHash } from "next/dist/server/image-optimizer";
 import { SDK_VERSION } from "firebase/app";
 
 export default function OrderPage({ orders }: any) {
-  console.log(orders);
+  // console.log(orders);
   return (
     <>
       <Seo

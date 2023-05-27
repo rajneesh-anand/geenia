@@ -50,7 +50,6 @@ export default function ResetPassword() {
           setFlag(false);
         }
       } catch (error: any) {
-        console.log(error);
         setFlag(false);
         setStatus("failed");
         setErrorMsg(error.message);

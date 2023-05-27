@@ -5,7 +5,7 @@ import { ROUTES } from "@utils/routes";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
-  console.log(session?.accessToken);
+  // console.log(session?.accessToken);
   if (session) {
     return {
       redirect: {

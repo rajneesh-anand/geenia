@@ -10,6 +10,7 @@ import ProductCardLoader from "@components/ui/loaders/product-card-loader";
 import cn from "classnames";
 import { useRouter } from "next/router";
 import { getDirection } from "@utils/get-direction";
+import ProductCardRelated from "./product-cards/product-cards-related";
 
 interface ProductsCarouselProps {
   sectionHeading: string;
@@ -104,7 +105,7 @@ const ProductsCarousel: React.FC<ProductsCarouselProps> = ({
                     key={`${uniqueKey}-${idx}`}
                     className="px-1.5 md:px-2 xl:px-2.5 py-4"
                   >
-                    <ProductCard product={product} />
+                    <ProductCardRelated product={product} />
                   </SwiperSlide>
                 ))}
                 <SwiperSlide className="p-2.5 flex items-center justify-center">

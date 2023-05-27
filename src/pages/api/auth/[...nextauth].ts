@@ -35,10 +35,10 @@ export default (req: NextApiRequest, res: NextApiResponse) =>
               throw new Error("No user found with this email !");
             }
 
-            console.log(user);
+            // console.log(user);
             //Check hashed password with database password
-            const checkPassword = await compareSync(password, user.password);
-            console.log(checkPassword);
+            const checkPassword = await compareSync(password, user.password!);
+            // console.log(checkPassword);
 
             // // Password Not Matched
             if (!checkPassword) {
@@ -83,11 +83,11 @@ export default (req: NextApiRequest, res: NextApiResponse) =>
 
       encode: async ({ secret, token, maxAge }) => {
         const jwtClaims = {
-          state: token.state,
-          id: token.id,
-          name: token.name,
-          email: token.email,
-          image: token.image,
+          state: token?.state,
+          id: token?.id,
+          name: token?.name,
+          email: token?.email,
+          image: token?.image,
           iat: Date.now() / 1000,
           exp: Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60,
         };
@@ -141,7 +141,7 @@ export default (req: NextApiRequest, res: NextApiResponse) =>
         // store this in postgres
         if (isUserSignedIn) {
           token.id = user.id;
-          token.image = user.image ? user.image.toString() : null;
+          token.image = user.image ? user.image.toString() : undefined;
           token.name = user.name ? user.name.toString() : "";
           token.email = user.email ? user.email.toString() : "";
         }

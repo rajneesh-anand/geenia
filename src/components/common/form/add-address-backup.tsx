@@ -1,8 +1,8 @@
-import Input from '@components/ui/form/input';
-import Button from '@components/ui/button';
-import TextArea from '@components/ui/form/text-area';
-import { useForm } from 'react-hook-form';
-import { useModalState } from '@components/common/modal/modal.context';
+import Input from "@components/ui/form/input";
+import Button from "@components/ui/button";
+import TextArea from "@components/ui/form/text-area";
+import { useForm } from "react-hook-form";
+import { useModalState } from "@components/common/modal/modal.context";
 
 interface ContactFormValues {
   title: string;
@@ -22,21 +22,21 @@ const AddAddressForm: React.FC = () => {
     formState: { errors },
   } = useForm<ContactFormValues>({
     defaultValues: {
-      title: data || data?.title ? data?.title : '',
-      country: data || data?.address?.country ? data?.address?.country : '',
-      city: data || data?.address?.city ? data?.address?.city : '',
-      state: data || data?.address?.state ? data?.address?.state : '',
-      zip: data || data?.address?.zip ? data?.address?.zip : '',
+      title: data || data?.title ? data?.title : "",
+      country: data || data?.address?.country ? data?.address?.country : "",
+      city: data || data?.address?.city ? data?.address?.city : "",
+      state: data || data?.address?.state ? data?.address?.state : "",
+      zip: data || data?.address?.zip ? data?.address?.zip : "",
       street_address:
         data || data?.address?.street_address
           ? data?.address?.street_address
-          : '',
-      default: data || data?.default ? data?.default : '',
+          : "",
+      default: data || data?.default ? data?.default : "",
     },
   });
 
   function onSubmit(values: ContactFormValues) {
-    console.log(values, 'Add Address');
+    // console.log(values, 'Add Address');
   }
 
   return (
@@ -46,7 +46,7 @@ const AddAddressForm: React.FC = () => {
           <Input
             variant="solid"
             label="Title"
-            {...register('title', { required: 'Title Required' })}
+            {...register("title", { required: "Title Required" })}
             error={errors.title?.message}
           />
         </div>
@@ -54,25 +54,25 @@ const AddAddressForm: React.FC = () => {
           <Input
             variant="solid"
             label="Country"
-            {...register('country', { required: 'Country Required' })}
+            {...register("country", { required: "Country Required" })}
             error={errors.country?.message}
           />
           <Input
             variant="solid"
             label="City"
-            {...register('city', { required: 'City Required' })}
+            {...register("city", { required: "City Required" })}
             error={errors.city?.message}
           />
           <Input
             variant="solid"
             label="State"
-            {...register('state', { required: 'State Required' })}
+            {...register("state", { required: "State Required" })}
             error={errors.state?.message}
           />
           <Input
             variant="solid"
             label="ZIP"
-            {...register('zip', { required: 'ZIP Required' })}
+            {...register("zip", { required: "ZIP Required" })}
             error={errors.zip?.message}
           />
         </div>
@@ -81,7 +81,7 @@ const AddAddressForm: React.FC = () => {
             variant="normal"
             inputClassName="focus:border-2 focus:outline-none focus:border-skin-primary"
             label="Street Address"
-            {...register('street_address')}
+            {...register("street_address")}
           />
         </div>
         <div className="mb-6">
@@ -89,7 +89,7 @@ const AddAddressForm: React.FC = () => {
             id="default-type"
             type="checkbox"
             className="form-checkbox w-5 h-5 border border-gray-300 rounded cursor-pointer transition duration-500 ease-in-out focus:ring-offset-0 hover:border-heading focus:outline-none focus:ring-0 focus-visible:outline-none   focus:checked:bg-skin-primary hover:checked:bg-skin-primary checked:bg-skin-primary"
-            {...register('default', { required: 'Default type Required' })}
+            {...register("default", { required: "Default type Required" })}
           />
           <label htmlFor="default-type" className="align-middle ms-3">
             Set Default Address

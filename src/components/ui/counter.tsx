@@ -26,7 +26,7 @@ const Counter: React.FC<CounterProps> = ({
 }) => {
   const size = variant === "single" ? "22" : "14";
   const { t } = useTranslation("common");
-  console.log(value);
+  // console.log(value);
   return (
     <div
       className={cn(

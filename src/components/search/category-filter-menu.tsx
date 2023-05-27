@@ -47,8 +47,8 @@ function CategoryFilterMenuItem({
 
   function onClick() {
     const { category, ...restQuery } = query;
-    console.log(category);
-    console.log(restQuery);
+    // console.log(category);
+    // console.log(restQuery);
     let currentFormState = selectedCategories.includes(slug)
       ? selectedCategories.filter((i) => i !== slug)
       : [...selectedCategories, slug];

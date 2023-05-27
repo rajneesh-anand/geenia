@@ -11,7 +11,7 @@ const BestSellerProductFeed: FC<ProductFeedProps> = ({ className }) => {
   const { data, isLoading, error } = useBestSellerProductsQuery({
     limit: 50,
   });
-  console.log(data);
+  // console.log(data);
   return (
     <ProductsGridBlock
       sectionHeading="text-best-grocery-near-you"

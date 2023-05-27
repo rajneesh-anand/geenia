@@ -43,11 +43,11 @@ export const ProductGridTwo: FC<ProductGridProps> = ({
 
   useEffect(() => {
     const category = query?.category?.toString().split(",");
-    console.log(category);
+    // console.log(category);
 
     if (category) {
       const subCategoryResult = products.reduce((acc: any, item: any) => {
-        console.log(item.category);
+        // console.log(item.category);
         let subCategoryExist = JSON.parse(item.category).find((cat: any) =>
           category?.includes(cat.slug)
         );

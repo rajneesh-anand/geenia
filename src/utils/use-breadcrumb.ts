@@ -25,13 +25,18 @@ export default function useBreadcrumb() {
       const pathArray = linkPath.map((path, i) => {
         return {
           breadcrumb: path,
-          href: "/" + linkPath.slice(0, i + 1).join("/"),
+          href:
+            path === "products"
+              ? "/"
+              : "/" + linkPath.slice(0, i + 1).join("/"),
         };
       });
 
       setBreadcrumbs(pathArray);
     }
   }, [router]);
+
+  // console.log(breadcrumbs);
 
   return breadcrumbs;
 }

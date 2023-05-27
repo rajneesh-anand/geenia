@@ -11,9 +11,9 @@ type PaginatedProduct = {
 const fetchProducts = async ({ queryKey }: any) => {
   const [_key, _params] = queryKey;
   const category = _params?.category?.toString().split(",");
-  console.log(category);
+  // console.log(category);
   const { data } = await http.get(`/products/${_params.slug}`);
-  console.log(data);
+  // console.log(data);
   if (category) {
     const subCategoryResult = data?.products.reduce((acc: any, item: any) => {
       let subCategoryExist = JSON.parse(item.category).find((cat: any) =>
