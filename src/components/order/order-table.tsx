@@ -134,7 +134,7 @@ const OrderTable: React.FC<{ orders?: any }> = ({ orders }) => {
                         </h3>
                       </td>
                       <td className="p-2">
-                        {itm.shipping === "free" ? (
+                        {itm.shipping === "0" ? (
                           <h3 className="font-medium text-left text-[12px] lg:text-[14px] text-green-700">
                             Free Shipping{" "}
                           </h3>

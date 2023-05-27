@@ -14,7 +14,9 @@ import Router, { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import TextArea from "@components/ui/form/text-area";
 import { toast } from "react-toastify";
-import { shippingData } from "@data/shipping";
+import Select from "@components/ui/form/select/select";
+import { statesOptions } from "@data/constant";
+import Spinner from "@components/ui/loaders/spinner/spinner";
 
 interface FormValues {
   address: string;
@@ -23,6 +25,7 @@ interface FormValues {
   name: string;
   contact: string;
   description: string;
+  city: string;
 }
 
 type responseObeject = {
@@ -34,11 +37,10 @@ type responseObeject = {
 const CheckoutCard: React.FC = () => {
   const { t } = useTranslation("common");
   const [error, setError] = useState<string>("");
-  const [pinError, setPinError] = useState<boolean>(false);
   const [processingStatus, setProcessingStatus] = useState<boolean>(false);
-  const [shippingCharge, setShippingCharge] = useState<string>("0");
   const { items, total, isEmpty, resetCart } = useCart();
   const { data: session } = useSession();
+  const [state, setState] = useState(statesOptions[0]);
   const router = useRouter();
 
   const {
@@ -119,6 +121,8 @@ const CheckoutCard: React.FC = () => {
           mobile: formData.mobile,
           email: session?.user?.email,
           address: formData.address,
+          city: formData.city,
+          state: state.value,
           pincode: formData.pin,
           description: formData.description,
         }),
@@ -170,17 +174,6 @@ const CheckoutCard: React.FC = () => {
     paymentObject.open();
   };
 
-  // const handleShippingCharge = (e: ChangeEvent<HTMLInputElement>) => {
-  //   // const pincode = e.target.value;
-  //   // const ship = shippingData.find((item) => item.pincode === Number(pincode));
-
-  //   if (total > 500) {
-  //     setShippingCharge("0");
-  //   } else {
-  //     setShippingCharge("99");
-  //   }
-  // };
-
   const checkoutFooter = [
     {
       id: 1,
@@ -202,7 +195,7 @@ const CheckoutCard: React.FC = () => {
   return (
     <div>
       {isEmpty ? (
-        <h1>No Data</h1>
+        <Spinner />
       ) : (
         <form noValidate>
           <div className="grid grid-cols-1 md:grid-cols-6 md:gap-3 px-4 ">
@@ -214,7 +207,7 @@ const CheckoutCard: React.FC = () => {
                 <Input
                   type="text"
                   variant="outline"
-                  label="Enter your full name"
+                  label="Full Name"
                   placeholder="Enter your full name "
                   {...register("name", {
                     required: "You must provide your name !",
@@ -222,17 +215,6 @@ const CheckoutCard: React.FC = () => {
                   error={errors.name?.message}
                 />
               </div>
-
-              {/* <div className="w-full mb-3">
-              <Input
-                type="email"
-                variant="outline"
-                label="Enter your billing email"
-                placeholder="Enter your billing email"
-                {...register("email")}
-                error={errors.email?.message}
-              />
-            </div> */}
 
               <div className="w-full mb-3">
                 <TextArea
@@ -244,6 +226,30 @@ const CheckoutCard: React.FC = () => {
                   })}
                   error={errors.address?.message}
                 />
+              </div>
+              <div className="flex flex-col md:flex-row  ">
+                <div className="w-full md:w-1/2  mb-3">
+                  <Input
+                    type="text"
+                    variant="outline"
+                    label="City/Town"
+                    {...register("city", {
+                      required: "city is required !",
+                    })}
+                    error={errors.city?.message}
+                  />
+                </div>
+                <div className="w-full md:w-1/2  mb-3 lg:ml-[4px]">
+                  <Select
+                    id="state"
+                    label="Select State"
+                    defaultValue={state}
+                    className=""
+                    options={statesOptions}
+                    isSearchable={false}
+                    onChange={(value: any) => setState(value)}
+                  />
+                </div>
               </div>
 
               <div className="flex flex-col md:flex-row pb-8 ">

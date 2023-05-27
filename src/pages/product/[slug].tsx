@@ -14,9 +14,7 @@ import { useRouter } from "next/router";
 
 export default function ProductPage({ product }: any) {
   const { query, pathname } = useRouter();
-  console.log(query);
-  console.log(`first`);
-  console.log(pathname);
+
   return (
     <>
       {/* <Seo
