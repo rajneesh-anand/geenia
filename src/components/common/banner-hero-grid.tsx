@@ -3,51 +3,64 @@ import useWindowSize from "@utils/use-window-size";
 import Carousel from "@components/ui/carousel/carousel";
 import { SwiperSlide } from "@components/ui/carousel/slider";
 import Container from "@components/ui/container";
+import Link from "@components/ui/link";
 
-interface BannerProps {
-  data: any;
+interface Props {
+  heroBanner?: any;
   className?: string;
-  girdClassName?: string;
+  contentClassName?: string;
 }
 
-const BannerHeroGrid: React.FC<BannerProps> = ({
-  data,
-  className = "mb-3 md:mb-4 lg:mb-5 xl:mb-6",
-  girdClassName = "2xl:gap-5",
+const BannerHeroGrid: React.FC<Props> = ({
+  heroBanner,
+  className,
+  contentClassName = "py-24",
 }) => {
-  const { width } = useWindowSize();
   return (
-    <Container>
-      <div className={`heightFull ${className}`}>
-        {width! < 768 ? (
-          <Carousel
-            prevActivateId="banner-carousel-button-prev"
-            nextActivateId="banner-carousel-button-next"
-          >
-            {data?.map((banner: any) => (
-              <SwiperSlide key={`banner-key-${banner.id}`}>
-                <BannerCard banner={banner} effectActive={true} />
-              </SwiperSlide>
-            ))}
-          </Carousel>
-        ) : (
-          <div
-            className={`grid gap-4 2xl:gap-5 3xl:gap-7 grid-cols-1 sm:grid-cols-12 ${girdClassName}`}
-          >
-            {data?.map((banner: any) => (
-              <BannerCard
-                key={`banner--key${banner.id}`}
-                banner={banner}
-                effectActive={true}
-                className={`${
-                  banner.type === "small" ? "col-span-5" : "col-span-7"
-                }`}
+    <div>
+      <Carousel
+        pagination={{
+          clickable: true,
+        }}
+        navigation={false}
+        autoplay={true}
+      >
+        <SwiperSlide>
+          <Container>
+            <div className="relative h-[416px]  mt-2">
+              <img
+                src="/images/hero/banner-1.jpg"
+                className="shadow rounded-sm object-cover w-full"
+                alt="banner-one"
               />
-            ))}
-          </div>
-        )}
-      </div>
-    </Container>
+            </div>
+          </Container>
+        </SwiperSlide>
+        <SwiperSlide>
+          <Container>
+            <div className="relative h-[416px]  mt-2">
+              <img
+                src="/images/hero/banner-2.jpg"
+                className="shadow rounded-sm object-cover w-full"
+                alt="banner-two"
+              />
+            </div>
+          </Container>
+        </SwiperSlide>
+
+        <SwiperSlide>
+          <Container>
+            <div className="relative h-[416px]  mt-2">
+              <img
+                src="/images/hero/banner-5.png"
+                className="shadow rounded-sm object-cover w-full"
+                alt="banner-three"
+              />
+            </div>
+          </Container>
+        </SwiperSlide>
+      </Carousel>
+    </div>
   );
 };
 

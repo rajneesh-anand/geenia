@@ -55,7 +55,7 @@ const HomeProductCard: React.FC<ProductProps> = ({ product, className }) => {
   return (
     <article
       className={cn(
-        "flex flex-col group overflow-hidden bg-gray-100 rounded-md cursor-pointer transition-all duration-300  hover:shadow-cardHover relative h-full",
+        "flex flex-col group overflow-hidden bg-white rounded-md cursor-pointer transition-all duration-300  hover:shadow-cardHover relative h-full",
         className
       )}
       onClick={navigateToProductPage}
@@ -74,14 +74,14 @@ const HomeProductCard: React.FC<ProductProps> = ({ product, className }) => {
         </div>
         <div className="w-full h-full absolute top-0 pt-2.5 md:pt-3.5 px-3 md:px-4 lg:px-[18px] z-10 -mx-0.5 sm:-mx-1">
           {discount && (
-            <span className="text-[12px] font-semibold text-skin-inverted uppercase inline-block bg-skin-yellow-three rounded-md px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
+            <span className="text-[12px] font-semibold text-skin-inverted uppercase inline-block bg-skin-yellow-three rounded-sm px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
               {t("text-on-sale")}
             </span>
           )}
         </div>
         <div className="w-full h-full absolute  top-0 text-right pt-2.5 md:pt-3.5 px-3 md:px-4 lg:px-[18px] z-10 -mx-0.5 sm:-mx-1">
           {discount && (
-            <span className="text-[12px] font-semibold text-skin-inverted uppercase inline-block bg-indigo-600 rounded-md px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
+            <span className="text-[12px] font-semibold text-skin-inverted uppercase inline-block bg-indigo-600 rounded-sm px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
               {discount} {t("text-off")}
             </span>
           )}

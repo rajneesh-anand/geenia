@@ -31,10 +31,10 @@ export default function Home() {
       />
 
       <BannerHeroGrid
-        data={bannersHero}
+        heroBanner={bannersHero}
         className="my-3 md:my-4 lg:mt-1 lg:mb-5 xl:mb-6 "
       />
-      <FeatureCarousel />
+      {/* <FeatureCarousel /> */}
       {/* <CategoryGridBlock /> */}
       <HomeProductFilter />
       {/* <BestSellerProductFeed /> */}
