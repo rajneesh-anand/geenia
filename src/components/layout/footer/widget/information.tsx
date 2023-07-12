@@ -44,7 +44,7 @@ const Information: React.FC<Props> = ({ className, socials }) => {
             </Link>
           ))}
           <div className="border-l-2 border-l-gray-400 px-2 ml-2">
-            <p className="font-medium">+91-96547-74846</p>
+            <p className="font-medium">+91-8448335399</p>
           </div>
         </div>
       </div>
