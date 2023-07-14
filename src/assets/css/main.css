@@ -81,7 +81,7 @@
 
 @layer components {
   .sticky-header.is-scrolling .navbar {
-    @apply fixed top-0 w-full  z-30 transition duration-200 ease-in-out bg-white;
+    @apply fixed top-0 w-full  z-30 transition duration-200 ease-in-out bg-[#fff7ec];
   }
 
   .menuItem > a::before {
@@ -109,7 +109,7 @@
 
   @media (min-width: 1280px) {
     .subMenu {
-      width: 240px;
+      width: 320px;
     }
   }
 

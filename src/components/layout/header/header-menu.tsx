@@ -27,7 +27,7 @@ const HeaderMenu: React.FC<MenuProps> = ({ data, className }) => {
         >
           <Link
             href={item.path}
-            className="inline-flex uppercase font-nunito font-semibold items-center text-sm lg:text-12px text-sky-800 py-2  relative group-hover:text-sky-900"
+            className="inline-flex uppercase font-nunito font-semibold items-center text-[12px] text-sky-800 py-2  relative group-hover:text-sky-900"
           >
             {t(item.label)}
             {(item?.columns || item.subMenu) && (
@@ -38,8 +38,20 @@ const HeaderMenu: React.FC<MenuProps> = ({ data, className }) => {
           </Link>
 
           {item?.subMenu && Array.isArray(item.subMenu) && (
-            <div className="subMenu shadow-dropDown bg-skin-fill z-30 absolute start-0 opacity-0 group-hover:opacity-100">
-              <ul className="text-body text-sm py-5">
+            <div className="subMenu shadow-dropDown z-30 absolute start-0 bg-gray-100 opacity-100 rounded-md">
+              <div className="grid grid-cols-2 gap-4 py-8">
+                {item.subMenu.map((menu: any, index: number) => {
+                  return (
+                    <Link
+                      href={menu.path}
+                      className="pt-2 pl-4 text-[12.5px] font-medium hover:font-semibold hover:text-rose-700"
+                    >
+                      {t(menu.label)}
+                    </Link>
+                  );
+                })}
+              </div>
+              {/* <ul className="text-body text-sm py-5">
                 {item.subMenu.map((menu: any, index: number) => {
                   const dept: number = 1;
                   const menuName: string = `sidebar-menu-${dept}-${index}`;
@@ -54,7 +66,7 @@ const HeaderMenu: React.FC<MenuProps> = ({ data, className }) => {
                     />
                   );
                 })}
-              </ul>
+              </ul> */}
             </div>
           )}
         </div>

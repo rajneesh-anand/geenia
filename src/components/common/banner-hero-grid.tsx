@@ -29,18 +29,7 @@ const BannerHeroGrid: React.FC<Props> = ({
           <Container>
             <div className="relative h-[416px]  mt-2">
               <img
-                src="/images/hero/banner-1.jpg"
-                className="shadow rounded-sm object-cover w-full"
-                alt="banner-one"
-              />
-            </div>
-          </Container>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Container>
-            <div className="relative h-[416px]  mt-2">
-              <img
-                src="/images/hero/banner-2.jpg"
+                src="/images/hero/2.jpg"
                 className="shadow rounded-sm object-cover w-full"
                 alt="banner-two"
               />
@@ -52,9 +41,20 @@ const BannerHeroGrid: React.FC<Props> = ({
           <Container>
             <div className="relative h-[416px]  mt-2">
               <img
-                src="/images/hero/banner-5.png"
+                src="/images/hero/1.jpg"
                 className="shadow rounded-sm object-cover w-full"
                 alt="banner-three"
+              />
+            </div>
+          </Container>
+        </SwiperSlide>
+        <SwiperSlide>
+          <Container>
+            <div className="relative h-[416px]  mt-2">
+              <img
+                src="/images/hero/banner-1.jpg"
+                className="shadow rounded-sm object-cover w-full"
+                alt="banner-one"
               />
             </div>
           </Container>

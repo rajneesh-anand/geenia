@@ -31,15 +31,15 @@ const Header: React.FC = () => {
   return (
     <header
       ref={siteHeaderRef}
-      className="sticky-header lg:relative w-full h-auto"
+      className="sticky-header lg:relative w-full h-auto bg-[#fff7ec]"
     >
-      <Container className="navbar flex items-center justify-center lg:justify-between py-2 lg:py-0 border-b border-slate-200">
+      <Container className="navbar flex items-center  py-2 lg:py-0 border-b border-slate-200">
         <Logo />
         <HeaderMenu
           data={site_header.menu}
-          className="flex transition-all duration-200 ease-in-out"
+          className="flex transition-all duration-200 ease-in-out ml-4"
         />
-        <div className="hidden lg:flex">
+        <div className="hidden lg:flex ml-auto">
           <CartButton className="flex mr-4" hideLabel={true} />
           <AuthMenu
             btnProps={{

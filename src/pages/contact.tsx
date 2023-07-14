@@ -45,9 +45,9 @@ export default function ContactUsPage() {
                   </div>
                 </div>
                 <div className="grow ml-6">
-                  <p className="font-bold mb-1">Technical support</p>
-                  <p className="text-gray-500">support@example.com</p>
-                  <p className="text-gray-500">+1 234-567-89</p>
+                  <p className="font-bold mb-1">Customer Support</p>
+                  <p className="text-gray-500">support@geenia.in</p>
+                  <p className="text-gray-500">+91-8448335399</p>
                 </div>
               </div>
             </div>
@@ -73,14 +73,14 @@ export default function ContactUsPage() {
                   </div>
                 </div>
                 <div className="grow ml-6">
-                  <p className="font-bold mb-1">Sales questions</p>
-                  <p className="text-gray-500">sales@example.com</p>
-                  <p className="text-gray-500">+1 234-567-89</p>
+                  <p className="font-bold mb-1">Sales Questions</p>
+                  <p className="text-gray-500">sales@geenia.in</p>
+                  <p className="text-gray-500">+91-8448335399</p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex flex-col md:flex-row justify-between items-center">
+          {/* <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-12 md:mb-0 grow-0 shrink-0 basis-auto w-full md:w-6/12 px-3 lg:px-6">
               <div className="flex align-start">
                 <div className="shrink-0">
@@ -137,7 +137,7 @@ export default function ContactUsPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </Container>
     </>

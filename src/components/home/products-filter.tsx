@@ -49,28 +49,28 @@ export const HomeProductFilter = () => {
           <button
             type="button"
             onClick={() => setActiveButton("best")}
-            className="text-white bg-[#961fa7] hover:bg-[#7d188c] focus:ring-2 focus:ring-[#431d48] font-medium rounded-sm text-lg px-8 py-2 text-center inline-flex items-center  mr-2 mb-2"
+            className="text-white bg-[#961fa7] hover:bg-[#7d188c] focus:ring-2 focus:ring-[#7d188c] font-medium rounded-sm text-lg px-8 py-2 text-center inline-flex items-center  mr-2 mb-2"
           >
             Best Seller
           </button>
           <button
             type="button"
             onClick={() => setActiveButton("discount")}
-            className="text-white bg-[#961fa7] hover:bg-[#7d188c] focus:ring-2 focus:ring-[#431d48] font-medium rounded-sm text-lg px-8 py-2 text-center inline-flex items-center  mr-2 mb-2"
+            className="text-white bg-[#961fa7] hover:bg-[#7d188c] focus:ring-2 focus:ring-[#7d188c] font-medium rounded-sm text-lg px-8 py-2 text-center inline-flex items-center  mr-2 mb-2"
           >
-            Upto 35% Discount
+            Upto 50% Discount
           </button>
           <button
             type="button"
             onClick={() => setActiveButton("deals")}
-            className="text-white bg-[#961fa7] hover:bg-[#7d188c] focus:ring-2 focus:ring-[#431d48] font-medium rounded-sm text-lg px-8 py-2 text-center inline-flex items-center  mr-2 mb-2"
+            className="text-white bg-[#961fa7] hover:bg-[#7d188c] focus:ring-2 focus:ring-[#7d188c] font-medium rounded-sm text-lg px-8 py-2 text-center inline-flex items-center  mr-2 mb-2"
           >
-            Deal of the day
+            Today's Deal
           </button>
           <button
             type="button"
             onClick={() => setActiveButton("launch")}
-            className="text-white bg-[#961fa7] hover:bg-[#7d188c] focus:ring-2 focus:ring-[#431d48] font-medium rounded-sm text-lg px-8 py-2 text-center inline-flex items-center  mr-2 mb-2"
+            className="text-white bg-[#961fa7] hover:bg-[#7d188c] focus:ring-2 focus:ring-[#7d188c] font-medium rounded-sm text-lg px-8 py-2 text-center inline-flex items-center  mr-2 mb-2"
           >
             {" "}
             New Arrival
