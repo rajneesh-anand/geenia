@@ -6,6 +6,7 @@ import { IoChevronForward } from "react-icons/io5";
 import { IoHomeOutline } from "react-icons/io5";
 import { ROUTES } from "@utils/routes";
 import cn from "classnames";
+import Container from "./container";
 
 interface Props {
   children: any;
@@ -67,32 +68,34 @@ const Breadcrumb: React.FC<{ separator?: string }> = ({
   ),
 }) => {
   const breadcrumbs = useBreadcrumb();
-  const { t } = useTranslation("common");
+
   ROUTES;
   return (
-    <BreadcrumbItems separator={separator}>
-      <ActiveLink
-        href={ROUTES.HOME}
-        activeClassName="font-semibold text-heading"
-      >
-        <a className="inline-flex items-center">
-          {/* <IoHomeOutline className="me-1.5 text-skin-base text-15px" /> */}
-          {t("breadcrumb-home")}
-        </a>
-      </ActiveLink>
-
-      {breadcrumbs?.map((breadcrumb: any) => (
+    <Container className="my-2">
+      <BreadcrumbItems separator={separator}>
         <ActiveLink
-          href={breadcrumb.href}
-          activeClassName="font-semibold text-heading"
-          key={breadcrumb.href}
+          href={ROUTES.HOME}
+          activeClassName="font-semibold text-sm text-slate-600"
         >
-          <a className="capitalize">
-            {convertBreadcrumbTitle(breadcrumb.breadcrumb)}
+          <a className="inline-flex items-center">
+            {/* <IoHomeOutline className="me-1.5 text-skin-base text-15px" /> */}
+            Home
           </a>
         </ActiveLink>
-      ))}
-    </BreadcrumbItems>
+
+        {breadcrumbs?.map((breadcrumb: any) => (
+          <ActiveLink
+            href={breadcrumb.href}
+            activeClassName="font-semibold text-heading"
+            key={breadcrumb.href}
+          >
+            <a className="capitalize">
+              {convertBreadcrumbTitle(breadcrumb.breadcrumb)}
+            </a>
+          </ActiveLink>
+        ))}
+      </BreadcrumbItems>
+    </Container>
   );
 };
 

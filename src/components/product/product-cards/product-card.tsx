@@ -21,7 +21,6 @@ interface ProductProps {
 function RenderPopupOrAddToCart({ data }: { data: Product }) {
   const { t } = useTranslation("common");
   const { id, quantity_in_stock } = data ?? {};
-
   const { width } = useWindowSize();
   const { openModal } = useModalAction();
   const { isInCart, isInStock } = useCart();
@@ -38,11 +37,10 @@ function RenderPopupOrAddToCart({ data }: { data: Product }) {
 
   return <AddToCart data={data} />;
 }
-const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
+const ProductCard: React.FC<ProductProps> = ({ product }) => {
   const router = useRouter();
-  const { name, image, unit, slug } = product ?? {};
+  const { name, image, unit, slug, new_arrival } = product ?? {};
 
-  const { t } = useTranslation("common");
   const { price, basePrice, discount } = usePrice({
     amount: Number(product?.sale_price),
     baseAmount: Number(product?.price),
@@ -53,63 +51,118 @@ const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
     router.push(`/${router.query.slug}/${slug}`);
   }
 
+  // return (
+  //   <article
+  //     className={cn(
+  //       "flex flex-col group overflow-hidden bg-white rounded-md cursor-pointer transition-all duration-300  hover:shadow-cardHover relative h-full",
+  //       className
+  //     )}
+  //     onClick={navigateToProductPage}
+  //     title={name}
+  //   >
+  //     <div className="relative flex-shrink-0">
+  //       <div className="flex overflow-hidden max-w-[230px] mx-auto transition duration-200 ease-in-out transform group-hover:scale-105 relative">
+  //         <img
+  //           src={image ?? productPlaceholder}
+  //           alt={name || "Product Image"}
+  //           width={230}
+  //           height={300}
+  //           // quality={100}
+  //           className="object-cover bg-skin-thumbnail"
+  //         />
+  //       </div>
+  //       <div className="w-full h-full absolute top-0 pt-2.5 md:pt-3.5 px-3 md:px-4 lg:px-[18px] z-10 -mx-0.5 sm:-mx-1">
+  //         {discount && (
+  //           <span className="text-[12px] font-semibold text-skin-inverted uppercase inline-block bg-skin-yellow-three rounded-md px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
+  //             {t("text-on-sale")}
+  //           </span>
+  //         )}
+  //       </div>
+  //       <div className="w-full h-full absolute  top-0 text-right pt-2.5 md:pt-3.5 px-3 md:px-4 lg:px-[18px] z-10 -mx-0.5 sm:-mx-1">
+  //         {discount && (
+  //           <span className="text-[12px] font-semibold text-skin-inverted uppercase inline-block bg-indigo-600 rounded-md px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
+  //             {discount} {t("text-off")}
+  //           </span>
+  //         )}
+  //       </div>
+  //     </div>
+
+  //     <div className="flex flex-col px-3 md:px-4 lg:px-[18px] pb-5 lg:pb-6 lg:pt-1.5 h-full">
+  //       <div className="text-center">
+  //         <h3 className="text-skin-base min-h-[44px] text-[11px]  lg:text-[15px] font-normal leading-5 sm:leading-6 mb-1.5">
+  //           {name}
+  //         </h3>
+  //       </div>
+  //       <Divider className="bg-[#5c0f8b] h-[2px]" />
+  //       <div className="flex items-center justify-center py-2">
+  //         {basePrice === price ? (
+  //           <p className="text-[20px] text-skin-base ">{price}</p>
+  //         ) : (
+  //           <>
+  //             <del className="text-[12px] text-skin-base text-opacity-70">
+  //               {basePrice}
+  //             </del>
+  //             <p className="text-[20px] ml-1 text-skin-base ">{price}</p>
+  //           </>
+  //         )}
+  //       </div>
+
+  //       <div className="mt-1">
+  //         <RenderPopupOrAddToCart data={product} />
+  //       </div>
+  //     </div>
+  //   </article>
+  // );
   return (
     <article
-      className={cn(
-        "flex flex-col group overflow-hidden bg-white rounded-md cursor-pointer transition-all duration-300  hover:shadow-cardHover relative h-full",
-        className
-      )}
+      className="relative mt-2 w-full max-w-xs overflow-hidden rounded-lg border"
       onClick={navigateToProductPage}
       title={name}
     >
-      <div className="relative flex-shrink-0">
-        <div className="flex overflow-hidden max-w-[230px] mx-auto transition duration-200 ease-in-out transform group-hover:scale-105 relative">
-          <img
-            src={image ?? productPlaceholder}
-            alt={name || "Product Image"}
-            width={230}
-            height={300}
-            // quality={100}
-            className="object-cover bg-skin-thumbnail"
-          />
-        </div>
-        <div className="w-full h-full absolute top-0 pt-2.5 md:pt-3.5 px-3 md:px-4 lg:px-[18px] z-10 -mx-0.5 sm:-mx-1">
-          {discount && (
-            <span className="text-[12px] font-semibold text-skin-inverted uppercase inline-block bg-skin-yellow-three rounded-md px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
-              {t("text-on-sale")}
-            </span>
-          )}
-        </div>
-        <div className="w-full h-full absolute  top-0 text-right pt-2.5 md:pt-3.5 px-3 md:px-4 lg:px-[18px] z-10 -mx-0.5 sm:-mx-1">
-          {discount && (
-            <span className="text-[12px] font-semibold text-skin-inverted uppercase inline-block bg-indigo-600 rounded-md px-2.5 pt-1 pb-[3px] mx-0.5 sm:mx-1">
-              {discount} {t("text-off")}
-            </span>
-          )}
-        </div>
-      </div>
+      <img
+        src={image ?? productPlaceholder}
+        alt={name || "Product Image"}
+        className="h-60 rounded-t-lg object-cover"
+      />
 
-      <div className="flex flex-col px-3 md:px-4 lg:px-[18px] pb-5 lg:pb-6 lg:pt-1.5 h-full">
-        <div className="text-center">
-          <h3 className="text-skin-base min-h-[44px] text-[11px]  lg:text-[15px] font-normal leading-5 sm:leading-6 mb-1.5">
-            {name}
-          </h3>
+      {discount && (
+        <span className="absolute top-0 left-0 w-28 translate-y-4 -translate-x-6 -rotate-45 bg-[#800080] text-center text-sm text-white">
+          Sale
+        </span>
+      )}
+
+      {new_arrival === "yes" && (
+        <div className="absolute right-0 top-0 h-16 w-16">
+          <span className="absolute left-[-34px] top-[32px] w-[170px] transform rotate-90 bg-yellow-500 text-center text-white font-medium py-1">
+            New Arrival
+          </span>
         </div>
-        <Divider className="bg-[#5c0f8b] h-[2px]" />
-        <div className="flex items-center justify-center py-2">
+      )}
+
+      <div className="mt-4 px-5 pb-5">
+        <h5 className="text-md font-medium tracking-tight text-slate-700">
+          {name}
+        </h5>
+
+        <Divider className="bg-skin-yellow-three h-[2px] mt-4 mb-2" />
+
+        <div className="flex items-center justify-center">
           {basePrice === price ? (
-            <p className="text-[20px] text-skin-base ">{price}</p>
+            <span className="text-2xl font-semibold text-slate-900">
+              {price}
+            </span>
           ) : (
-            <>
-              <del className="text-[12px] text-skin-base text-opacity-70">
+            <p>
+              <span className="text-2xl font-semibold text-slate-900 mr-2">
+                {price}
+              </span>
+              <span className="text-sm text-slate-900 line-through">
                 {basePrice}
-              </del>
-              <p className="text-[20px] ml-1 text-skin-base ">{price}</p>
-            </>
+              </span>
+            </p>
           )}
         </div>
-
-        <div className="mt-1">
+        <div className="flex justify-center mt-2">
           <RenderPopupOrAddToCart data={product} />
         </div>
       </div>

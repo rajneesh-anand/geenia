@@ -56,6 +56,7 @@ module.exports = {
           four: withOpacity("--color-fill-four"),
           secondary: withOpacity("--color-fill-secondary"),
           purple: withOpacity("--color-purple"),
+          "purple-dark": withOpacity("--color-purple-dark"),
           highlighted: withOpacity("--color-highlighted"),
           "dropdown-hover": withOpacity("--color-fill-dropdown-hover"),
           "button-secondary": withOpacity("--color-button-secondary"),

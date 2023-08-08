@@ -6,6 +6,7 @@ export interface Product {
   image: string;
   sale_price: string;
   category: string;
+  new_arrival: string;
 }
 
 export const launchProducts: Product[] = [
@@ -17,6 +18,7 @@ export const launchProducts: Product[] = [
     image: "https://www.dropbox.com/s/oj5tmishaac94ne/0001.jpg?raw=1",
     price: "499",
     sale_price: "250",
+    new_arrival: "yes",
   },
 
   {
@@ -27,6 +29,7 @@ export const launchProducts: Product[] = [
     image: "https://www.dropbox.com/s/eh7gbzw13ke4qy0/0003.jpg?raw=1",
     price: "499",
     sale_price: "250",
+    new_arrival: "yes",
   },
   {
     id: "3",
@@ -36,6 +39,7 @@ export const launchProducts: Product[] = [
     image: "https://www.dropbox.com/s/of6m1lkgm6da7rn/0005.jpg?raw=1",
     price: "499",
     sale_price: "250",
+    new_arrival: "yes",
   },
   {
     id: "4",
@@ -45,5 +49,6 @@ export const launchProducts: Product[] = [
     image: "https://www.dropbox.com/s/363xigqpevlnv32/0007.jpg?raw=1",
     price: "499",
     sale_price: "250",
+    new_arrival: "yes",
   },
 ];

@@ -19,7 +19,7 @@ export default function ProductPage({ product }: any) {
       <Seo
         title={product.name}
         description={product.description}
-        path={`bodycare/${product.slug}`}
+        path={`fragrance/${product.slug}`}
       />
       <Divider />
       <div className="pt-6 lg:pt-7">

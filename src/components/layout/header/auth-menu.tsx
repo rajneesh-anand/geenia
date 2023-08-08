@@ -1,7 +1,5 @@
 import Link from "@components/ui/link";
 import React from "react";
-import { FiChevronDown } from "react-icons/fi";
-import { FaUserCircle } from "react-icons/fa";
 import { useSession, signOut } from "next-auth/react";
 import { Menu, Transition } from "@headlessui/react";
 
@@ -16,15 +14,16 @@ const AuthMenu: React.FC<Props> = ({ btnProps }) => {
       as="div"
       className="relative inline-flex ml-auto border px-[8px] py-[4px] rounded-sm border-purple-700"
     >
-      <Menu.Button className="inline-flex justify-center items-center group">
+      <Menu.Button className="text-sm font-nunito uppercase rounded-full border-2 border-[#d6934c] text-slate-900 text-opacity-90 font-semibold focus:outline-none ">
         <img
-          className="rounded-full"
+          className="rounded-full border-[#d6934c]"
           src={session?.user?.image ?? "/images/placeholder/avatar.svg"}
-          width="24"
-          height="24"
+          width="28"
+          height="28"
           alt={session?.user?.name}
         />
-        <div className="flex items-center truncate">
+
+        {/* <div className="flex items-center truncate">
           <span className="truncate ml-2 text-red-900 uppercase text-[12px] font-medium group-hover:text-gray-800">
             My Account
           </span>
@@ -34,7 +33,7 @@ const AuthMenu: React.FC<Props> = ({ btnProps }) => {
           >
             <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
           </svg>
-        </div>
+        </div> */}
       </Menu.Button>
 
       <Transition
@@ -83,11 +82,17 @@ const AuthMenu: React.FC<Props> = ({ btnProps }) => {
     </Menu>
   ) : (
     <button
-      className="text-sm font-nunito uppercase lg:text-[12.5px] text-slate-900 text-opacity-90 font-semibold focus:outline-none ml-2 px-3 py-1.5 border rounded-sm border-emerald-700"
+      className="text-sm font-nunito uppercase rounded-full border-2 border-[#d6934c] text-slate-900 text-opacity-90 font-semibold focus:outline-none "
       aria-label="Authentication"
       {...btnProps}
     >
-      Sign In
+      <img
+        className="rounded-full border-[#d6934c]"
+        src="/images/placeholder/avatar.svg"
+        width="28"
+        height="28"
+        alt="sign in"
+      />
     </button>
   );
 };

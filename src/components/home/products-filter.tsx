@@ -18,6 +18,7 @@ import { launchProducts } from "@data/launch";
 import { discountProducts } from "@data/discount";
 import { bestSellerProducts } from "@data/best";
 import Container from "@components/ui/container";
+import ProductCardCategoryWise from "@components/product/product-cards/product-card-category-page";
 
 type Product = {
   id: string;
@@ -45,7 +46,7 @@ export const HomeProductFilter = () => {
           </span>
         </div>
 
-        <div className="flex items-center justify-center py-8">
+        <div className="flex items-center justify-center flex-wrap py-8">
           <button
             type="button"
             onClick={() => setActiveButton("best")}
@@ -77,12 +78,12 @@ export const HomeProductFilter = () => {
           </button>
         </div>
       </Container>
-      <div className="bg-[#EBE0F0] py-8 mb-8">
+      <div className="bg-[#EBE0F0] py-8 ">
         {activeButton === "best" && (
           <Container>
             <div className="grid grid-cols-2 md:grid-cols-3  xl:grid-cols-4 3xl:grid-cols-5 gap-3 pb-4">
               {bestSellerProducts?.map((item: Product, idx: any) => (
-                <ProductCard key={idx} product={item} />
+                <ProductCardCategoryWise key={idx} product={item} />
               ))}
             </div>
           </Container>
@@ -92,7 +93,7 @@ export const HomeProductFilter = () => {
           <Container>
             <div className="grid grid-cols-2 md:grid-cols-3  xl:grid-cols-4 3xl:grid-cols-5 gap-3 pb-4">
               {discountProducts?.map((item: Product, idx: any) => (
-                <ProductCard key={idx} product={item} />
+                <ProductCardCategoryWise key={idx} product={item} />
               ))}
             </div>
           </Container>
@@ -102,7 +103,7 @@ export const HomeProductFilter = () => {
           <Container>
             <div className="grid grid-cols-2 md:grid-cols-3  xl:grid-cols-4 3xl:grid-cols-5 gap-3 pb-4">
               {dealsProducts?.map((item: Product, idx: any) => (
-                <ProductCard key={idx} product={item} />
+                <ProductCardCategoryWise key={idx} product={item} />
               ))}
             </div>
           </Container>
@@ -111,7 +112,7 @@ export const HomeProductFilter = () => {
           <Container>
             <div className="grid grid-cols-2 md:grid-cols-3  xl:grid-cols-4 3xl:grid-cols-5 gap-3 pb-4">
               {launchProducts?.map((item: Product, idx: any) => (
-                <ProductCard key={idx} product={item} />
+                <ProductCardCategoryWise key={idx} product={item} />
               ))}
             </div>
           </Container>

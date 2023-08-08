@@ -1,45 +1,68 @@
 import { QueryOptionsType, Product } from "@framework/types";
 import { API_ENDPOINTS } from "@framework/utils/api-endpoints";
 import http from "@framework/utils/http";
-import shuffle from "lodash/shuffle";
 import { useInfiniteQuery } from "react-query";
 
 type PaginatedProduct = {
   data: Product[];
   paginatorInfo: any;
+  totalItems?: string | number;
 };
 const fetchProducts = async ({ queryKey }: any) => {
   const [_key, _params] = queryKey;
   const category = _params?.category?.toString().split(",");
-  // console.log(category);
-  const { data } = await http.get(`/products/${_params.slug}`);
-  // console.log(data);
-  if (category) {
-    const subCategoryResult = data?.products.reduce((acc: any, item: any) => {
-      let subCategoryExist = JSON.parse(item.category).find((cat: any) =>
-        category?.includes(cat.slug)
-      );
+  const { data } = await http.get(`/products/${_params.slug}?page=1&limit=12`);
 
-      if (subCategoryExist) {
-        acc.push(item);
-      }
-      return acc;
-    }, []);
+  return {
+    data: data?.products as Product[],
+    totalItems: data?.totalItems,
+    paginatorInfo: {
+      nextPageUrl: "",
+    },
+  };
 
-    return {
-      data: subCategoryResult as Product[],
-      paginatorInfo: {
-        nextPageUrl: "",
-      },
-    };
-  } else {
-    return {
-      data: data?.products as Product[],
-      paginatorInfo: {
-        nextPageUrl: "",
-      },
-    };
-  }
+  // if (category) {
+  //   const subCategoryResult = data?.products.reduce((acc: any, item: any) => {
+  //     let subCategoryExist = JSON.parse(item.category).find((cat: any) =>
+  //       category?.includes(cat.slug)
+  //     );
+
+  //     if (subCategoryExist) {
+  //       acc.push(item);
+  //     }
+  //     return acc;
+  //   }, []);
+
+  //   return {
+  //     data: subCategoryResult as Product[],
+  //     paginatorInfo: {
+  //       nextPageUrl: "",
+  //     },
+  //   };
+  // } else {
+  //   return {
+  //     data: data?.products as Product[],
+  //     paginatorInfo: {
+  //       nextPageUrl: "",
+  //     },
+  //   };
+  // }
+};
+
+const fetchProductsCategoriesWise = async ({ queryKey }: any) => {
+  const { pathname, query } = queryKey[1];
+
+  const { data } = await http.get(
+    `${pathname}?category=${query.categorgy}&page=1&limit=12`
+  );
+
+  return {
+    data: data?.products as Product[],
+    totalItems: data?.totalItems,
+    paginatorInfo: {
+      nextPageUrl: "",
+    },
+  };
 };
 
 const useProductsQuery = (options: QueryOptionsType) => {
@@ -52,4 +75,19 @@ const useProductsQuery = (options: QueryOptionsType) => {
   );
 };
 
-export { useProductsQuery, fetchProducts };
+const useProductsQueryCategoriesWise = (options: QueryOptionsType) => {
+  return useInfiniteQuery<PaginatedProduct, Error>(
+    [API_ENDPOINTS.PRODUCT, options],
+    fetchProductsCategoriesWise,
+    {
+      getNextPageParam: ({ paginatorInfo }) => paginatorInfo.nextPageUrl,
+    }
+  );
+};
+
+export {
+  useProductsQuery,
+  fetchProducts,
+  useProductsQueryCategoriesWise,
+  fetchProductsCategoriesWise,
+};

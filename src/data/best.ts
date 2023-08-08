@@ -6,6 +6,7 @@ export interface Product {
   category: string;
   price: string;
   sale_price: string;
+  new_arrival: string;
 }
 
 export const bestSellerProducts: Product[] = [
@@ -17,6 +18,7 @@ export const bestSellerProducts: Product[] = [
     image: "https://www.dropbox.com/s/sxoyo7cdlwuybu5/1.jpg?raw=1",
     price: "550",
     sale_price: "499",
+    new_arrival: "",
   },
   {
     id: "2",
@@ -26,6 +28,7 @@ export const bestSellerProducts: Product[] = [
     image: "https://www.dropbox.com/s/himmp42opdz65k4/1.jpg?raw=1",
     price: "599",
     sale_price: "550",
+    new_arrival: "",
   },
   {
     id: "3",
@@ -35,6 +38,7 @@ export const bestSellerProducts: Product[] = [
     image: "https://www.dropbox.com/s/txyket9e2mcnnpm/1.jpg?raw=1",
     price: "450",
     sale_price: "399",
+    new_arrival: "",
   },
   {
     id: "4",
@@ -44,6 +48,7 @@ export const bestSellerProducts: Product[] = [
     image: "https://www.dropbox.com/s/wsllq1gzymmlaph/1.jpg?raw=1",
     price: "575",
     sale_price: "520",
+    new_arrival: "",
   },
   {
     id: "5",
@@ -53,5 +58,6 @@ export const bestSellerProducts: Product[] = [
     image: "https://www.dropbox.com/s/bqo5xrrai714mtw/1.jpg?raw=1",
     price: "550",
     sale_price: "499",
+    new_arrival: "",
   },
 ];

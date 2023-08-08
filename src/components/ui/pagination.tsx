@@ -1,8 +1,18 @@
 import RCPagination, { PaginationProps } from "rc-pagination";
-// import "rc-pagination/index.css";
+import { ArrowNext } from "@components/icons/arrow-next";
+import { ArrowPrev } from "@components/icons/arrow-prev";
+import localeInfo from "@components/locale/en_US";
+import "rc-pagination/assets/index.css";
 
 const Pagination: React.FC<PaginationProps> = (props) => {
-  return <RCPagination {...props} />;
+  return (
+    <RCPagination
+      locale={localeInfo}
+      nextIcon={<ArrowNext />}
+      prevIcon={<ArrowPrev />}
+      {...props}
+    />
+  );
 };
 
 export default Pagination;

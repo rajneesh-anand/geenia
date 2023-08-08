@@ -6,6 +6,7 @@ export interface Product {
   image: string;
   sale_price: string;
   category: string;
+  new_arrival: string;
 }
 
 export const dealsProducts: Product[] = [
@@ -18,6 +19,7 @@ export const dealsProducts: Product[] = [
       "https://www.dropbox.com/s/2ipdy5t4rp95hhr/Face%20Scrub_00001.jpg?raw=1",
     price: "499",
     sale_price: "250",
+    new_arrival: "",
   },
 
   {
@@ -29,6 +31,7 @@ export const dealsProducts: Product[] = [
       "https://www.dropbox.com/s/cmd9towzwfaeizx/Face%20Scrub_00003.jpg?raw=1",
     price: "499",
     sale_price: "250",
+    new_arrival: "",
   },
   {
     id: "3",
@@ -39,6 +42,7 @@ export const dealsProducts: Product[] = [
       "https://www.dropbox.com/s/1229p3ps68s7ct7/Face%20Scrub_00005.jpg?raw=1",
     price: "499",
     sale_price: "250",
+    new_arrival: "",
   },
   {
     id: "4",
@@ -49,5 +53,6 @@ export const dealsProducts: Product[] = [
       "https://www.dropbox.com/s/9sgt5gmua51pejy/Face%20Scrub_00007.jpg?raw=1",
     price: "499",
     sale_price: "250",
+    new_arrival: "",
   },
 ];

@@ -1,7 +1,4 @@
 import Link from "@components/ui/link";
-import { FaChevronDown } from "react-icons/fa";
-import ListMenu from "@components/ui/list-menu";
-import { useTranslation } from "next-i18next";
 import cn from "classnames";
 
 interface MenuProps {
@@ -10,68 +7,107 @@ interface MenuProps {
 }
 
 const HeaderMenu: React.FC<MenuProps> = ({ data, className }) => {
-  const { t } = useTranslation("menu");
   return (
-    <nav
+    <ul
       className={cn(
-        " headerMenu hidden lg:flex lg:justify-center relative ",
+        "hidden lg:flex lg:justify-center lg:items-center",
         className
       )}
     >
-      {data?.map((item: any) => (
-        <div
-          className={`menuItem group cursor-pointer py-1.5 mx-3 xl:mx-4  ${
-            item.subMenu ? "relative" : ""
-          }`}
-          key={item.id}
+      {data?.map((item: any, idx: any) => (
+        <li
+          key={idx}
+          className="hoverable hover:bg-skin-purple hover:text-white"
         >
           <Link
             href={item.path}
-            className="inline-flex uppercase font-nunito font-semibold items-center text-[12px] text-sky-800 py-2  relative group-hover:text-sky-900"
+            className="relative block py-4 px-4 text-[13px] uppercase font-nunito font-semibold hover:bg-skin-purple hover:text-white"
           >
-            {t(item.label)}
-            {(item?.columns || item.subMenu) && (
-              <span className="text-xs mt-1 xl:mt-0.5 w-4 flex justify-end text-skin-base opacity-40 group-hover:text-skin-primary">
-                <FaChevronDown className="transition duration-300 ease-in-out transform group-hover:-rotate-180" />
-              </span>
-            )}
+            {item.label}
           </Link>
 
-          {item?.subMenu && Array.isArray(item.subMenu) && (
-            <div className="subMenu shadow-dropDown z-30 absolute start-0 bg-gray-100 opacity-100 rounded-md">
-              <div className="grid grid-cols-2 gap-4 py-8">
-                {item.subMenu.map((menu: any, index: number) => {
-                  return (
-                    <Link
-                      href={menu.path}
-                      className="pt-2 pl-4 text-[12.5px] font-medium hover:font-semibold hover:text-rose-700"
-                    >
-                      {t(menu.label)}
-                    </Link>
-                  );
-                })}
+          {item.subMenu ? (
+            item.megaMenu ? (
+              <div
+                role="toggle"
+                className="p-3 mega-menu mb-8 sm:mb-0 shadow-xl bg-skin-purple"
+              >
+                <div className="container mx-auto w-full flex flex-wrap justify-between mx-2">
+                  <ul className="px-4 w-full sm:w-1/2 lg:w-1/4 border-gray-600 border-b sm:border-r lg:border-b-0 pb-6 pt-6 lg:pt-3">
+                    {item.subMenuGroup1 &&
+                      item.subMenuGroup1.map((itm: any, idx: any) => (
+                        <li key={idx}>
+                          <Link
+                            href={itm.path}
+                            className="block p-3 hover:bg-skin-purple-dark text-white"
+                          >
+                            {itm.label}
+                          </Link>
+                        </li>
+                      ))}
+                  </ul>
+                  <ul className="px-4 w-full sm:w-1/2 lg:w-1/4 border-gray-600 border-b sm:border-r lg:border-b-0 pb-6 pt-6 lg:pt-3">
+                    {item.subMenuGroup2 &&
+                      item.subMenuGroup2.map((itm: any, idx: any) => (
+                        <li key={idx}>
+                          <Link
+                            href={itm.path}
+                            className="block p-3 hover:bg-skin-purple-dark text-white"
+                          >
+                            {itm.label}
+                          </Link>
+                        </li>
+                      ))}
+                  </ul>
+                  <ul className="px-4 w-full sm:w-1/2 lg:w-1/4 border-gray-600 border-b sm:border-r lg:border-b-0 pb-6 pt-6 lg:pt-3">
+                    {item.subMenuGroup3 &&
+                      item.subMenuGroup3.map((itm: any, idx: any) => (
+                        <li key={idx}>
+                          <Link
+                            href={itm.path}
+                            className="block p-3 hover:bg-skin-purple-dark text-white"
+                          >
+                            {itm.label}
+                          </Link>
+                        </li>
+                      ))}
+                  </ul>
+                  <ul className="px-4 w-full sm:w-1/2 lg:w-1/4 border-gray-600 pb-6 pt-6 lg:pt-3">
+                    <p className="font-medium  text-sm text-white font-nunito mb-2">
+                      Best Seller
+                    </p>
+                    <li className="pt-3">
+                      <img src="https://www.dropbox.com/s/prow2ar08z3ynd7/Face%20Gel_00003.jpg?raw=1" />
+                    </li>
+                  </ul>
+                </div>
               </div>
-              {/* <ul className="text-body text-sm py-5">
-                {item.subMenu.map((menu: any, index: number) => {
-                  const dept: number = 1;
-                  const menuName: string = `sidebar-menu-${dept}-${index}`;
-                  return (
-                    <ListMenu
-                      dept={dept}
-                      data={menu}
-                      hasSubMenu={menu.subMenu}
-                      menuName={menuName}
-                      key={menuName}
-                      menuIndex={index}
-                    />
-                  );
-                })}
-              </ul> */}
-            </div>
-          )}
-        </div>
+            ) : (
+              <div
+                role="toggle"
+                className="p-3 mega-menu-mini mb-16 sm:mb-0 shadow-xl bg-skin-purple"
+              >
+                <div className="container mx-auto w-full flex flex-wrap justify-between mx-1">
+                  <ul className="w-full ">
+                    {item.subMenuGroup1 &&
+                      item.subMenuGroup1.map((itm: any, idx: any) => (
+                        <li key={idx}>
+                          <Link
+                            href={itm.path}
+                            className="block p-3 hover:bg-skin-purple-dark text-white"
+                          >
+                            {itm.label}
+                          </Link>
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+              </div>
+            )
+          ) : null}
+        </li>
       ))}
-    </nav>
+    </ul>
   );
 };
 

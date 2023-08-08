@@ -3,21 +3,21 @@ import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
 import Alert from "@components/ui/alert";
 import Button from "@components/ui/button";
-import ProductCard from "@components/product/product-cards/product-card";
+import ProductCardCategoryWise from "@components/product/product-cards/product-card-category-page";
 import ProductCardLoader from "@components/ui/loaders/product-card-loader";
 import cn from "classnames";
-import { useProductsQuery } from "@framework/product/get-all-products";
+import { useProductsQueryCategoriesWise } from "@framework/product/get-all-products";
 import { LIMITS } from "@framework/utils/limits";
 import { Product } from "@framework/types";
-import Pagination from "@components/pagination/Pagination";
 
 interface ProductGridProps {
   className?: string;
 }
 
-export const ProductGrid: FC<ProductGridProps> = ({ className = "" }) => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { query } = useRouter();
+export const ProductGridCategoriesWise: FC<ProductGridProps> = ({
+  className = "",
+}) => {
+  const router = useRouter();
   const {
     isFetching: isLoading,
     isFetchingNextPage: loadingMore,
@@ -25,10 +25,9 @@ export const ProductGrid: FC<ProductGridProps> = ({ className = "" }) => {
     hasNextPage,
     data,
     error,
-  } = useProductsQuery({ limit: 12, ...query });
-  console.log(query);
-  console.log(query.page);
-  console.log(data?.pages[0].totalItems);
+  } = useProductsQueryCategoriesWise({ limit: 12, ...router });
+  console.log(data?.pages[0].data.length);
+
   return (
     <>
       {error ? (
@@ -44,25 +43,31 @@ export const ProductGrid: FC<ProductGridProps> = ({ className = "" }) => {
             />
           ))}
         </div>
-      ) : (
+      ) : data?.pages[0].data.length!! > 0 ? (
         <div className="grid sm:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-6 gap-2 ">
           {data?.pages?.map((page: any) => {
             return page?.data?.map((product: Product) => (
-              <ProductCard
+              <ProductCardCategoryWise
                 key={`product--key-${product.id}`}
                 product={product}
               />
             ));
           })}
         </div>
-      )}
+      ) : (
+        <div className="flex flex-col items-center justify-center no-product-found">
+          <img
+            src="/images/noproduct2.svg"
+            alt="no-product"
+            width={450}
+            height={550}
+          />
 
-      <Pagination
-        currentPage={currentPage}
-        lastPage={Math.ceil(Number(data?.pages[0].totalItems) / 12)}
-        maxLength={7}
-        setCurrentPage={setCurrentPage}
-      />
+          <p className="pb-16">
+            You can find plenty of other products on our homepage
+          </p>
+        </div>
+      )}
     </>
   );
 };
