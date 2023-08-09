@@ -12,7 +12,7 @@ const AuthMenu: React.FC<Props> = ({ btnProps }) => {
   return session ? (
     <Menu
       as="div"
-      className="relative inline-flex ml-auto border px-[8px] py-[4px] rounded-sm border-purple-700"
+      className="relative inline-flex ml-auto  px-[8px] py-[4px] rounded-sm "
     >
       <Menu.Button className="text-sm font-nunito uppercase rounded-full border-2 border-[#d6934c] text-slate-900 text-opacity-90 font-semibold focus:outline-none ">
         <img

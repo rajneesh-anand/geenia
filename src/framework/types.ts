@@ -158,6 +158,7 @@ export type Product = {
   quantity_in_stock?: string;
   tags?: string;
   category?: string;
+  sub_category?: string;
   [key: string]: unknown;
 };
 export type OrderItem = {

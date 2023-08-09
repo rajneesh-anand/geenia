@@ -1,20 +1,13 @@
 import { useState } from "react";
 import Input from "@components/ui/form/input";
 import PasswordInput from "@components/ui/form/password-input";
-import Button from "@components/ui/button";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Logo from "@components/ui/logo";
 import Alert from "@components/ui/alert";
-import { useSignUpMutation, SignUpInputType } from "@framework/auth/use-signup";
-import Link from "@components/ui/link";
-import { useTranslation } from "next-i18next";
 import Image from "@components/ui/image";
 import { useModalAction } from "@components/common/modal/modal.context";
-import Switch from "@components/ui/switch";
 import CloseButton from "@components/ui/close-button";
 import cn from "classnames";
-import { ROUTES } from "@utils/routes";
-import { useUserAuth } from "@contexts/user.context";
 import PhoneInputWithCountry from "@components/ui/phone-input";
 
 interface SignUpFormProps {
@@ -22,14 +15,20 @@ interface SignUpFormProps {
   className?: string;
 }
 
+interface SignUpInputType {
+  email: string;
+  password: string;
+  mobile: string;
+  name: string;
+}
+
 const SignUpForm: React.FC<SignUpFormProps> = ({
   isPopup = true,
   className,
 }) => {
-  const { t } = useTranslation();
-  const { signUp, error, setError } = useUserAuth();
   const { closeModal, openModal } = useModalAction();
   const [processing, setProcessing] = useState(false);
+  const [error, setError] = useState(null);
 
   const {
     register,
@@ -89,9 +88,6 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             src="/images/hero/registration.png"
             alt="sign up"
             layout="fill"
-            // width={800}
-            // height={620}
-            // objectFit="contain"
             className="w-full"
           />
         </div>
@@ -102,13 +98,13 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
             </div>
 
             <div className="text-sm sm:text-base text-body text-center mt-3 mb-1">
-              {t("common:text-already-registered")}{" "}
+              Already registered ?
               <button
                 type="button"
                 className="ms-1 text-sm sm:text-base text-skin-primary font-semibold hover:no-underline focus:outline-none"
                 onClick={handleSignIn}
               >
-                {t("common:text-sign-in-now")}
+                Sign In
               </button>
             </div>
           </div>
@@ -120,12 +116,12 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
           >
             <div className="flex flex-col space-y-4">
               <Input
-                label={t("forms:label-name")}
+                label="Name"
                 type="text"
                 placeholder="Enter your name !"
                 variant="outline"
                 {...register("name", {
-                  required: "forms:name-required",
+                  required: "Name is required !",
                 })}
                 error={errors.name?.message}
               />
@@ -141,27 +137,27 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                 // })}
               />
               <Input
-                label={t("forms:label-email")}
+                label="Email"
                 type="email"
                 variant="outline"
                 placeholder="Enter your email !"
                 {...register("email", {
-                  required: `${t("forms:email-required")}`,
+                  required: "Email is required !",
                   pattern: {
                     value:
                       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: t("forms:email-error"),
+                    message: "Invalid email address !",
                   },
                 })}
                 error={errors.email?.message}
               />
               <PasswordInput
                 placeholder="Enter your password !"
-                label={t("forms:label-password")}
+                label="Password"
                 variant="outline"
                 error={errors.password?.message}
                 {...register("password", {
-                  required: `${t("forms:password-required")}`,
+                  required: "Password is required !",
                 })}
               />
 
@@ -170,7 +166,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({
                   type="submit"
                   className="inline-flex items-center justify-center w-full font-nunito px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-skin-primary rounded-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 hover:bg-opacity-90"
                 >
-                  {processing ? "Registering ... " : t("common:text-register")}
+                  {processing ? "Registering ... " : "Register Now"}
                 </button>
               </div>
             </div>

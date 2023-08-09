@@ -1,5 +1,5 @@
 import React from "react";
-import { getToken } from "@framework/utils/get-token";
+import { getToken } from "@utils/get-token";
 import { CartProvider } from "./cart/cart.context";
 import { ModalProvider } from "@components/common/modal/modal.context";
 

@@ -1,15 +1,8 @@
-import { Table } from "@components/ui/table";
-import Input from "@components/ui/form/input";
-import { useState } from "react";
-import Pagination from "@components/ui/pagination";
-import ActionsButton from "@components/ui/action-button";
-import { TotalPrice } from "@components/order/price";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import relativeTime from "dayjs/plugin/relativeTime";
 import timezone from "dayjs/plugin/timezone";
-import { GrNext, GrPrevious } from "react-icons/gr";
-import { BsSearch } from "react-icons/bs";
+
 import Image from "@components/ui/image";
 import Container from "@components/ui/container";
 import Breadcrumb from "@components/ui/breadcrumb";

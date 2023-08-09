@@ -1,4 +1,4 @@
-import usePrice from "@framework/product/use-price";
+import usePrice from "@framework/use-price";
 import Image from "@components/ui/image";
 
 export const OrderDetailsContent: React.FC<{ item?: any }> = ({ item }) => {

@@ -1,7 +1,7 @@
 import Scrollbar from "@components/ui/scrollbar";
 import { useCart } from "@contexts/cart/cart.context";
 import { useUI } from "@contexts/ui.context";
-import usePrice from "@framework/product/use-price";
+import usePrice from "@framework/use-price";
 import { IoClose } from "react-icons/io5";
 import CartItem from "./cart-item";
 import EmptyCart from "./empty-cart";

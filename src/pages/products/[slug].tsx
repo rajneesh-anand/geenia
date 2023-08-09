@@ -5,61 +5,11 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import ErrorMessage from "@components/ui/error-message";
 import Loader from "@components/ui/loader/loader";
-import { useNewProductsQuery } from "@framework/product/get-all-cookies-products";
-const ProductList = dynamic(() => import("@components/product/products-list"));
+import { useProductsQuery } from "@framework/product-query";
 
-// export default function Products() {
-//   return (
-//     <>
-//       <Seo
-//         title="Geenia Organic Beauty Products"
-//         description="Fastest E-commerce template built with React, NextJS, TypeScript, React-Query and Tailwind CSS."
-//         path="products"
-//       />
-//       <Divider />
-//       <Container className="bg-[#EBE0F0]">
-//         <div className="pt-4">
-//           <Breadcrumb />
-//         </div>
-
-//         <Container>
-//           <Element name="grid" className="flex py-6 ">
-//             {/* <div className="flex-shrink-0 hidden lg:block w-72  sticky top-16 h-full">
-//               <ShopFilters />
-//             </div> */}
-//             <div className="w-full ">
-//               <ProductGrid />
-//             </div>
-//           </Element>
-//         </Container>
-
-//         {/* {data ? (
-//           <Element name="grid" className="flex py-6 ">
-//             <div className="flex-shrink-0 hidden lg:block w-72  sticky top-16 h-full">
-//               <ShopFilters />
-//             </div>
-//             <div className="w-full ">
-//               <ProductGridTwo products={data} />
-//             </div>
-//           </Element>
-//         ) : (
-//           <div className="flex flex-col items-center justify-center no-product-found">
-//             <Image
-//               src="/images/noproduct2.svg"
-//               alt="no-product"
-//               width={450}
-//               height={550}
-//             />
-
-//             <p className="pb-16">
-//               You can find plenty of other products on our homepage
-//             </p>
-//           </div>
-//         )} */}
-//       </Container>
-//     </>
-//   );
-// }
+const ProductList = dynamic(
+  () => import("@components/product/product-list/product-list")
+);
 
 export default function ProductsPage() {
   const [page, setPage] = useState(1);
@@ -69,7 +19,7 @@ export default function ProductsPage() {
     data,
     isLoading: loading,
     error,
-  } = useNewProductsQuery({
+  } = useProductsQuery({
     limit: 12,
     page,
     ...query,
@@ -89,5 +39,3 @@ export default function ProductsPage() {
 }
 
 ProductsPage.Layout = Layout;
-
-// Products.Layout = Layout;

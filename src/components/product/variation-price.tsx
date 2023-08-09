@@ -1,4 +1,4 @@
-import usePrice from "@framework/product/use-price";
+import usePrice from "@framework/use-price";
 import isEmpty from "lodash/isEmpty";
 import { useTranslation } from "next-i18next";
 

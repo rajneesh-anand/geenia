@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import Link from "next/link";
-import usePrice from "@framework/product/use-price";
+import usePrice from "@framework/use-price";
 import { useCart } from "@contexts/cart/cart.context";
 import Text from "@components/ui/text";
 import Button from "@components/ui/button";

@@ -1,21 +1,8 @@
-import BannerCard from "@components/cards/banner-card";
-import useWindowSize from "@utils/use-window-size";
 import Carousel from "@components/ui/carousel/carousel";
 import { SwiperSlide } from "@components/ui/carousel/slider";
 import Container from "@components/ui/container";
-import Link from "@components/ui/link";
 
-interface Props {
-  heroBanner?: any;
-  className?: string;
-  contentClassName?: string;
-}
-
-const BannerHeroGrid: React.FC<Props> = ({
-  heroBanner,
-  className,
-  contentClassName = "py-24",
-}) => {
+const HomeBanner = () => {
   return (
     <div>
       <Carousel
@@ -64,4 +51,4 @@ const BannerHeroGrid: React.FC<Props> = ({
   );
 };
 
-export default BannerHeroGrid;
+export default HomeBanner;

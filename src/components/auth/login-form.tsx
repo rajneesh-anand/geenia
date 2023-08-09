@@ -3,7 +3,7 @@ import Input from "@components/ui/form/input";
 import PasswordInput from "@components/ui/form/password-input";
 import Button from "@components/ui/button";
 import { useForm } from "react-hook-form";
-import { useLoginMutation, LoginInputType } from "@framework/auth/use-login";
+
 import Logo from "@components/ui/logo";
 import { useTranslation } from "next-i18next";
 import Image from "@components/ui/image";
@@ -23,7 +23,12 @@ import { signIn } from "next-auth/react";
 interface LoginFormProps {
   isPopup?: boolean;
   className?: string;
-  csrfToken: any;
+  csrfToken?: any;
+}
+
+interface SignInInputType {
+  email: string;
+  password: string;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({
@@ -31,57 +36,23 @@ const LoginForm: React.FC<LoginFormProps> = ({
   className,
   csrfToken,
 }) => {
-  const { t } = useTranslation();
   const router = useRouter();
   const { closeModal, openModal } = useModalAction();
-  const [remember, setRemember] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false);
-  const [number, setNumber] = useState<string | undefined>("");
-  const [flag, setFlag] = useState(false);
-  const [otp, setOtp] = useState("");
-  const [result, setResult] = useState<string | any>("");
-  const { setUpRecaptha, mobileAuth, logIn, loginSuccess, error, setError } =
-    useUserAuth();
+
+  const { loginSuccess, error, setError } = useUserAuth();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginInputType>();
+  } = useForm<SignInInputType>();
 
   function handleNavigate(path: string) {
     router.push(`/${path}`);
     closeModal();
   }
 
-  const getOtp = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    setError(null);
-    if (number === "" || number === undefined)
-      return setError("Please enter a valid phone number!");
-    try {
-      const response = await setUpRecaptha(number);
-      setResult(response);
-      setFlag(true);
-    } catch (err: any) {
-      setError(err.message);
-    }
-  };
-
-  const verifyOtp = async (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    setError(null);
-    if (otp === "" || otp === null) return;
-    try {
-      await result.confirm(otp);
-      mobileAuth(number);
-      closeModal();
-    } catch (err: any) {
-      setError(err.message);
-    }
-  };
-
-  async function onSubmit({ email, password }: LoginInputType) {
+  async function onSubmit({ email, password }: SignInInputType) {
     const result = await signIn<"credentials">("credentials", {
       redirect: false,
       email: email,
@@ -117,9 +88,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
             src="/images/hero/login.png"
             alt="signin Image"
             layout="fill"
-            // width={800}
-            // height={600}
-            // objectFit="contain"
             className="w-full"
           />
         </div>
@@ -130,13 +98,13 @@ const LoginForm: React.FC<LoginFormProps> = ({
             </div>
 
             <div className="text-sm sm:text-15px text-body text-center mt-3 mb-1">
-              {t("common:text-don’t-have-account")}{" "}
+              Don't have an account ?
               <button
                 type="button"
-                className="text-skin-primary sm:text-15px text-sm ml-1  font-semibold hover:no-underline focus:outline-none"
+                className="text-skin-primary sm:text-15px text-sm ml-1  font-medium hover:no-underline focus:outline-none"
                 onClick={handleSignUp}
               >
-                {t("common:text-create-account")}
+                Create Account
               </button>
             </div>
           </div>
@@ -226,11 +194,11 @@ const LoginForm: React.FC<LoginFormProps> = ({
                 label="Email"
                 type="email"
                 {...register("email", {
-                  required: "Email address is mandatory !",
+                  required: "Email address is required !",
                   pattern: {
                     value:
                       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: t("forms:email-error"),
+                    message: " Invalid email address",
                   },
                 })}
                 error={errors.email?.message}
@@ -238,7 +206,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
               <PasswordInput
                 label="Password"
                 {...register("password", {
-                  required: "Password is mandatory !",
+                  required: "Password is required !",
                 })}
                 error={errors.password?.message}
               />
@@ -248,7 +216,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
                   type="submit"
                   className="inline-flex items-center justify-center w-full font-nunito px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-skin-primary rounded-sm shadow-sm focus:outline-none hover:bg-opacity-90"
                 >
-                  {t("common:text-sign-in")}
+                  Sign In
                 </button>
               </div>
             </div>
@@ -265,19 +233,19 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
           <div className="mb-16 md:mb-3">
             <p className="mt-4 mb-7 px-2 text-center text-sm leading-relaxed text-body sm:mt-5 sm:mb-10 sm:px-0 md:text-base">
-              {t("registration-helper")}
+              By Signing In, you agree to Geenia International's
               <span
                 onClick={() => handleNavigate("terms")}
                 className="mx-1 cursor-pointer text-skin-primary underline hover:no-underline"
               >
-                {t("text-terms")}
+                terms
               </span>
               &amp;
               <span
                 onClick={() => handleNavigate("privacy")}
                 className="cursor-pointer text-skin-primary underline hover:no-underline ltr:ml-1 rtl:mr-1"
               >
-                {t("text-policy")}
+                policy
               </span>
             </p>
           </div>

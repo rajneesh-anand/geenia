@@ -12,7 +12,7 @@ const ProductCatList = dynamic(
   () => import("@components/product/product-list/product-cat-list")
 );
 
-export default function SkincareCategoryPage() {
+export default function PhyCategoryPage() {
   const router = useRouter();
 
   const {
@@ -36,4 +36,4 @@ export default function SkincareCategoryPage() {
   );
 }
 
-SkincareCategoryPage.Layout = Layout;
+PhyCategoryPage.Layout = Layout;

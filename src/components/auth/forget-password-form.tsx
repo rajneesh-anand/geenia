@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import Button from "@components/ui/button";
+
 import Input from "@components/ui/form/input";
 import Logo from "@components/ui/logo";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "next-i18next";
+
 import { useModalAction } from "@components/common/modal/modal.context";
 import CloseButton from "@components/ui/close-button";
-import { useUserAuth } from "@contexts/user.context";
+
 import Alert from "@components/ui/alert";
 import { IoCheckmarkCircle } from "react-icons/io5";
-import { BsCheckLg } from "react-icons/bs";
 
 type FormValues = {
   email: string;
@@ -18,10 +17,9 @@ type FormValues = {
 const ForgetPasswordForm = () => {
   const [status, setStatus] = useState("");
   const [errorMsg, setErrorMsg] = useState<string | undefined>();
-  const { t } = useTranslation();
+
   const { closeModal, openModal } = useModalAction();
-  const [flag, setFlag] = useState(false);
-  const { resetPassword, error, setError, user } = useUserAuth();
+
   const {
     register,
     handleSubmit,
@@ -79,7 +77,7 @@ const ForgetPasswordForm = () => {
         <>
           <div className="text-center my-4 lg:my-3 ">
             <p className="text-sm md:text-base text-body ">
-              {t("common:forgot-password-helper")}
+              We'll send you a link to reset your password
             </p>
           </div>
           {errorMsg && (
@@ -103,11 +101,11 @@ const ForgetPasswordForm = () => {
               variant="outline"
               className="mb-4"
               {...register("email", {
-                required: `${t("forms:email-required")}`,
+                required: "Email is required !",
                 pattern: {
                   value:
                     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  message: t("forms:email-error"),
+                  message: "Invalid email address !",
                 },
               })}
               error={errors.email?.message}
@@ -117,25 +115,23 @@ const ForgetPasswordForm = () => {
               type="submit"
               className="inline-flex items-center justify-center w-full font-nunito px-4 py-2 text-base font-medium leading-6 text-white whitespace-no-wrap bg-skin-primary rounded-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 hover:bg-opacity-90"
             >
-              {t("common:text-reset-password")}
+              Reset Your Password
             </button>
           </form>
         </>
       )}
       <div className="flex flex-col items-center justify-center relative text-sm text-heading mt-8 sm:mt-10 mb-6 sm:mb-7">
         <hr className="w-full border-gray-300" />
-        <span className="absolute -top-2.5 px-2 bg-skin-fill">
-          {t("common:text-or")}
-        </span>
+        <span className="absolute -top-2.5 px-2 bg-skin-fill">Or</span>
       </div>
       <div className="text-sm sm:text-15px text-skin-muted text-center">
-        {t("common:text-back-to")}{" "}
+        Back to
         <button
           type="button"
           className="text-skin-base underline font-medium hover:no-underline focus:outline-none"
           onClick={handleSignIn}
         >
-          {t("common:text-login")}
+          Sign In
         </button>
       </div>
     </div>

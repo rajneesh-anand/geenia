@@ -1,8 +1,6 @@
 import Counter from "@components/ui/counter";
 import { useCart } from "@contexts/cart/cart.context";
 import { generateCartItem } from "@utils/generate-cart-item";
-import PlusIcon from "@components/icons/plus-icon";
-import useWindowSize from "@utils/use-window-size";
 
 interface Props {
   data: any;
@@ -11,7 +9,6 @@ interface Props {
 }
 
 export const AddToCart = ({ data, variation, disabled }: Props) => {
-  const { width } = useWindowSize();
   const {
     addItemToCart,
     removeItemFromCart,
@@ -32,7 +29,7 @@ export const AddToCart = ({ data, variation, disabled }: Props) => {
     removeItemFromCart(item.id);
   };
   const outOfStock = isInCart(item?.id) && !isInStock(item.id);
-  const iconSize = width! > 480 ? "17" : "15";
+
   return !isInCart(item?.id) ? (
     <button
       className="flex items-center rounded-sm bg-skin-yellow-three px-4 py-2 text-center text-sm font-medium text-white  "

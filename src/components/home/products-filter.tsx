@@ -18,7 +18,7 @@ import { launchProducts } from "@data/launch";
 import { discountProducts } from "@data/discount";
 import { bestSellerProducts } from "@data/best";
 import Container from "@components/ui/container";
-import ProductCardCategoryWise from "@components/product/product-cards/product-card-category-page";
+import ProductCardCategoryWise from "@components/product/product-cards/product-card";
 
 type Product = {
   id: string;

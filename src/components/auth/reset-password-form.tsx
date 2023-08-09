@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react";
-import Button from "@components/ui/button";
 import PasswordInput from "@components/ui/form/password-input";
-import Logo from "@components/ui/logo";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "next-i18next";
+
 import { useModalAction } from "@components/common/modal/modal.context";
-import CloseButton from "@components/ui/close-button";
-import { useUserAuth } from "@contexts/user.context";
+
 import Alert from "@components/ui/alert";
-import { IoCheckmarkCircle } from "react-icons/io5";
+
 import { useRouter } from "next/router";
 import Spinner from "@components/ui/loaders/spinner/spinner";
 
@@ -21,8 +18,7 @@ export default function ResetPassword() {
   const router = useRouter();
   const [status, setStatus] = useState<string | undefined>();
   const [errorMsg, setErrorMsg] = useState<string | undefined>();
-  const { t } = useTranslation();
-  const { closeModal, openModal } = useModalAction();
+  const { openModal } = useModalAction();
   const [flag, setFlag] = useState<boolean>(true);
 
   const {

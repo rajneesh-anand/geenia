@@ -1,6 +1,6 @@
 import cn from "classnames";
 import Image from "@components/ui/image";
-import usePrice from "@framework/product/use-price";
+import usePrice from "@framework/use-price";
 // import { Product } from "@framework/types";
 import { useModalAction } from "@components/common/modal/modal.context";
 import useWindowSize from "@utils/use-window-size";
