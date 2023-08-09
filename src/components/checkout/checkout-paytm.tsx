@@ -39,7 +39,7 @@ type responseObeject = {
 
 const CheckoutCard: React.FC = () => {
   const { t } = useTranslation("common");
-  const { user, isAuthorized } = useUserAuth();
+
   const { items, total, isEmpty } = useCart();
   const [selectedState, setSelectedState] = useState(statesOptions[0]);
   const [redirect, setRedirect] = useState(false);
@@ -305,17 +305,17 @@ const CheckoutCard: React.FC = () => {
   const checkoutFooter = [
     {
       id: 1,
-      name: t("text-sub-total"),
+      name: "Sub Total",
       price: subtotal,
     },
     {
       id: 2,
-      name: t("text-shipping"),
+      name: "Shipping",
       price: "$0",
     },
     {
       id: 3,
-      name: t("text-total"),
+      name: "Total",
       price: subtotal,
     },
   ];

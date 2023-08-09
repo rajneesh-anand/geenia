@@ -177,17 +177,17 @@ const CheckoutCard: React.FC = () => {
   const checkoutFooter = [
     {
       id: 1,
-      name: t("text-sub-total"),
+      name: "Sub Total",
       price: subtotal,
     },
     {
       id: 2,
-      name: t("text-shipping"),
+      name: "Shipping",
       price: total > 500 ? "free" : shippingAmount,
     },
     {
       id: 3,
-      name: t("text-total"),
+      name: "Total",
       price: totalAmount,
     },
   ];

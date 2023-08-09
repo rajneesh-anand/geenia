@@ -37,9 +37,9 @@ const Header: React.FC = () => {
       <Container className="navbar flex items-center py-2 lg:py-0 border-b border-slate-200">
         <Logo />
         <HeaderMenu data={site_header.menu} />
-        <Searchform />
         <div className="hidden lg:flex ml-auto">
-          <CartButton className="flex mr-4" hideLabel={true} />
+          <Searchform />
+          <CartButton className="flex mx-2" hideLabel={true} />
           <AuthMenu
             btnProps={{
               onClick: handleLogin,

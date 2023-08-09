@@ -49,9 +49,9 @@ const social = [
 
 export default function MobileMenu() {
   const [activeMenus, setActiveMenus] = useState<any>([]);
-  const { site_header } = siteSettings;
+  const { site_header_mobile } = siteSettings;
   const { closeSidebar } = useUI();
-  const { t } = useTranslation("menu");
+
   const handleArrowClick = (menuName: string) => {
     let newActiveMenus = [...activeMenus];
     if (newActiveMenus.includes(menuName)) {
@@ -81,7 +81,7 @@ export default function MobileMenu() {
             className="relative w-full py-4 transition duration-300 ease-in-out menu-item ltr:pl-5 rtl:pr-5 md:ltr:pl-7 md:rtl:pr-7 ltr:pr-4 rtl:pl-4 text-brand-dark"
           >
             <span className="block w-full" onClick={closeSidebar}>
-              {t(`${data.label}`)}
+              {data.label}
             </span>
           </Link>
           {hasSubMenu && (
@@ -100,7 +100,7 @@ export default function MobileMenu() {
         {hasSubMenu && (
           <SubMenu
             dept={dept}
-            data={data.subMenu}
+            data={data.subMenuGroup}
             toggle={activeMenus.includes(menuName)}
             menuIndex={menuIndex}
           />
@@ -156,7 +156,7 @@ export default function MobileMenu() {
         <Scrollbar className="menu-scrollbar flex-grow mb-auto">
           <div className="flex flex-col py-6 px-0 text-skin-base">
             <ul className="mobile-menu">
-              {site_header.menu.map((menu, index) => {
+              {site_header_mobile.menu.map((menu, index) => {
                 const dept: number = 1;
                 const menuName: string = `sidebar-menu-${dept}-${index}`;
 
@@ -182,7 +182,7 @@ export default function MobileMenu() {
               className={`text-heading space-s-6 transition duration-300 ease-in text-skin-base text-opacity-60 hover:text-skin-primary ${item.className}`}
               key={index}
             >
-              <span className="sr-only">{t(`${item.title}`)}</span>
+              <span className="sr-only">{item.title}</span>
               {item.icon}
             </Link>
           ))}

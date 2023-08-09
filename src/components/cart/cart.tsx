@@ -5,14 +5,13 @@ import usePrice from "@framework/use-price";
 import { IoClose } from "react-icons/io5";
 import CartItem from "./cart-item";
 import EmptyCart from "./empty-cart";
-import Link from "@components/ui/link";
-import { ROUTES } from "@utils/routes";
+
 import cn from "classnames";
 import { useTranslation } from "next-i18next";
 import Heading from "@components/ui/heading";
 import Text from "@components/ui/text";
 import DeleteIcon from "@components/icons/delete-icon";
-import { useUserAuth } from "@contexts/user.context";
+
 import { useModalAction } from "@components/common/modal/modal.context";
 import Router from "next/router";
 import { useSession } from "next-auth/react";
@@ -21,7 +20,7 @@ export default function Cart() {
   const { t } = useTranslation("common");
 
   const { data: session, status } = useSession();
-  const { isAuthorized, user } = useUserAuth();
+
   const { openModal } = useModalAction();
   const { closeDrawer } = useUI();
   const { items, total, isEmpty, resetCart } = useCart();
@@ -48,11 +47,11 @@ export default function Cart() {
           {!isEmpty && (
             <button
               className="flex flex-shrink items-center text-15px transition duration-150 ease-in focus:outline-none text-skin-base opacity-50 hover:opacity-100 -me-1.5"
-              aria-label={t("text-clear-all")}
+              aria-label="Clear All"
               onClick={resetCart}
             >
               <DeleteIcon />
-              <span className="ps-1">{t("text-clear-all")}</span>
+              <span className="ps-1">Clear All</span>
             </button>
           )}
 
@@ -80,9 +79,10 @@ export default function Cart() {
         <div className="border-t border-skin-base px-5 md:px-7 pt-5 md:pt-6 pb-5 md:pb-6">
           <div className="flex pb-5 md:pb-7">
             <div className="pe-3">
-              <Heading className="mb-2.5">{t("text-sub-total")}:</Heading>
+              <Heading className="mb-2.5">Sub Total:</Heading>
               <Text className="leading-6">
-                {t("text-cart-final-price-discount")}
+                Final price and discounts will be determined at the time of
+                payment processing
               </Text>
             </div>
             <div className="flex-shrink-0 font-semibold text-base md:text-lg text-skin-base -mt-0.5 min-w-[80px] text-end">
@@ -112,7 +112,7 @@ export default function Cart() {
                 }
               )}
             >
-              <span className="py-0.5">{t("text-proceed-to-checkout")}</span>
+              <span className="py-0.5">Proceed to Checkout</span>
             </button>
           </div>
         </div>
