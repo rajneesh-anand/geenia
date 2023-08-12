@@ -1,4 +1,3 @@
-import Container from "@components/ui/container";
 import Image from "@components/ui/image";
 import { siteSettings } from "@settings/site-settings";
 import { useTranslation } from "next-i18next";
@@ -15,7 +14,6 @@ interface CopyrightProps {
 }
 const year = new Date().getFullYear();
 const Copyright: React.FC<CopyrightProps> = ({ payment }) => {
-  const { t } = useTranslation("footer");
   return (
     <div className="text-center mb-4 py-2 border-t border-t-gray-300">
       <p className="text-skin-base text-sm leading-7 lg:leading-[27px] lg:text-15px">
@@ -44,7 +42,7 @@ const Copyright: React.FC<CopyrightProps> = ({ payment }) => {
               >
                 <Image
                   src={item.image}
-                  alt={t(item.name)}
+                  alt={item.name}
                   height={item.height}
                   width={item.width}
                 />

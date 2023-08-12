@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import usePrice from "@framework/use-price";
 import { useCart } from "@contexts/cart/cart.context";
@@ -6,11 +6,11 @@ import Text from "@components/ui/text";
 import Button from "@components/ui/button";
 import { CheckoutItem } from "@components/checkout/checkout-card-item";
 import { CheckoutCardFooterItem } from "./checkout-card-footer-item";
-import { useTranslation } from "next-i18next";
+
 import { ROUTES } from "@utils/routes";
 import Input from "@components/ui/input";
-import { useForm, Controller } from "react-hook-form";
-import Router, { useRouter } from "next/router";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import TextArea from "@components/ui/form/text-area";
 import { toast } from "react-toastify";
@@ -35,7 +35,6 @@ type responseObeject = {
 };
 
 const CheckoutCard: React.FC = () => {
-  const { t } = useTranslation("common");
   const [error, setError] = useState<string>("");
   const [processingStatus, setProcessingStatus] = useState<boolean>(false);
   const { items, total, isEmpty, resetCart } = useCart();
@@ -46,9 +45,6 @@ const CheckoutCard: React.FC = () => {
   const {
     register,
     handleSubmit,
-    control,
-    setValue,
-    reset,
     formState: { errors },
   } = useForm<FormValues>();
 
@@ -183,7 +179,7 @@ const CheckoutCard: React.FC = () => {
     {
       id: 2,
       name: "Shipping",
-      price: total > 500 ? "free" : shippingAmount,
+      price: total > 500 ? "Free" : shippingAmount,
     },
     {
       id: 3,
@@ -201,7 +197,7 @@ const CheckoutCard: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-6 md:gap-3 px-4 ">
             <div className="md:col-span-3 md:mx-8 my-3 md:my-8">
               <h3 className="font-semibold uppercase text-red-900 py-4">
-                Shipping Information
+                Shipping Address
               </h3>
               <div className="w-full mb-3 ">
                 <Input
@@ -210,7 +206,7 @@ const CheckoutCard: React.FC = () => {
                   label="Full Name"
                   placeholder="Enter your full name "
                   {...register("name", {
-                    required: "You must provide your name !",
+                    required: "Name is required !",
                   })}
                   error={errors.name?.message}
                 />
@@ -222,7 +218,7 @@ const CheckoutCard: React.FC = () => {
                   label="Your Shiping  Address"
                   placeholder="Enter your detailed shipping address "
                   {...register("address", {
-                    required: "shipping address is required !",
+                    required: "address is required !",
                   })}
                   error={errors.address?.message}
                 />
@@ -291,7 +287,7 @@ const CheckoutCard: React.FC = () => {
                 items.map((item) => <CheckoutItem item={item} key={item.id} />)
               ) : (
                 <p className="text-skin-red text-opacity-70 py-4">
-                  {t("text-empty-cart")}
+                  Your cart is empty
                 </p>
               )}
               {checkoutFooter.map((item: any) => (
@@ -305,19 +301,19 @@ const CheckoutCard: React.FC = () => {
                 loading={processingStatus}
                 onClick={handleSubmit(makePayment)}
               >
-                {t("button-order-now")}
+                Make Payment
               </Button>
               <Text className="mt-8">
-                {t("text-by-placing-your-order")}{" "}
+                By placing the order, you agree to Geenia International's{" "}
                 <Link href={ROUTES.TERMS}>
                   <a className="text-skin-primary underline font-medium">
-                    {t("text-terms-of-service")}{" "}
+                    Terms of Service
                   </a>
                 </Link>
-                {t("text-and")}{" "}
+                and{" "}
                 <Link href={ROUTES.RETURN}>
                   <a className="text-skin-primary underline font-medium">
-                    {t("text-privacy")}
+                    Privacy Policy
                   </a>
                 </Link>
                 {/* . {t("text-credit-debit")} */}

@@ -2,7 +2,6 @@ import Link from "@components/ui/link";
 import Logo from "@components/ui/logo";
 import Text from "@components/ui/text";
 import Image from "@components/ui/image";
-import { useTranslation } from "next-i18next";
 
 interface Props {
   className?: string;
@@ -17,12 +16,13 @@ interface Props {
 }
 
 const Information: React.FC<Props> = ({ className, socials }) => {
-  const { t } = useTranslation("footer");
   return (
     <>
       <div className="text-center">
         <Logo />
-        <Text>{t("text-about-us")}</Text>
+        <Text>
+          We offer high-quality organic beauty products at very affordable price
+        </Text>
       </div>
       <div className="flex justify-center mt-4">
         <div className="flex items-center justify-center px-4 py-4 border-y-2 border-y-gray-500 max-w-[420px]">
