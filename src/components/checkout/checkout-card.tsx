@@ -9,6 +9,7 @@ import { CheckoutCardFooterItem } from "./checkout-card-footer-item";
 
 import { ROUTES } from "@utils/routes";
 import Input from "@components/ui/input";
+
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
@@ -45,6 +46,7 @@ const CheckoutCard: React.FC = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<FormValues>();
 

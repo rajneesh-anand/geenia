@@ -1,20 +1,7 @@
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import cn from "classnames";
-import React, { InputHTMLAttributes } from "react";
-
-export interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  className?: string;
-  inputClassName?: string;
-  labelClassName?: string;
-  label?: string;
-  placeholder?: string;
-  name: string;
-  error?: string;
-  type?: string;
-  shadow?: boolean;
-  variant?: "normal" | "solid" | "outline";
-}
+import React from "react";
 
 const classes = {
   root: "py-2 px-4 w-full appearance-none transition duration-150 ease-in-out border text-input text-13px lg:text-sm  rounded placeholder-[#B3B3B3] min-h-12 transition duration-200 ease-in-out text-base",
@@ -23,12 +10,13 @@ const classes = {
   outline: " ",
   shadow: "focus:shadow",
 };
-const MobileInput = React.forwardRef<HTMLInputElement, Props>(
+const MobileInput = React.forwardRef(
   (
     {
       className = "block",
       label,
       name,
+      control,
       error,
       placeholder,
       variant = "normal",
@@ -67,7 +55,7 @@ const MobileInput = React.forwardRef<HTMLInputElement, Props>(
 
         <PhoneInputWithCountry
           name="mobile"
-          ref={ref}
+          control={control}
           className={rootClassName}
           rules={{ required: true }}
           defaultCountry="IN"
