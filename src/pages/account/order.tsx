@@ -72,7 +72,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
   const { data } = await axios.post(
-    `${process.env.NEXT_PUBLIC_NODE_API}/order/order-list`,
+    `${process.env.NEXT_PUBLIC_NODE_API}/order/customer-orders`,
     { email: session?.user?.email },
     {
       headers: {
