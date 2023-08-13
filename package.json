@@ -4,7 +4,7 @@
   "description": "Geenia International Private Limited",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev ",
     "build": "next build",
     "start": "next start ",
     "pg-push": "npx prisma db push",

@@ -5,21 +5,18 @@ import usePrice from "@framework/use-price";
 import { IoClose } from "react-icons/io5";
 import CartItem from "./cart-item";
 import EmptyCart from "./empty-cart";
-
 import cn from "classnames";
-import { useTranslation } from "next-i18next";
 import Heading from "@components/ui/heading";
 import Text from "@components/ui/text";
 import DeleteIcon from "@components/icons/delete-icon";
 
 import { useModalAction } from "@components/common/modal/modal.context";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 export default function Cart() {
-  const { t } = useTranslation("common");
-
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   const { openModal } = useModalAction();
   const { closeDrawer } = useUI();
@@ -32,7 +29,7 @@ export default function Cart() {
   const handleCheckout = () => {
     closeDrawer();
     if (session) {
-      Router.push("/checkout");
+      router.push("/checkout");
     } else {
       openModal("LOGIN_VIEW");
     }
