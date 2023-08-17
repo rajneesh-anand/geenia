@@ -7,10 +7,11 @@ export type IProps = {
 };
 
 const ProductCatList = ({ products }: IProps) => {
+  console.log(products);
   return (
     <>
       <Container>
-        {products.length > 0 ? (
+        {products && products.length > 0 ? (
           <div className="grid sm:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-6 gap-2 ">
             {products?.map((product: Product) => (
               <ProductCard

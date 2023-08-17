@@ -30,9 +30,10 @@ function RenderPopupOrAddToCart({ data }: { data: Product }) {
   return <AddToCart data={data} />;
 }
 const ProductCard: React.FC<ProductProps> = ({ product, className }) => {
-  console.log(product);
   const router = useRouter();
   const { name, image, unit, category, slug, new_arrival } = product ?? {};
+  console.log(category);
+  console.log(slug);
 
   const { price, basePrice, discount } = usePrice({
     amount: Number(product?.sale_price),

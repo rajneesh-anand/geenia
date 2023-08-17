@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "@components/layout";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import dynamic from "next/dynamic";
 import ErrorMessage from "@components/ui/error-message";
 import Loader from "@components/ui/loader/loader";

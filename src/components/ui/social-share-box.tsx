@@ -56,8 +56,10 @@ const SocialShareBox: React.FC<Props> = ({ className = "", shareUrl }) => {
         className
       )}
     >
-      <Heading className="mb-2">{t("text-share-social-network")}</Heading>
-      <Text variant="small">{t("text-share-social-network-description")}</Text>
+      <Heading className="mb-2">Share in social networks</Heading>
+      <Text variant="small">
+        To reach the highest traffic view share this product
+      </Text>
       <div className="flex items-center flex-wrap space-s-2 mb-4">
         <FacebookShareButton url={shareUrl!}>
           <FacebookIcon
@@ -88,7 +90,7 @@ const SocialShareBox: React.FC<Props> = ({ className = "", shareUrl }) => {
           />
         </LinkedinShareButton>
       </div>
-      <Text variant="small">{t("text-or-copy-link")}</Text>
+      <Text variant="small">or copy link</Text>
       <div className="relative mt-2.5 mb-1.5">
         <Input
           type="link"
@@ -118,12 +120,12 @@ const SocialShareBox: React.FC<Props> = ({ className = "", shareUrl }) => {
               className="absolute end-0.5 top-[6%] h-[90%] px-2 text-skin-primary text-sm uppercase font-bold flex items-center bg-skin-fill cursor-pointer"
               role="button"
             >
-              {t("text-copy")}
+              copy
             </span>
           </CopyToClipboard>
         ) : (
           <span className="absolute end-0.5 top-[6%] h-[90%] pe-1.5 ps-8 text-skin-primary text-sm uppercase font-bold flex items-center bg-skin-fill cursor-pointer">
-            {t("text-copied")}
+            copied
           </span>
         )}
       </div>
