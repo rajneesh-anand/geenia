@@ -6,7 +6,9 @@ import usePrice from "@framework/use-price";
 import { useCart } from "@contexts/cart/cart.context";
 import { generateCartItem } from "@utils/generate-cart-item";
 import { toast } from "react-toastify";
+import { scroller, Element } from "react-scroll";
 import ThumbnailCarousel from "@components/ui/carousel/thumbnail-carousel";
+import { ThumbsCarousel } from "@components/ui/carousel/thumb-carousel";
 import Image from "@components/ui/image";
 import CartIcon from "@components/icons/cart-icon";
 import { IoIosHeart, IoIosHeartEmpty } from "react-icons/io";
@@ -38,7 +40,6 @@ interface ProductProps {
 }
 
 const ProductDetail: React.FC<ProductProps> = ({ product }) => {
-  console.log(product);
   const router = useRouter();
   const ImageArray = product.gallery;
   const { width } = useWindowSize();
@@ -124,7 +125,7 @@ const ProductDetail: React.FC<ProductProps> = ({ product }) => {
           ) : (
             <div className="w-auto flex items-center justify-center">
               <Image
-                src={ImageArray[0] ?? "/images/placeholder/product.svg"}
+                src={product?.gallery[0] ?? "/images/placeholder/product.svg"}
                 alt={product?.name!}
                 width={900}
                 height={680}
@@ -255,6 +256,171 @@ const ProductDetail: React.FC<ProductProps> = ({ product }) => {
         description={product.product_detailed_description}
       />
     </div>
+
+    // <article className="rounded-lg bg-light">
+    //   <div className="flex flex-col border-b border-border-200 border-opacity-70 md:flex-row">
+    //     <div className="p-6 md:w-1/2 lg:px-14 lg:py-4 ">
+    //       <div className="h-full product-gallery">
+    //         <ThumbsCarousel
+    //           gallery={product?.gallery}
+    //           hideThumbs={JSON.parse(product?.gallery).length <= 1}
+    //         />
+    //       </div>
+    //     </div>
+
+    //     {/* <div className="flex flex-col items-start p-5 pt-10 md:w-1/2 lg:p-14 xl:p-16">
+    //       <div className="w-full" ref={intersectionRef}>
+    //         <div className="flex items-start justify-between w-full space-x-8 rtl:space-x-reverse">
+    //           <h1
+    //             className={classNames(
+    //               `text-lg font-semibold tracking-tight text-heading md:text-xl xl:text-2xl`,
+    //               {
+    //                 "cursor-pointer transition-colors hover:text-accent":
+    //                   isModal,
+    //               }
+    //             )}
+    //             {...(isModal && {
+    //               onClick: () => navigate(Routes.product(slug)),
+    //             })}
+    //           >
+    //             {name}
+    //           </h1>
+
+    //           <div>
+    //             <FavoriteButton
+    //               productId={id}
+    //               className={classNames({ "mr-1": isModal })}
+    //             />
+    //           </div>
+    //         </div>
+    //         <div className="flex items-center justify-between mt-2">
+    //           {unit && !hasVariations && (
+    //             <span className="block text-sm font-normal text-body">
+    //               {unit}
+    //             </span>
+    //           )}
+
+    //           {isModal && (
+    //             <div className="inline-flex items-center px-3 py-1 text-sm text-white border rounded shrink-0 border-accent bg-accent">
+    //               {ratings}
+    //               <StarIcon className="h-2.5 w-2.5 ltr:ml-1 rtl:mr-1" />
+    //             </div>
+    //           )}
+    //         </div>
+
+    //         {description && (
+    //           <div className="mt-3 text-sm leading-7 text-body md:mt-4">
+    //             <Truncate
+    //               character={150}
+    //               {...(!isModal && {
+    //                 onClick: () => scrollDetails(),
+    //                 compressText: "common:text-see-more",
+    //               })}
+    //             >
+    //               {description}
+    //             </Truncate>
+    //           </div>
+    //         )}
+
+    //         {hasVariations ? (
+    //           <>
+    //             <div className="flex items-center my-5 md:my-10">
+    //               <VariationPrice
+    //                 selectedVariation={selectedVariation}
+    //                 minPrice={product.min_price}
+    //                 maxPrice={product.max_price}
+    //               />
+    //             </div>
+    //             <div>
+    //               <VariationGroups variations={variations} />
+    //             </div>
+    //           </>
+    //         ) : (
+    //           <span className="flex items-center my-5 md:my-10">
+    //             <ins className="text-2xl font-semibold no-underline text-accent md:text-3xl">
+    //               {price}
+    //             </ins>
+    //             {basePrice && (
+    //               <del className="text-sm font-normal text-muted ltr:ml-2 rtl:mr-2 md:text-base">
+    //                 {basePrice}
+    //               </del>
+    //             )}
+    //           </span>
+    //         )}
+
+    //         <div className="flex flex-col items-center mt-6 md:mt-6 lg:flex-row">
+    //           <div className="mb-3 w-full lg:mb-0 lg:max-w-[400px]">
+    //             <AddToCart
+    //               data={product}
+    //               variant="big"
+    //               variation={selectedVariation}
+    //               disabled={selectedVariation?.is_disable || !isSelected}
+    //             />
+    //           </div>
+
+    //           {!hasVariations && (
+    //             <>
+    //               {Number(quantity) > 0 ? (
+    //                 <span className="text-base whitespace-nowrap text-body ltr:lg:ml-7 rtl:lg:mr-7">
+    //                   {quantity} {t("text-pieces-available")}
+    //                 </span>
+    //               ) : (
+    //                 <div className="text-base text-red-500 whitespace-nowrap ltr:lg:ml-7 rtl:lg:mr-7">
+    //                   {t("text-out-stock")}
+    //                 </div>
+    //               )}
+    //             </>
+    //           )}
+    //           {!isEmpty(selectedVariation) && (
+    //             <span className="text-base whitespace-nowrap text-body ltr:lg:ml-7 rtl:lg:mr-7">
+    //               {selectedVariation?.is_disable ||
+    //               selectedVariation.quantity === 0
+    //                 ? t("text-out-stock")
+    //                 : `${selectedVariation.quantity} ${t(
+    //                     "text-pieces-available"
+    //                   )}`}
+    //             </span>
+    //           )}
+    //         </div>
+    //       </div>
+
+    //       {!!categories?.length && (
+    //         <CategoryBadges
+    //           categories={categories}
+    //           basePath={`/${type?.slug}`}
+    //           onClose={closeModal}
+    //         />
+    //       )}
+
+    //       {shop?.name && (
+    //         <div className="flex items-center mt-2">
+    //           <span className="py-1 text-sm font-semibold capitalize text-heading ltr:mr-6 rtl:ml-6">
+    //             {t("common:text-sellers")}
+    //           </span>
+
+    //           <button
+    //             onClick={() => navigate(Routes.shop(shop?.slug))}
+    //             className="text-sm tracking-wider underline transition text-accent hover:text-accent-hover hover:no-underline"
+    //           >
+    //             {shop?.name}
+    //           </button>
+    //         </div>
+    //       )}
+    //     </div> */}
+    //   </div>
+
+    //   <Element
+    //     name="details"
+    //     className="px-5 py-4 border-b border-border-200 border-opacity-70 lg:px-16 lg:py-14"
+    //   >
+    //     <h2 className="mb-4 text-lg font-semibold tracking-tight text-heading md:mb-6">
+    //       Product Details
+    //     </h2>
+    //     <p className="text-sm text-body">
+    //       {product.product_detailed_description}
+    //     </p>
+    //   </Element>
+    // </article>
   );
 };
 

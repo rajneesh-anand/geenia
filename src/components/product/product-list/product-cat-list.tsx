@@ -1,6 +1,10 @@
 import { Product } from "@framework/types";
-import ProductCard from "@components/product/product-cards/product-card";
 import Container from "@components/ui/container";
+
+import dynamic from "next/dynamic";
+const ProductCard = dynamic(
+  () => import("@components/product/product-cards/product-card")
+);
 
 export type IProps = {
   products: Product[];

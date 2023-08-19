@@ -74,9 +74,8 @@ module.exports = {
       },
 
       fontFamily: {
-        body: ["Open Sans", "system-ui", "sans-serif"],
+        body: ["system-ui", "sans-serif"],
         nunito: ["'Nunito', sans-serif"],
-        poppins: ["'Poppins', sans-serif"],
       },
 
       fontSize: {

@@ -14,15 +14,22 @@ function Searchform() {
     }
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      router.push(`/search?product=${searchText}`);
+    }
+  };
+
   return (
     <div className="relative flex rounded-sm px-2">
       <input
         type="text"
         className="h-8 w-80 pl-4 pr-20 rounded-sm z-0 focus:outline-0 focus:ring-0"
-        placeholder="Search product..."
+        placeholder="search product..."
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           setSearchText(e.target.value)
         }
+        onKeyDown={handleKeyDown}
       />
       <div className="absolute top-0 right-0">
         <button
