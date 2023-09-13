@@ -39,7 +39,7 @@ const ProductDescriptionTab = ({ description }: IProps) => {
           <Tab.Panel className="lg:flex">
             {description && (
               <div
-                className="text-sm sm:text-15px text-skin-muted leading-[2em] space-y-4 lg:space-y-5 xl:space-y-7"
+                className=" product-detailed-page text-sm sm:text-15px text-skin-muted leading-[2em] space-y-4 lg:space-y-5 xl:space-y-7"
                 dangerouslySetInnerHTML={{
                   __html: description,
                 }}

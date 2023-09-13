@@ -482,3 +482,16 @@
 .checkout .save-change-button {
   display: none;
 }
+
+.product-detailed-page ol {
+  list-style: decimal;
+  margin-top: 8px !important;
+}
+
+.product-detailed-page ol li {
+  margin-left: 32px !important;
+}
+
+.product-detailed-page > h1 h2 h3 h4 h5 h6 {
+  margin-top: 16px !important;
+}
