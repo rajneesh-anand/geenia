@@ -43,7 +43,6 @@ const ProductDetail: React.FC<ProductProps> = ({ product }) => {
   const router = useRouter();
   const ImageArray = product.gallery;
   const { width } = useWindowSize();
-
   const { addItemToCart, isInCart, isInStock } = useCart();
 
   const [favorite, setFavorite] = useState<boolean>(false);
