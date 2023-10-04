@@ -1,22 +1,33 @@
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import cn from "classnames";
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  className?: string;
+  inputClassName?: string;
+  labelClassName?: string;
+  label?: string;
+  placeholder?: string;
+  name: string;
+  error?: string;
+  type?: string;
+  shadow?: boolean;
+  variant?: "normal" | "solid" | "outline";
+}
 const classes = {
-  root: "py-2 px-4 w-full appearance-none transition duration-150 ease-in-out border text-input text-13px lg:text-sm  rounded placeholder-[#B3B3B3] min-h-12 transition duration-200 ease-in-out text-base",
-  normal: "bg-gray-100  ",
+  root: "py-2 px-4 w-full appearance-none transition duration-150 ease-in-out border text-input text-13px lg:text-sm  rounded-sm placeholder-[#B3B3B3] min-h-12 transition duration-200 ease-in-out text-base",
+  normal: "border-gray-700  ",
   solid: "bg-fill border-orange  h-11 md:h-12",
-  outline: " ",
+  outline: " border-gray-700",
   shadow: "focus:shadow",
 };
-const MobileInput = React.forwardRef(
+const MobileInput = React.forwardRef<HTMLInputElement, Props>(
   (
     {
       className = "block",
       label,
       name,
-      control,
       error,
       placeholder,
       variant = "normal",
@@ -45,7 +56,7 @@ const MobileInput = React.forwardRef(
         {label && (
           <label
             htmlFor={name}
-            className={`block font-normal text-sm leading-none mb-3 cursor-pointer ${
+            className={`block font-medium text-sm leading-none mb-2 cursor-pointer ${
               labelClassName || "text-base text-opacity-70"
             }`}
           >
@@ -54,16 +65,16 @@ const MobileInput = React.forwardRef(
         )}
 
         <PhoneInputWithCountry
+          ref={ref}
           name="mobile"
-          control={control}
           className={rootClassName}
           rules={{ required: true }}
           defaultCountry="IN"
-          placeholder="XXXXXXXXXX"
+          placeholder={placeholder}
           {...rest}
         />
 
-        {error && <p className="my-2 text-[13px] text-rose-600">{error}</p>}
+        {error && <p className="my-1 text-[13px] text-rose-600">{error}</p>}
       </div>
     );
   }

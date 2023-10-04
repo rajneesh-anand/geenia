@@ -35,7 +35,7 @@ const HomeBanner = () => {
             </div>
           </Container>
         </SwiperSlide>
-        <SwiperSlide>
+        {/* <SwiperSlide>
           <Container>
             <div className="relative lg:h-[416px] h-[216px]  mt-2">
               <img
@@ -45,7 +45,7 @@ const HomeBanner = () => {
               />
             </div>
           </Container>
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Carousel>
     </div>
   );

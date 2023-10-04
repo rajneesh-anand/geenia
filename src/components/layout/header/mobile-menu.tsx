@@ -5,7 +5,6 @@ import Scrollbar from "@components/ui/scrollbar";
 import { IoIosArrowDown } from "react-icons/io";
 import Logo from "@components/ui/logo";
 import { useUI } from "@contexts/ui.context";
-import { useTranslation } from "next-i18next";
 import cn from "classnames";
 
 import {
@@ -19,14 +18,14 @@ import {
 const social = [
   {
     id: 0,
-    link: "https://www.facebook.com/redqinc/",
+    link: "https://www.facebook.com",
     icon: <IoLogoFacebook />,
     className: "facebook",
     title: "text-facebook",
   },
   {
     id: 1,
-    link: "https://twitter.com/redqinc",
+    link: "https://twitter.com",
     icon: <IoLogoTwitter />,
     className: "twitter",
     title: "text-twitter",
@@ -40,7 +39,7 @@ const social = [
   },
   {
     id: 3,
-    link: "https://www.instagram.com/redqinc/",
+    link: "https://www.instagram.com/",
     icon: <IoLogoInstagram />,
     className: "instagram",
     title: "text-instagram",

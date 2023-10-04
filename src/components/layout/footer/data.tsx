@@ -63,7 +63,7 @@ export const footer = {
   socials: [
     {
       id: 1,
-      path: "https://www.facebook.com/",
+      path: "https://www.facebook.com/profile.php?id=100095389503139&mibextid=LQQJ4d",
       image: "/images/social/facebook.svg",
       name: "facebook",
       width: 20,
@@ -79,7 +79,7 @@ export const footer = {
     },
     {
       id: 3,
-      path: "https://www.instagram.com/",
+      path: " https://instagram.com/geenia_international?",
       image: "/images/social/instagram.svg",
       name: "instagram",
       width: 20,
@@ -87,7 +87,7 @@ export const footer = {
     },
     {
       id: 4,
-      path: "https://www.youtube.com/channel/UCjld1tyVHRNy_pe3ROLiLhw",
+      path: "https://youtube.com/@GeeniaInternational?si=SeS8SeJmL2zwRJoY",
       image: "/images/social/youtube.svg",
       name: "youtube",
       width: 24,
