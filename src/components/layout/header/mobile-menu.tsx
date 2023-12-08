@@ -6,49 +6,13 @@ import { IoIosArrowDown } from "react-icons/io";
 import Logo from "@components/ui/logo";
 import { useUI } from "@contexts/ui.context";
 import cn from "classnames";
+import Image from "@components/ui/image";
 
-import {
-  IoLogoInstagram,
-  IoLogoTwitter,
-  IoLogoFacebook,
-  IoLogoYoutube,
-  IoClose,
-} from "react-icons/io5";
-
-const social = [
-  {
-    id: 0,
-    link: "https://www.facebook.com",
-    icon: <IoLogoFacebook />,
-    className: "facebook",
-    title: "text-facebook",
-  },
-  {
-    id: 1,
-    link: "https://twitter.com",
-    icon: <IoLogoTwitter />,
-    className: "twitter",
-    title: "text-twitter",
-  },
-  {
-    id: 2,
-    link: "https://www.youtube.com/channel/UCjld1tyVHRNy_pe3ROLiLhw",
-    icon: <IoLogoYoutube />,
-    className: "youtube",
-    title: "text-youtube",
-  },
-  {
-    id: 3,
-    link: "https://www.instagram.com/",
-    icon: <IoLogoInstagram />,
-    className: "instagram",
-    title: "text-instagram",
-  },
-];
+import { IoClose } from "react-icons/io5";
 
 export default function MobileMenu() {
   const [activeMenus, setActiveMenus] = useState<any>([]);
-  const { site_header_mobile } = siteSettings;
+  const { site_header_mobile, social_links } = siteSettings;
   const { closeSidebar } = useUI();
 
   const handleArrowClick = (menuName: string) => {
@@ -175,14 +139,21 @@ export default function MobileMenu() {
         </Scrollbar>
 
         <div className="flex items-center justify-center bg-skin-fill border-t border-skin-base px-7 flex-shrink-0 space-s-1 py-5">
-          {social?.map((item, index) => (
+          {social_links.map((item, index) => (
             <Link
-              href={item.link}
-              className={`text-heading space-s-6 transition duration-300 ease-in text-skin-base text-opacity-60 hover:text-skin-primary ${item.className}`}
+              href={item.path ? item.path : "/"}
               key={index}
+              className="mx-1 transition hover:opacity-80 social-link-vertical-align"
+              target="_blank"
+              rel="noreferrer"
             >
-              <span className="sr-only">{item.title}</span>
-              {item.icon}
+              <Image
+                src={item.image}
+                alt={item.name}
+                height={item.height}
+                width={item.width}
+                className="align-middle transform scale-85 md:scale-100 "
+              />
             </Link>
           ))}
         </div>

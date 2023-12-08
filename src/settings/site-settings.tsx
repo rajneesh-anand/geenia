@@ -3,7 +3,7 @@ export const siteSettings = {
   description:
     "Geenia International is here to serve you better products for you we are in this Industry from many years and continuosly  upgrading products as per the environment",
   author: {
-    name: "Geenia Internatoinal Private Limited",
+    name: "Geenia International Private Limited",
     websiteUrl: "https://geenia.in",
     address: "",
   },
@@ -609,4 +609,100 @@ export const siteSettings = {
       },
     ],
   },
+
+  social_links: [
+    {
+      id: 1,
+      path: "https://www.facebook.com/profile.php?id=100095389503139&mibextid=LQQJ4d",
+      image: "/images/social/facebook.svg",
+      name: "facebook",
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 2,
+      path: "https://twitter.com/",
+      image: "/images/social/twitter.svg",
+      name: "twitter",
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 3,
+      path: "https://instagram.com/geenia_international?igshid=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr",
+      image: "/images/social/instagram.svg",
+      name: "instagram",
+      width: 20,
+      height: 20,
+    },
+    {
+      id: 4,
+      path: "https://youtube.com/@GeeniaInternational?si=SeS8SeJmL2zwRJoY",
+      image: "/images/social/youtube.svg",
+      name: "youtube",
+      width: 24,
+      height: 24,
+    },
+  ],
+  footer_links: [
+    {
+      id: 1,
+      title: "Privacy Policy",
+      path: "/privacy",
+    },
+    {
+      id: 2,
+      title: "Terms & Services",
+      path: "/terms",
+    },
+    {
+      id: 3,
+      title: "Return & Refund Policy",
+      path: "/return-policy",
+    },
+    {
+      id: 4,
+      title: "Contact Us",
+      path: "/contact",
+    },
+    {
+      id: 5,
+      title: "FAQ",
+      path: "/faq",
+    },
+  ],
+  payments_links: [
+    {
+      id: 1,
+      path: "/",
+      image: "/images/payment/mastercard.svg",
+      name: "payment-master-card",
+      width: 34,
+      height: 20,
+    },
+    {
+      id: 2,
+      path: "/",
+      image: "/images/payment/visa.svg",
+      name: "payment-visa",
+      width: 50,
+      height: 20,
+    },
+    {
+      id: 3,
+      path: "/",
+      image: "/images/payment/paytm.svg",
+      name: "payment-paytm",
+      width: 50,
+      height: 20,
+    },
+    {
+      id: 4,
+      path: "/",
+      image: "/images/payment/upi.svg",
+      name: "payment-upi",
+      width: 50,
+      height: 20,
+    },
+  ],
 };
